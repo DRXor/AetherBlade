@@ -969,7 +969,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.49803925, g: 0.49803925, b: 0.49803925, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1009,6 +1009,8 @@ MonoBehaviour:
   moveSpeed: 5
   acceleration: 10
   friction: 8
+  drag: 3
+  maxSpeed: 8
 --- !u!114 &2100076190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,6 +1026,8 @@ MonoBehaviour:
   moveSpeed: 5
   acceleration: 10
   friction: 8
+  drag: 3
+  maxSpeed: 8
 --- !u!61 &2100076191
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1069,7 +1073,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

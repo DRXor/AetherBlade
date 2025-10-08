@@ -3,9 +3,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
-    public float acceleration = 10f;
+    public float moveSpeed = 7f;
+    public float acceleration = 18f;
     public float friction = 8f;
+    public float drag = 6f; // Аэродинамическое сопротивление
+    public float maxSpeed = 9f;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         // Нормализуем, чтобы диагональное движение не было быстрее
         moveInput = moveInput.normalized;
     }
+    
 
     void FixedUpdate()
     {
@@ -39,10 +42,27 @@ public class PlayerMovement : MonoBehaviour
         // Применяем силу к физическому телу
         rb.AddForce(movement);
 
+        // ОГРАНИЧЕНИЕ МАКСИМАЛЬНОЙ СКОРОСТИ
+        if (rb.linearVelocity.magnitude > maxSpeed)
+        {
+            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+        }
+
         // Трение, когда не двигаемся
         if (moveInput.magnitude < 0.1f)
         {
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, friction * Time.fixedDeltaTime);
+        }
+
+
+        // Естественное трение через физический drag
+        if (moveInput.magnitude < 0.1f)
+        {
+            rb.linearVelocity *= (1f - drag * Time.fixedDeltaTime);
+
+            // Полная остановка при очень малой скорости
+            if (rb.linearVelocity.magnitude < 0.1f)
+                rb.linearVelocity = Vector2.zero;
         }
     }
 }
