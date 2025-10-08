@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float drag = 6f; // Аэродинамическое сопротивление
     public float maxSpeed = 9f;
 
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
 
     void Update()
     {
