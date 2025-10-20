@@ -1,27 +1,27 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
     [Header("Weapon Settings")]
-    public Transform weaponPivot;      // Сюда перетащи WeaponPivot
-    public Transform firePoint;        // Сюда перетащи FirePoint  
-    public GameObject bulletPrefab;    // Сюда перетащи префаб пули (создадим позже)
-    public float fireRate = 0.2f;      // Скорострельность (выстрелов в секунду)
+    public Transform weaponPivot;      // Г‘ГѕГ¤Г  ГЇГҐГ°ГҐГІГ Г№ГЁ WeaponPivot
+    public Transform firePoint;        // Г‘ГѕГ¤Г  ГЇГҐГ°ГҐГІГ Г№ГЁ FirePoint  
+    public GameObject bulletPrefab;    // Г‘ГѕГ¤Г  ГЇГҐГ°ГҐГІГ Г№ГЁ ГЇГ°ГҐГґГ ГЎ ГЇГіГ«ГЁ (Г±Г®Г§Г¤Г Г¤ГЁГ¬ ГЇГ®Г§Г¦ГҐ)
+    public float fireRate = 0.2f;      // Г‘ГЄГ®Г°Г®Г±ГІГ°ГҐГ«ГјГ­Г®Г±ГІГј (ГўГ»Г±ГІГ°ГҐГ«Г®Гў Гў Г±ГҐГЄГіГ­Г¤Гі)
 
     private float nextFireTime = 0f;
-    
+
 
     void Update()
     {
-        // Поворот оружия к курсору
+        // ГЏГ®ГўГ®Г°Г®ГІ Г®Г°ГіГ¦ГЁГї ГЄ ГЄГіГ°Г±Г®Г°Гі
         if (weaponPivot != null)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePosition - transform.position).normalized;
-            weaponPivot.right = direction; // Поворачиваем оружие в сторону мыши
+            weaponPivot.right = direction; // ГЏГ®ГўГ®Г°Г Г·ГЁГўГ ГҐГ¬ Г®Г°ГіГ¦ГЁГҐ Гў Г±ГІГ®Г°Г®Г­Гі Г¬Г»ГёГЁ
         }
 
-        // Стрельба по ЛКМ
+        // Г‘ГІГ°ГҐГ«ГјГЎГ  ГЇГ® Г‹ГЉГЊ
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
         {
             Shoot();
@@ -36,8 +36,8 @@ public class PlayerShooting : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Destroy(bullet, 2f);
 
-            // Простой визуальный эффект
-            Debug.Log("BANG!"); // Замени потом на реальный эффект
+            // ГЏГ°Г®Г±ГІГ®Г© ГўГЁГ§ГіГ Г«ГјГ­Г»Г© ГЅГґГґГҐГЄГІ
+            Debug.Log("BANG!"); // Г‡Г Г¬ГҐГ­ГЁ ГЇГ®ГІГ®Г¬ Г­Г  Г°ГҐГ Г«ГјГ­Г»Г© ГЅГґГґГҐГЄГІ
         }
         else
         {
