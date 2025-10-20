@@ -13,11 +13,45 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
+    [Header("Sprite Setup")]
+    public bool autoSetupCollider = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        SetupSpriteAndCollider();
     }
 
+    void SetupSpriteAndCollider()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+
+        if (spriteRenderer != null && collider != null)
+        {
+            // Автоматически подгоняем размер коллайдера под спрайт
+            collider.size = spriteRenderer.bounds.size;
+            collider.offset = new Vector2(0, 0);
+        }
+
+        if (autoSetupCollider)
+        {
+            SetupCollider();
+        }
+    }
+
+    void SetupCollider()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+
+        if (sr != null && collider != null && sr.sprite != null)
+        {
+            collider.size = sr.sprite.bounds.size;
+            collider.offset = Vector2.zero;
+            Debug.Log($"Auto-setup collider for {gameObject.name}: {collider.size}");
+        }
+    }
 
     void Update()
     {
