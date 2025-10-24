@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-=======
-using UnityEngine;
->>>>>>> sounds
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float friction = 8f;
     public float drag = 6f; // Аэродинамическое сопротивление
     public float maxSpeed = 9f;
-<<<<<<< HEAD
+
     public GameObject coinPrefab;
     
 
@@ -67,18 +63,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log($"Auto-setup collider for {gameObject.name}: {collider.size}");
         }
     }
-=======
-
-
-    private Rigidbody2D rb;
-    private Vector2 moveInput;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
->>>>>>> sounds
 
     void Update()
     {
@@ -128,7 +112,6 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
         }
     }
-<<<<<<< HEAD
     private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (collision.gameObject.CompareTag("Coin")) 
@@ -144,6 +127,4 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
-=======
->>>>>>> sounds
 }
