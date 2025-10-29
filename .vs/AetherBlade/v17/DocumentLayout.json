@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\HealthBarUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\HealthBarUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\HealthEnemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\HealthEnemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\EnemyHealthBar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\EnemyHealthBar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\HealthEnemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\HealthEnemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,27 +39,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "HealthBarUI.cs",
-              "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\HealthBarUI.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\HealthBarUI.cs",
-              "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\HealthBarUI.cs",
-              "RelativeToolTip": "Assets\\Scripts\\HealthBarUI.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T16:24:50.041Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "HealthEnemy.cs",
               "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\HealthEnemy.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\HealthEnemy.cs",
               "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\HealthEnemy.cs",
               "RelativeToolTip": "Assets\\Scripts\\HealthEnemy.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAgwD0AAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB4AAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T16:20:02.434Z",
+              "WhenOpened": "2025-10-29T16:51:33.64Z",
               "EditorCaption": ""
             },
             {
@@ -74,7 +57,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyHealthBar.cs",
               "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\EnemyHealthBar.cs",
               "RelativeToolTip": "Assets\\Scripts\\EnemyHealthBar.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAIBJwDcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-29T16:12:45.405Z",
               "EditorCaption": ""
