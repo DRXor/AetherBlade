@@ -28,6 +28,7 @@ public class HealthEnemy : MonoBehaviour
         if (sprite_renderer != null)
             original_color = sprite_renderer.color;
 
+        Debug.Log($"{gameObject.name} health initialized: {current_health}/{max_health}");
     }
     public void take_damage_to_enemy(float damage)
     {
