@@ -1,15 +1,15 @@
 using UnityEngine;
 
+
 public class PlayerShooting : MonoBehaviour
 {
     [Header("Weapon Settings")]
-    public Transform weaponPivot;      // Сюда перетащи WeaponPivot
-    public Transform firePoint;        // Сюда перетащи FirePoint  
-    public GameObject bulletPrefab;    // Сюда перетащи префаб пули (создадим позже)
-    public float fireRate = 0.2f;      // Скорострельность (выстрелов в секунду)
+    public Transform weaponPivot;     
+    public Transform firePoint;        
+    public GameObject bulletPrefab;    
+    public float fireRate = 0.2f;      
 
     private float nextFireTime = 0f;
-    
 
     void Update()
     {
@@ -18,7 +18,7 @@ public class PlayerShooting : MonoBehaviour
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePosition - transform.position).normalized;
-            weaponPivot.right = direction; // Поворачиваем оружие в сторону мыши
+            weaponPivot.right = direction; 
         }
 
         // Стрельба по ЛКМ
@@ -35,7 +35,8 @@ public class PlayerShooting : MonoBehaviour
         {
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Destroy(bullet, 2f);
-
+            
+            Debug.Log("BANG!"); 
             // Простой визуальный эффект
             Debug.Log("BANG!"); // Замени потом на реальный эффект
         }
