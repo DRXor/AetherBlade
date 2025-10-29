@@ -6,9 +6,15 @@ public class Bullet : MonoBehaviour
     public float speed = 15f;
     public float damage = 25f;
     public float lifetime = 2f;
+    public float knockbackForce = 5f;
+
+    [Header("Hit Effects")]
+    public GameObject hitEffectPrefab;
+    public AudioClip hitSound;
 
     private Rigidbody2D rb;
     private bool hasHit = false;
+    private Vector2 initialDirection;
 
     void Start()
     {
@@ -20,17 +26,15 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        // Настройка Rigidbody для пули
-        rb.gravityScale = 0f; // Без гравитации
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Непрерывное обнаружение коллизий
-        rb.interpolation = RigidbodyInterpolation2D.Extrapolate; // Сглаживание движения
+        // Настройка физики
+        rb.gravityScale = 0f;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
-        // Движение пули
-        rb.linearVelocity = transform.right * speed;
+        // Сохраняем начальное направление для отбрасывания
+        initialDirection = transform.right;
+        rb.linearVelocity = initialDirection * speed;
 
-        // Уничтожение пули через время
         Destroy(gameObject, lifetime);
-
         SetupCollisionIgnore();
     }
 
@@ -48,71 +52,64 @@ public class Bullet : MonoBehaviour
                 Physics2D.IgnoreCollision(bulletCollider, playerCollider);
             }
         }
-
-        // Игнорируем столкновения с другими пулями
-        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
-        foreach (GameObject bullet in bullets)
-        {
-            if (bullet != gameObject)
-            {
-                Collider2D otherBulletCollider = bullet.GetComponent<Collider2D>();
-                Collider2D thisCollider = GetComponent<Collider2D>();
-                if (otherBulletCollider != null && thisCollider != null)
-                {
-                    Physics2D.IgnoreCollision(thisCollider, otherBulletCollider);
-                }
-            }
-        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (hasHit) return; // Предотвращаем множественные срабатывания
+        if (hasHit) return;
         hasHit = true;
-
-        Debug.Log($"Bullet hit: {collision.gameObject.name}, Tag: {collision.gameObject.tag}");
 
         // Наносим урон врагам
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            ApplyDamageToEnemy(collision.gameObject);
+            ApplyDamageToEnemy(collision.gameObject, collision.contacts[0].point);
         }
 
-        // Визуальный эффект попадания (можно добавить частицы)
-        CreateHitEffect();
-
-        // Отключаем коллайдер и видимость перед уничтожением
+        CreateHitEffect(collision.contacts[0].point);
         DisableBullet();
-
-        // Уничтожаем с небольшой задержкой для эффекта
         Destroy(gameObject, 0.05f);
     }
 
-    void ApplyDamageToEnemy(GameObject enemy)
+    void ApplyDamageToEnemy(GameObject enemy, Vector2 hitPoint)
     {
         HealthEnemy enemyHealth = enemy.GetComponent<HealthEnemy>();
         if (enemyHealth != null)
         {
             enemyHealth.take_damage_to_enemy(damage);
-            Debug.Log($"SUCCESS: Enemy took {damage} damage!");
-        }
-        else
-        {
-            Debug.LogError("HealthEnemy component NOT found!");
 
-            // Альтернативная попытка найти любой компонент здоровья
-            Health universalHealth = enemy.GetComponent<Health>();
-            if (universalHealth != null)
-            {
-                universalHealth.TakeDamage(damage);
-                Debug.Log($"SUCCESS: Used universal Health component!");
-            }
+            // Применяем отбрасывание
+            ApplyKnockback(enemy, hitPoint);
+
+            Debug.Log($"SUCCESS: Enemy took {damage} damage!");
         }
     }
 
-    void CreateHitEffect()
+    void ApplyKnockback(GameObject enemy, Vector2 hitPoint)
     {
-        // Временный эффект - изменение цвета
+        Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
+        if (enemyRb != null)
+        {
+            // Направление отбрасывания - от точки попадания
+            Vector2 knockbackDir = ((Vector2)enemy.transform.position - hitPoint).normalized;
+            enemyRb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
+        }
+    }
+
+    void CreateHitEffect(Vector2 position)
+    {
+        // Визуальный эффект попадания
+        if (hitEffectPrefab != null)
+        {
+            Instantiate(hitEffectPrefab, position, Quaternion.identity);
+        }
+
+        // Звуковой эффект
+        if (hitSound != null)
+        {
+            AudioSource.PlayClipAtPoint(hitSound, position);
+        }
+
+        // Анимация попадания на самом спрайте пули
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         if (sprite != null)
         {
@@ -122,7 +119,6 @@ public class Bullet : MonoBehaviour
 
     void DisableBullet()
     {
-        // Отключаем компоненты чтобы пуля не мешала
         Collider2D collider = GetComponent<Collider2D>();
         if (collider != null) collider.enabled = false;
 
