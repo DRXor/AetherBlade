@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,8 +11,12 @@ public class PlayerMovement : MonoBehaviour
     public float drag = 6f; // Аэродинамическое сопротивление
     public float maxSpeed = 9f;
 
+    public GameObject coinPrefab;
+    
 
+    public Text CoinCount;
     private Rigidbody2D rb;
+    public int coin;
     private Vector2 moveInput;
 
     [Header("Sprite Setup")]
@@ -19,7 +25,12 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        coin = 0;
+        CoinCount.text = $"Coin: {coin}";
+
         SetupSpriteAndCollider();
+
     }
 
     void SetupSpriteAndCollider()
@@ -99,6 +110,21 @@ public class PlayerMovement : MonoBehaviour
             // Полная остановка при очень малой скорости
             if (rb.linearVelocity.magnitude < 0.1f)
                 rb.linearVelocity = Vector2.zero;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if (collision.gameObject.CompareTag("Coin")) 
+        {
+            coin += 1;
+            CoinCount.text = $"Coin: {coin}";
+            Destroy(collision.gameObject);
+            //if (coinPrefab != null) 
+            //{
+            //    GameObject Coin = Instantiate(coinPrefab, new Vector2(Random.Range(-4, 4), Random.Range(-2, 2)), Quaternion.identity);
+            //}
+            
+
         }
     }
 }

@@ -1,27 +1,27 @@
-﻿using UnityEngine;
+using UnityEngine;
+
 
 public class PlayerShooting : MonoBehaviour
 {
     [Header("Weapon Settings")]
-    public Transform weaponPivot;      // Ñþäà ïåðåòàùè WeaponPivot
-    public Transform firePoint;        // Ñþäà ïåðåòàùè FirePoint  
-    public GameObject bulletPrefab;    // Ñþäà ïåðåòàùè ïðåôàá ïóëè (ñîçäàäèì ïîçæå)
-    public float fireRate = 0.2f;      // Ñêîðîñòðåëüíîñòü (âûñòðåëîâ â ñåêóíäó)
+    public Transform weaponPivot;     
+    public Transform firePoint;        
+    public GameObject bulletPrefab;    
+    public float fireRate = 0.2f;      
 
     private float nextFireTime = 0f;
 
-
     void Update()
     {
-        // Ïîâîðîò îðóæèÿ ê êóðñîðó
+        // ������� ������ � �������
         if (weaponPivot != null)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePosition - transform.position).normalized;
-            weaponPivot.right = direction; // Ïîâîðà÷èâàåì îðóæèå â ñòîðîíó ìûøè
+            weaponPivot.right = direction; 
         }
 
-        // Ñòðåëüáà ïî ËÊÌ
+        // �������� �� ���
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
         {
             Shoot();
@@ -35,9 +35,10 @@ public class PlayerShooting : MonoBehaviour
         {
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Destroy(bullet, 2f);
-
-            // Ïðîñòîé âèçóàëüíûé ýôôåêò
-            Debug.Log("BANG!"); // Çàìåíè ïîòîì íà ðåàëüíûé ýôôåêò
+            
+            Debug.Log("BANG!"); 
+            // ������� ���������� ������
+            Debug.Log("BANG!"); // ������ ����� �� �������� ������
         }
         else
         {
