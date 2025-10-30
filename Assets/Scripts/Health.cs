@@ -9,21 +9,25 @@ public class Health : MonoBehaviour
     public bool isInvulnerable = false;
 
     [Header("Events")]
-    public UnityEvent OnDamage;      // ??????? ??? ????????? ?????
-    public UnityEvent OnDeath;       // ??????? ??? ??????
-    public UnityEvent OnHeal;        // ??????? ??? ???????
+    public UnityEvent OnDamage;
+    public UnityEvent OnDeath;
+    public UnityEvent OnHeal;
 
     [Header("Visual Feedback")]
     public Color damageColor = Color.red;
+    public Color shieldDamageColor = Color.cyan; 
     public float flashDuration = 0.1f;
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
+    private Shield shieldComponent;
 
     void Start()
     {
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        shieldComponent = GetComponent<Shield>();
+
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
     }
@@ -32,16 +36,24 @@ public class Health : MonoBehaviour
     {
         if (isInvulnerable) return;
 
+        if (shieldComponent != null && shieldComponent.TakeDamage(damage))
+        {
+            if (spriteRenderer != null)
+            {
+                StartCoroutine(FlashColor(shieldDamageColor));
+            }
+            return;
+        }
+
         currentHealth -= damage;
         OnDamage?.Invoke();
 
-        // ?????????? ?????? ????????? ?????
         if (spriteRenderer != null)
         {
-            StartCoroutine(FlashRed());
+            StartCoroutine(FlashColor(damageColor));
         }
 
-        Debug.Log($"{gameObject.name} took {damage} damage. Health: {currentHealth}");
+        Debug.Log($"{gameObject.name} took {damage} health damage. Health: {currentHealth}");
 
         if (currentHealth <= 0)
         {
@@ -59,14 +71,12 @@ public class Health : MonoBehaviour
     {
         Debug.Log($"{gameObject.name} died!");
         OnDeath?.Invoke();
-
-        // ????????? ??????? - ????? ???????? ?? ???????? ??????
         Destroy(gameObject);
     }
 
-    System.Collections.IEnumerator FlashRed()
+    System.Collections.IEnumerator FlashColor(Color flashColor)
     {
-        spriteRenderer.color = damageColor;
+        spriteRenderer.color = flashColor;
         yield return new WaitForSeconds(flashDuration);
         spriteRenderer.color = originalColor;
     }
