@@ -17,7 +17,7 @@ public class HealthBarUI : MonoBehaviour
     void Start()
     {
         if (playerHealth == null)
-            playerHealth = FindObjectOfType<Health>();
+            playerHealth = FindFirstObjectByType<Health>();
 
         if (healthSlider == null)
             healthSlider = GetComponent<Slider>();
