@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\EnemyHealthBar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\EnemyHealthBar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\ShieldTester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\ShieldTester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Shield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Shield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,15 +38,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EnemyHealthBar.cs",
-              "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\EnemyHealthBar.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyHealthBar.cs",
-              "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\EnemyHealthBar.cs",
-              "RelativeToolTip": "Assets\\Scripts\\EnemyHealthBar.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADcAAAAFAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Shield.cs",
+              "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Shield.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Shield.cs",
+              "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Shield.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Shield.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-29T16:12:45.405Z",
+              "WhenOpened": "2025-10-30T05:53:18.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ShieldTester.cs",
+              "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\ShieldTester.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ShieldTester.cs",
+              "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\ShieldTester.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ShieldTester.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T05:49:50.751Z",
               "EditorCaption": ""
             }
           ]
