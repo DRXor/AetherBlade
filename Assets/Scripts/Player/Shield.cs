@@ -6,22 +6,26 @@ public class Shield : MonoBehaviour
     [Header("Shield Settings")]
     public float maxShield = 50f;
     public float currentShield;
-    public bool hasShield = false;
+    public bool hasShieldItem = false; 
+    public bool isShieldActive = false; 
 
     [Header("Events")]
     public UnityEvent OnShieldDamage;
     public UnityEvent OnShieldBreak;
-    public UnityEvent OnShieldRestore;
+    public UnityEvent OnShieldActivate;
+    public UnityEvent OnShieldDeactivate;
+    public UnityEvent OnShieldPickup;
 
     void Start()
     {
         currentShield = 0f;
-        hasShield = false;
+        hasShieldItem = false;
+        isShieldActive = false;
     }
 
     public bool TakeDamage(float damage)
     {
-        if (!hasShield || currentShield <= 0)
+        if (!isShieldActive || currentShield <= 0)
             return false;
 
         currentShield -= damage;
@@ -32,7 +36,8 @@ public class Shield : MonoBehaviour
         if (currentShield <= 0)
         {
             currentShield = 0;
-            hasShield = false; 
+            isShieldActive = false;
+            hasShieldItem = false; 
             OnShieldBreak?.Invoke();
             Debug.Log($"{gameObject.name}'s shield broke permanently!");
         }
@@ -40,24 +45,50 @@ public class Shield : MonoBehaviour
         return true;
     }
 
-    public void AddShield(float shieldAmount)
+    public void PickupShield(float shieldAmount)
     {
-        hasShield = true;
-        currentShield = Mathf.Min(currentShield + shieldAmount, maxShield);
-        OnShieldRestore?.Invoke();
+        hasShieldItem = true;
+        currentShield = shieldAmount;
+        OnShieldPickup?.Invoke();
 
-        Debug.Log($"{gameObject.name} gained shield: {currentShield}/{maxShield}");
+        Debug.Log($"Щит подобран! Прочность: {currentShield}/{maxShield}");
     }
 
-    public void RemoveShield()
+    public void ActivateShield()
     {
-        hasShield = false;
-        currentShield = 0f;
-        Debug.Log($"{gameObject.name}'s shield removed");
+        if (hasShieldItem && !isShieldActive && currentShield > 0)
+        {
+            isShieldActive = true;
+            OnShieldActivate?.Invoke();
+            Debug.Log($"Щит активирован! Прочность: {currentShield}/{maxShield}");
+        }
+        else if (!hasShieldItem)
+        {
+            Debug.Log("Нет щита в инвентаре!");
+        }
+        else if (isShieldActive)
+        {
+            Debug.Log("Щит уже активирован!");
+        }
+    }
+
+    public void DeactivateShield()
+    {
+        if (isShieldActive)
+        {
+            isShieldActive = false;
+            OnShieldDeactivate?.Invoke();
+            Debug.Log("Щит деактивирован");
+        }
     }
 
     public float GetShieldPercentage()
     {
         return currentShield / maxShield;
+    }
+
+    public void LogStatus()
+    {
+        Debug.Log($"Статус: В инвентаре={hasShieldItem}, Активен={isShieldActive}, Прочность={currentShield}/{maxShield}");
     }
 }

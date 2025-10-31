@@ -1,4 +1,4 @@
-п»їusing UnityEngine;
+using UnityEngine;
 
 public class ShieldTester : MonoBehaviour
 {
@@ -13,13 +13,19 @@ public class ShieldTester : MonoBehaviour
 
     void Update()
     {
-        // F - РґРѕР±Р°РІРёС‚СЊ/РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ С‰РёС‚
+        // F - активировать/деактивировать щит
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (playerShield != null)
             {
-                playerShield.AddShield(50f);
-                Debug.Log("рџ›ЎпёЏ Р©РёС‚ РґРѕР±Р°РІР»РµРЅ! РўРµРєСѓС‰РёР№ С‰РёС‚: " + playerShield.currentShield);
+                if (playerShield.isShieldActive)
+                {
+                    playerShield.DeactivateShield();
+                }
+                else
+                {
+                    playerShield.ActivateShield();
+                }
                 LogStatus();
             }
         }
@@ -30,8 +36,10 @@ public class ShieldTester : MonoBehaviour
     {
         if (playerShield != null && playerHealth != null)
         {
-            string shieldStatus = playerShield.hasShield ? $"рџ›ЎпёЏ Р©РёС‚: {playerShield.currentShield}/50" : "рџ›ЎпёЏ Р©РёС‚Р° РЅРµС‚";
-            Debug.Log($"вќ¤пёЏ Р—РґРѕСЂРѕРІСЊРµ: {playerHealth.currentHealth}/100 | {shieldStatus}");
+            string shieldStatus = playerShield.hasShieldItem ?
+                $"Щит: {playerShield.currentShield}/50 ({(playerShield.isShieldActive ? "АКТИВЕН" : "неактивен")})" :
+                "Щита нет";
+            Debug.Log($"Здоровье: {playerHealth.currentHealth}/100 | {shieldStatus}");
         }
     }
 }

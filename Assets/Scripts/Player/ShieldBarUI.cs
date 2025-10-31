@@ -8,7 +8,8 @@ public class ShieldBarUI : MonoBehaviour
     public Shield playerShield;
 
     [Header("Visual Options")]
-    public Color shieldColor = Color.cyan;
+    public Color activeShieldColor = Color.cyan;
+    public Color inactiveShieldColor = Color.gray;
     public Color lowShieldColor = Color.blue;
 
     private Image fillImage;
@@ -16,13 +17,8 @@ public class ShieldBarUI : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("ShieldBarUI Start called");
-
         if (shieldSlider == null)
-        {
             shieldSlider = GetComponent<Slider>();
-            Debug.Log("Slider found: " + (shieldSlider != null));
-        }
 
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null)
@@ -31,11 +27,6 @@ public class ShieldBarUI : MonoBehaviour
         if (shieldSlider != null)
         {
             fillImage = shieldSlider.fillRect.GetComponent<Image>();
-            if (fillImage != null)
-            {
-                fillImage.color = shieldColor;
-            }
-
             shieldSlider.minValue = 0f;
             shieldSlider.maxValue = 1f;
             shieldSlider.value = 0f;
@@ -44,51 +35,26 @@ public class ShieldBarUI : MonoBehaviour
         if (playerShield != null)
         {
             SetupShieldEvents();
-            Debug.Log("Using playerShield from inspector");
-            return;
-        }
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            playerShield = player.GetComponent<Shield>();
-            if (playerShield != null)
-            {
-                SetupShieldEvents();
-                Debug.Log("Found player by tag and shield component");
-                return;
-            }
-            else
-            {
-                Debug.LogWarning("Player found but Shield component missing!");
-            }
         }
         else
         {
-            Debug.LogWarning("No GameObject with tag 'Player' found!");
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null) playerShield = player.GetComponent<Shield>();
+            if (playerShield != null) SetupShieldEvents();
         }
 
-        playerShield = FindFirstObjectByType<Shield>();
-        if (playerShield != null)
-        {
-            SetupShieldEvents();
-            Debug.Log("Found shield component in scene");
-            return;
-        }
-
-        Debug.LogError("Could not find Shield component! Please assign manually.");
+        UpdateShieldVisibility();
     }
 
     void SetupShieldEvents()
     {
-        if (playerShield != null)
-        {
-            playerShield.OnShieldDamage.AddListener(UpdateShieldBar);
-            playerShield.OnShieldBreak.AddListener(OnShieldBreak);
-            playerShield.OnShieldRestore.AddListener(OnShieldRestore);
-            UpdateShieldVisibility();
-            Debug.Log("Shield events setup successfully");
-        }
+        playerShield.OnShieldDamage.AddListener(UpdateShieldBar);
+        playerShield.OnShieldBreak.AddListener(OnShieldBreak);
+        playerShield.OnShieldActivate.AddListener(OnShieldActivate);
+        playerShield.OnShieldDeactivate.AddListener(OnShieldDeactivate);
+        playerShield.OnShieldPickup.AddListener(OnShieldPickup);
+
+        UpdateShieldAppearance();
     }
 
     void Update()
@@ -101,10 +67,13 @@ public class ShieldBarUI : MonoBehaviour
 
             if (canvasGroup != null)
             {
-                float targetAlpha = playerShield.hasShield ? 1f : 0f;
+                bool shouldShow = playerShield.hasShieldItem;
+                float targetAlpha = shouldShow ? 1f : 0f;
                 canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, targetAlpha, Time.deltaTime * 5f);
             }
         }
+
+        UpdateShieldAppearance();
     }
 
     void UpdateShieldBar()
@@ -116,42 +85,56 @@ public class ShieldBarUI : MonoBehaviour
         }
     }
 
-    void OnShieldBreak()
+    void OnShieldActivate()
     {
-        Debug.Log("Shield broken!");
-        UpdateShieldVisibility();
+        Debug.Log("UI: Shield activated");
+        UpdateShieldAppearance();
     }
 
-    void OnShieldRestore()
+    void OnShieldDeactivate()
     {
-        Debug.Log("Shield restored!");
-        UpdateShieldVisibility();
+        Debug.Log("UI: Shield deactivated");
+        UpdateShieldAppearance();
+    }
+
+    void OnShieldBreak()
+    {
+        Debug.Log("UI: Shield broken");
+        UpdateShieldAppearance();
+    }
+
+    void OnShieldPickup()
+    {
+        Debug.Log("UI: Shield picked up");
+        UpdateShieldAppearance();
+    }
+
+    void UpdateShieldAppearance()
+    {
+        if (fillImage != null && playerShield != null)
+        {
+            if (playerShield.isShieldActive)
+            {
+                float shieldPercent = playerShield.GetShieldPercentage();
+                fillImage.color = Color.Lerp(lowShieldColor, activeShieldColor, shieldPercent);
+            }
+            else
+            {
+                fillImage.color = inactiveShieldColor;
+            }
+        }
     }
 
     void UpdateShieldColor()
     {
-        if (fillImage != null && playerShield != null)
-        {
-            float shieldPercent = playerShield.GetShieldPercentage();
-            fillImage.color = Color.Lerp(lowShieldColor, shieldColor, shieldPercent);
-        }
+        UpdateShieldAppearance();
     }
 
     void UpdateShieldVisibility()
     {
         if (canvasGroup != null && playerShield != null)
         {
-            canvasGroup.alpha = playerShield.hasShield ? 1f : 0f;
-        }
-    }
-
-    void OnDestroy()
-    {
-        if (playerShield != null)
-        {
-            playerShield.OnShieldDamage.RemoveListener(UpdateShieldBar);
-            playerShield.OnShieldBreak.RemoveListener(OnShieldBreak);
-            playerShield.OnShieldRestore.RemoveListener(OnShieldRestore);
+            canvasGroup.alpha = playerShield.hasShieldItem ? 1f : 0f;
         }
     }
 }
