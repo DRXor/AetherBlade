@@ -1,5 +1,7 @@
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,10 +12,12 @@ public class PlayerMovement : MonoBehaviour
     public float friction = 8f;
     public float drag = 6f; // Аэродинамическое сопротивление
     public float maxSpeed = 9f;
-
     public GameObject coinPrefab;
-    
+   
+    private float Timer = 0f;
+    private float clipLength = 0f;
 
+    public Sounds soundComponent;
     public Text CoinCount;
     private Rigidbody2D rb;
     public int coin;
@@ -67,12 +71,28 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Получаем ввод от клавиатуры
-        moveInput.x = Input.GetAxisRaw("Horizontal"); 
-        moveInput.y = Input.GetAxisRaw("Vertical");   
-        
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
         // Нормализуем, чтобы диагональное движение не было быстрее
         moveInput = moveInput.normalized;
-    }
+        if (moveInput != Vector2.zero)
+        {
+            Timer -= Time.deltaTime;
+            if (Timer <= 0f) 
+            {
+                AudioClip clip = soundComponent.sounds[0];
+                soundComponent.PlaySound(0, 0.7f, false, false, 0.9f, 1.1f);
+                clipLength = clip.length;
+                Timer = clipLength;
+            }
+            
+        }
+        else
+        {
+            Timer = 0f;
+        }
+    
+    }   
     
 
     void FixedUpdate()
@@ -118,11 +138,12 @@ public class PlayerMovement : MonoBehaviour
         {
             coin += 1;
             CoinCount.text = $"Coin: {coin}";
+            soundComponent.PlaySound(2, 1f, false, false, 0.9f, 1.0f);
             Destroy(collision.gameObject);
-            //if (coinPrefab != null) 
-            //{
-            //    GameObject Coin = Instantiate(coinPrefab, new Vector2(Random.Range(-4, 4), Random.Range(-2, 2)), Quaternion.identity);
-            //}
+            if (coinPrefab != null) 
+            {
+                GameObject Coin = Instantiate(coinPrefab, new Vector2(Random.Range(-4, 4), Random.Range(-2, 2)), Quaternion.identity);
+            }
             
 
         }

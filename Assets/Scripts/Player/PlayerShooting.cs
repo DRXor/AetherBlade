@@ -7,13 +7,13 @@ public class PlayerShooting : MonoBehaviour
     public Transform weaponPivot;     
     public Transform firePoint;        
     public GameObject bulletPrefab;    
-    public float fireRate = 0.2f;      
-
+    public float fireRate = 0.2f;
+    public Sounds soundsComponent;
     private float nextFireTime = 0f;
 
     void Update()
     {
-        // Поворот оружия к курсору
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (weaponPivot != null)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -21,11 +21,14 @@ public class PlayerShooting : MonoBehaviour
             weaponPivot.right = direction; 
         }
 
-        // Стрельба по ЛКМ
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
         {
             Shoot();
+            soundsComponent.PlaySound(1, 1f, false, false, 1.0f, 1.1f);
             nextFireTime = Time.time + fireRate;
+            
+         
         }
     }
 
@@ -37,8 +40,8 @@ public class PlayerShooting : MonoBehaviour
             Destroy(bullet, 2f);
             
             Debug.Log("BANG!"); 
-            // Простой визуальный эффект
-            Debug.Log("BANG!"); // Замени потом на реальный эффект
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+            Debug.Log("BANG!"); // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
         else
         {
