@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,15 +11,58 @@ public class PlayerMovement : MonoBehaviour
     public float drag = 6f; // Аэродинамическое сопротивление
     public float maxSpeed = 9f;
 
+    public GameObject coinPrefab;
+    
 
+    public Text CoinCount;
     private Rigidbody2D rb;
+    public int coin;
     private Vector2 moveInput;
+
+    [Header("Sprite Setup")]
+    public bool autoSetupCollider = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        coin = 0;
+        CoinCount.text = $"Coin: {coin}";
+
+        SetupSpriteAndCollider();
+
     }
 
+    void SetupSpriteAndCollider()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+
+        if (spriteRenderer != null && collider != null)
+        {
+            // Автоматически подгоняем размер коллайдера под спрайт
+            collider.size = spriteRenderer.bounds.size;
+            collider.offset = new Vector2(0, 0);
+        }
+
+        if (autoSetupCollider)
+        {
+            SetupCollider();
+        }
+    }
+
+    void SetupCollider()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+
+        if (sr != null && collider != null && sr.sprite != null)
+        {
+            collider.size = sr.sprite.bounds.size;
+            collider.offset = Vector2.zero;
+            Debug.Log($"Auto-setup collider for {gameObject.name}: {collider.size}");
+        }
+    }
 
     void Update()
     {
@@ -65,6 +110,21 @@ public class PlayerMovement : MonoBehaviour
             // Полная остановка при очень малой скорости
             if (rb.linearVelocity.magnitude < 0.1f)
                 rb.linearVelocity = Vector2.zero;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if (collision.gameObject.CompareTag("Coin")) 
+        {
+            coin += 1;
+            CoinCount.text = $"Coin: {coin}";
+            Destroy(collision.gameObject);
+            //if (coinPrefab != null) 
+            //{
+            //    GameObject Coin = Instantiate(coinPrefab, new Vector2(Random.Range(-4, 4), Random.Range(-2, 2)), Quaternion.identity);
+            //}
+            
+
         }
     }
 }
