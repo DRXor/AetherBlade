@@ -53,7 +53,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void AttackPlayer()
+    public void AttackPlayer()
     {
         if (playerHealth != null)
         {
