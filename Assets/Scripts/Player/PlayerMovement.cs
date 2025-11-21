@@ -8,15 +8,14 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 7f;
     public float acceleration = 18f;
     public float friction = 8f;
-    public float drag = 6f; // Аэродинамическое сопротивление
+    public float drag = 6f;
     public float maxSpeed = 9f;
 
     public GameObject coinPrefab;
-    
-
     public Text CoinCount;
+
     private Rigidbody2D rb;
-    public int coin;
+    private int coin;
     private Vector2 moveInput;
 
     [Header("Sprite Setup")]
@@ -24,13 +23,30 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        // ИСПРАВЛЕНИЕ: Добавлена проверка и автоматическое создание Rigidbody2D
         rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogWarning("Rigidbody2D not found! Adding one automatically.");
+            rb = gameObject.AddComponent<Rigidbody2D>();
+            // Настройки по умолчанию для 2D платформера
+            rb.freezeRotation = true;
+            rb.gravityScale = 0f; // Для top-down игры
+        }
 
         coin = 0;
-        CoinCount.text = $"Coin: {coin}";
+
+        // ИСПРАВЛЕНИЕ: Проверка на null для UI элемента
+        if (CoinCount != null)
+        {
+            CoinCount.text = $"Coin: {coin}";
+        }
+        else
+        {
+            Debug.LogWarning("CoinCount Text not assigned in inspector!");
+        }
 
         SetupSpriteAndCollider();
-
     }
 
     void SetupSpriteAndCollider()
@@ -40,9 +56,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (spriteRenderer != null && collider != null)
         {
-            // Автоматически подгоняем размер коллайдера под спрайт
             collider.size = spriteRenderer.bounds.size;
             collider.offset = new Vector2(0, 0);
+        }
+        else
+        {
+            Debug.LogWarning("SpriteRenderer or BoxCollider2D not found for auto-setup");
         }
 
         if (autoSetupCollider)
@@ -67,20 +86,22 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Получаем ввод от клавиатуры
-        moveInput.x = Input.GetAxisRaw("Horizontal"); 
-        moveInput.y = Input.GetAxisRaw("Vertical");   
-        
-        // Нормализуем, чтобы диагональное движение не было быстрее
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
+
         moveInput = moveInput.normalized;
     }
-    
+
 
     void FixedUpdate()
     {
+        // ИСПРАВЛЕНИЕ: Проверка rb на null перед использованием
+        if (rb == null) return;
+
         // Вычисляем желаемую скорость
         Vector2 targetVelocity = moveInput * moveSpeed;
 
-        // Вычисляем разнице между желаемой и текущей скоростью
+        // Вычисляем разницу между желаемой и текущей скоростью
         Vector2 velocityDiff = targetVelocity - rb.linearVelocity;
 
         // Вычисляем силу для движения
@@ -101,7 +122,6 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, friction * Time.fixedDeltaTime);
         }
 
-
         // Естественное трение через физический drag
         if (moveInput.magnitude < 0.1f)
         {
@@ -112,19 +132,49 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision) 
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Coin")) 
+        if (collision.gameObject.CompareTag("Coin"))
         {
             coin += 1;
-            CoinCount.text = $"Coin: {coin}";
-            Destroy(collision.gameObject);
-            //if (coinPrefab != null) 
-            //{
-            //    GameObject Coin = Instantiate(coinPrefab, new Vector2(Random.Range(-4, 4), Random.Range(-2, 2)), Quaternion.identity);
-            //}
-            
 
+            // ИСПРАВЛЕНИЕ: Проверка на null для UI
+            if (CoinCount != null)
+            {
+                CoinCount.text = $"Coin: {coin}";
+            }
+
+            Destroy(collision.gameObject);
+
+            // ЗВУК: Подбор монетки
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySound(5, 0.7f); // индекс 5 - звук монетки
+            }
         }
+    }
+
+    // Дополнительный метод для сбора монет из других скриптов
+    public void AddCoin(int amount = 1)
+    {
+        coin += amount;
+
+        if (CoinCount != null)
+        {
+            CoinCount.text = $"Coin: {coin}";
+        }
+
+        // ЗВУК: Подбор монетки
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySound(5, 0.7f);
+        }
+    }
+
+    // Метод для получения текущего количества монет
+    public int GetCoinCount()
+    {
+        return coin;
     }
 }
