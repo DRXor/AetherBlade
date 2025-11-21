@@ -115,7 +115,7 @@ public class EnemyWaypointPatrol : MonoBehaviour
     {
         if (enemyAI != null)
         {
-            enemyAI.AttackPlayer();
+            enemyAI.AttackSequence();
         }
     }
 
