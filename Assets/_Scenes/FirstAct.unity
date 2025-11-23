@@ -2233,6 +2233,7 @@ GameObject:
   - component: {fileID: 331679329}
   - component: {fileID: 331679328}
   - component: {fileID: 331679327}
+  - component: {fileID: 331679331}
   m_Layer: 5
   m_Name: PlayerHealthCanvas
   m_TagString: Untagged
@@ -2324,6 +2325,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &331679331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331679326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e5e8eb22b0b5e47b42ab7826601505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
+  artifactsText: {fileID: 935525776}
+  coinsText: {fileID: 1205703471}
+  keysText: {fileID: 170754550}
+  shieldIcon: {fileID: 0}
+  weaponIcon: {fileID: 0}
 --- !u!1001 &345571287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6323,7 +6341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 210, y: 330}
+  m_AnchoredPosition: {x: 210, y: 400}
   m_SizeDelta: {x: 320, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898366874
@@ -13183,7 +13201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 210, y: 400}
+  m_AnchoredPosition: {x: 210, y: 330}
   m_SizeDelta: {x: 320, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2026802458
