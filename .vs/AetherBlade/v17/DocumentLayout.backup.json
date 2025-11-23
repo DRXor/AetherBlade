@@ -72,7 +72,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Items\\InventoryUI.cs",
               "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Items\\InventoryUI.cs",
               "RelativeToolTip": "Assets\\Scripts\\Items\\InventoryUI.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-23T11:45:33.717Z",
               "EditorCaption": ""
@@ -87,8 +87,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Items\\ShieldPickup.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T11:44:22.319Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-23T11:44:22.319Z"
             },
             {
               "$type": "Document",
@@ -100,8 +99,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Items\\CoinPickup.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T11:43:33.692Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-23T11:43:33.692Z"
             },
             {
               "$type": "Document",
@@ -113,8 +111,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Items\\ArtifactPickup.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T11:43:10.903Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-23T11:43:10.903Z"
             },
             {
               "$type": "Document",
@@ -126,8 +123,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Items\\Inventory.cs",
               "ViewState": "AgIAAHUAAAAAAAAAAAAUwI4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T10:03:52.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-23T10:03:52.775Z"
             },
             {
               "$type": "Document",
@@ -139,8 +135,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Items\\CurrencyItem.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T10:02:35.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-23T10:02:35.938Z"
             },
             {
               "$type": "Document",
@@ -152,8 +147,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Items\\ConsumableItem.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T10:02:13.819Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-23T10:02:13.819Z"
             },
             {
               "$type": "Document",
@@ -178,8 +172,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Items\\ArtifactItem.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T10:01:50.346Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-23T10:01:50.346Z"
             }
           ]
         }

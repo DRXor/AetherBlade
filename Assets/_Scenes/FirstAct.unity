@@ -2340,8 +2340,6 @@ MonoBehaviour:
   artifactsText: {fileID: 935525776}
   coinsText: {fileID: 1205703471}
   keysText: {fileID: 170754550}
-  shieldIcon: {fileID: 0}
-  weaponIcon: {fileID: 0}
 --- !u!1001 &345571287
 PrefabInstance:
   m_ObjectHideFlags: 0
