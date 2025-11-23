@@ -133,6 +133,15 @@ public class Inventory : MonoBehaviour
         CachePlayerComponents();
     }
 
+    public int keysCollected = 0;
+    public event Action<int> OnKeysChanged;
+
+    public void CollectKey()
+    {
+        keysCollected++;
+        OnKeysChanged?.Invoke(keysCollected);
+    }
+
     // Временный метод для тестирования
     void Update()
     {
