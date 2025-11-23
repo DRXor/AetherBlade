@@ -140,7 +140,7 @@ public class Inventory : MonoBehaviour
     {
         keysCollected++;
         OnKeysChanged?.Invoke(keysCollected);
-    }
+    }   
 
     // Временный метод для тестирования
     void Update()
