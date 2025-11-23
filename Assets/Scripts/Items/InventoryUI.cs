@@ -1,11 +1,13 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
     [Header("UI References")]
-    public Text artifactsText;
-    public Text coinsText;
+    public TMP_Text artifactsText;
+    public TMP_Text coinsText;
+    public TMP_Text keysText;
     public Image shieldIcon;
     public Image weaponIcon;
 
@@ -13,11 +15,13 @@ public class InventoryUI : MonoBehaviour
     {
         Inventory.Instance.OnArtifactsChanged += UpdateArtifactsUI;
         Inventory.Instance.OnCoinsChanged += UpdateCoinsUI;
+        Inventory.Instance.OnKeysChanged += UpdateKeysUI;
         Inventory.Instance.OnShieldChanged += UpdateShieldUI;
         Inventory.Instance.OnWeaponChanged += UpdateWeaponUI;
 
         UpdateArtifactsUI(Inventory.Instance.artifactsCollected);
         UpdateCoinsUI(Inventory.Instance.coinsCollected);
+        UpdateKeysUI(Inventory.Instance.keysCollected);
         UpdateShieldUI(Inventory.Instance.hasShield);
         UpdateWeaponUI(Inventory.Instance.hasWeapon);
     }
@@ -25,13 +29,19 @@ public class InventoryUI : MonoBehaviour
     void UpdateArtifactsUI(int count)
     {
         if (artifactsText != null)
-            artifactsText.text = $"¿ÚÂÙ‡ÍÚ˚: {count}";
+            artifactsText.text = $"–ê—Ä—Ç: {count}";
     }
 
     void UpdateCoinsUI(int count)
     {
         if (coinsText != null)
-            coinsText.text = $"ÃÓÌÂÚ˚: {count}";
+            coinsText.text = $"–ú–æ–Ω: {count}";
+    }
+
+    void UpdateKeysUI(int count)
+    {
+        if (keysText != null)
+            keysText.text = $"–ö–ª: {count}";
     }
 
     void UpdateShieldUI(bool hasShield)
@@ -58,6 +68,7 @@ public class InventoryUI : MonoBehaviour
         {
             Inventory.Instance.OnArtifactsChanged -= UpdateArtifactsUI;
             Inventory.Instance.OnCoinsChanged -= UpdateCoinsUI;
+            Inventory.Instance.OnKeysChanged -= UpdateKeysUI;
             Inventory.Instance.OnShieldChanged -= UpdateShieldUI;
             Inventory.Instance.OnWeaponChanged -= UpdateWeaponUI;
         }
