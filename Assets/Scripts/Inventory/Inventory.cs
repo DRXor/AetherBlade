@@ -9,18 +9,18 @@ public class Inventory : MonoBehaviour
     [Header("Inventory Stats")]
     public int artifactsCollected = 0;
     public int coinsCollected = 0;
+    public int keysCollected = 0;
 
     [Header("Active Items")]
     public bool hasShield = false;
-    public bool hasWeapon = false;
 
     private Shield cachedPlayerShield;
     private Health cachedPlayerHealth;
 
     public event Action<int> OnArtifactsChanged;
     public event Action<int> OnCoinsChanged;
+    public event Action<int> OnKeysChanged;
     public event Action<bool> OnShieldChanged;
-    public event Action<bool> OnWeaponChanged;
 
     void Awake()
     {
@@ -56,14 +56,18 @@ public class Inventory : MonoBehaviour
     {
         artifactsCollected++;
         OnArtifactsChanged?.Invoke(artifactsCollected);
-        Debug.Log($"Артефакт собран! Всего: {artifactsCollected}");
     }
 
     public void CollectCoins(int amount = 1)
     {
         coinsCollected += amount;
         OnCoinsChanged?.Invoke(coinsCollected);
-        Debug.Log($"Монеты собраны! Всего: {coinsCollected}");
+    }
+
+    public void CollectKey()
+    {
+        keysCollected++;
+        OnKeysChanged?.Invoke(keysCollected);
     }
 
     public void PickupShield()
@@ -72,43 +76,19 @@ public class Inventory : MonoBehaviour
         {
             hasShield = true;
             OnShieldChanged?.Invoke(true);
-            Debug.Log("Щит добавлен в инвентарь!");
 
             if (cachedPlayerShield != null)
             {
                 cachedPlayerShield.PickupShield(50f);
             }
-            else
-            {
-                Debug.LogWarning("Компонент Shield не найден на игроке!");
-            }
-        }
-        else
-        {
-            Debug.Log("Уже есть щит в инвентаре!");
         }
     }
 
-    public void PickupWeapon()
-    {
-        if (!hasWeapon)
-        {
-            hasWeapon = true;
-            OnWeaponChanged?.Invoke(true);
-            Debug.Log("Оружие добавлено в инвентарь!");
-        }
-    }
-
-    public void UseHealthPotion(float healAmount = 25f)
+    public void UseHealthPotion(int healAmount = 25)
     {
         if (cachedPlayerHealth != null)
         {
-            cachedPlayerHealth.Heal((int)healAmount);
-            Debug.Log($"Использовано зелье здоровья! +{healAmount} HP");
-        }
-        else
-        {
-            Debug.LogWarning("Компонент Health не найден на игроке!");
+            cachedPlayerHealth.Heal(healAmount);
         }
     }
 
@@ -120,55 +100,11 @@ public class Inventory : MonoBehaviour
                 cachedPlayerShield.currentShield + shieldAmount,
                 cachedPlayerShield.maxShield
             );
-            Debug.Log($"Использовано зелье щита! +{shieldAmount} shield");
-        }
-        else
-        {
-            Debug.LogWarning("Щит не найден или не активирован!");
         }
     }
 
     public void RefreshPlayerComponents()
     {
         CachePlayerComponents();
-    }
-
-    public int keysCollected = 0;
-    public event Action<int> OnKeysChanged;
-
-    public void CollectKey()
-    {
-        keysCollected++;
-        OnKeysChanged?.Invoke(keysCollected);
-    }   
-
-    // Временный метод для тестирования
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            CollectArtifact();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            CollectCoins(5);
-        }
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            PickupShield();
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            UseHealthPotion();
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            RefreshPlayerComponents();
-            Debug.Log("Компоненты игрока обновлены!");
-        }
     }
 }
