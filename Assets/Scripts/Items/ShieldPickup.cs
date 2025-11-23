@@ -15,16 +15,18 @@ public class ShieldPickup : MonoBehaviour
             {
                 playerShield.PickupShield(shieldAmount);
 
+                Inventory.Instance.PickupShield();
+
                 if (pickupEffect != null)
                     Instantiate(pickupEffect, transform.position, transform.rotation);
 
                 Destroy(gameObject);
 
-                Debug.Log("Щит подобран!");
+                Debug.Log("Щит подобран и добавлен в инвентарь!");
             }
             else if (playerShield != null && playerShield.hasShieldItem)
             {
-                Debug.Log("У вас уже есть щит!");
+                Debug.Log("У вас уже есть щит в инвентаре!");
             }
         }
     }
