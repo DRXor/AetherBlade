@@ -144,4 +144,28 @@ public class HealthEnemy : MonoBehaviour
         yield return new WaitForSeconds(flash_duration);
         sprite_renderer.color = original_color;
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Получение урона от пуль
+        if (other.CompareTag("Bullet"))
+        {
+            Bullet bullet = other.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                take_damage_to_enemy(bullet.damage);
+
+                // Отбрасывание от пули
+                Vector2 knockbackDirection = (transform.position - other.transform.position).normalized;
+                ApplyKnockback(knockbackDirection * 3f);
+
+                Destroy(other.gameObject); // Уничтожаем пулю
+            }
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        take_damage_to_enemy(damage);
+    }
 }
