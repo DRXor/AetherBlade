@@ -59,7 +59,14 @@ public class HealthEnemy : MonoBehaviour
     {
         if (immortality) return;
 
+        Debug.Log($"=== DAMAGE CALLED ===");
+        Debug.Log($"Before: {current_health}");
+
         current_health -= damage;
+
+        Debug.Log($"After: {current_health}");
+        Debug.Log($"Damage taken: {damage}");
+
         EnemyDamage?.Invoke();
 
         if (sprite_renderer != null)
@@ -67,10 +74,9 @@ public class HealthEnemy : MonoBehaviour
             StartCoroutine(Flash());
         }
 
-        Debug.Log($"{gameObject.name} took {damage}. Health {current_health}");
-
         if (current_health <= 0)
         {
+            Debug.Log($"Enemy {gameObject.name} DIED!");
             die_enemy();
         }
     }
@@ -166,6 +172,13 @@ public class HealthEnemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log($"=== HEALTHENEMY.TakeDamage() CALLED ===");
+        Debug.Log($"Object: {gameObject.name}");
+        Debug.Log($"Damage: {damage}");
+        Debug.Log($"Current health before: {current_health}");
+
         take_damage_to_enemy(damage);
+
+        Debug.Log($"Current health after: {current_health}");
     }
 }
