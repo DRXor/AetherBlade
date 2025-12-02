@@ -7,7 +7,15 @@
       "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|c:\\users\\darya\\desktop\\unity projects\\aetherblade\\assets\\scripts\\enemy\\enemytrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\enemy\\healthenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\healthenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|c:\\users\\darya\\desktop\\unity projects\\aetherblade\\assets\\scripts\\enemy\\enemyhealthdebug.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemyhealthdebug.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\enemy\\enemytrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemytrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -17,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\enemy\\healthenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\healthenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\enemy\\enemycollisionchecker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -67,7 +71,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -83,20 +87,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EnemyTrigger.cs",
-              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyTrigger.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyTrigger.cs",
-              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyTrigger.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Enemy\\EnemyTrigger.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "EnemyHealthDebug.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyHealthDebug.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyHealthDebug.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyHealthDebug.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy\\EnemyHealthDebug.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAUwCkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T14:44:22.181Z",
+              "WhenOpened": "2025-12-01T14:53:22.945Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "EnemyWaypointPatrol.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyWaypointPatrol.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyWaypointPatrol.cs",
@@ -108,19 +112,45 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "HealthEnemy.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\HealthEnemy.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\HealthEnemy.cs",
               "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\HealthEnemy.cs",
               "RelativeToolTip": "Assets\\Scripts\\Enemy\\HealthEnemy.cs",
-              "ViewState": "AgIAAIwAAAAAAAAAAAA0wKkAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAIwLYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-30T15:07:17.819Z"
+              "WhenOpened": "2025-11-30T15:07:17.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Bullet.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Bullet.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Bullet.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Bullet.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Bullet.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwDgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T20:01:57.055Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "EnemyTrigger.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyTrigger.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyTrigger.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyTrigger.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy\\EnemyTrigger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T14:44:22.181Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "PlayerHealth.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\PlayerHealth.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerHealth.cs",
@@ -132,20 +162,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Bullet.cs",
-              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Bullet.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Bullet.cs",
-              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Bullet.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Bullet.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAUwDwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-30T20:01:57.055Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "UniversalEnemy.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\UniversalEnemy.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\UniversalEnemy.cs",
@@ -157,7 +174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "EnemyHealthBar.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyHealthBar.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyHealthBar.cs",
@@ -169,7 +186,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "EnemyCollisionFix.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyCollisionFix.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyCollisionFix.cs",
@@ -181,7 +198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "EnemyCollisionChecker.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyCollisionChecker.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyCollisionChecker.cs",
@@ -193,7 +210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "EnemyDebug.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyDebug.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyDebug.cs",
@@ -205,7 +222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "EnemyAI.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyAI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyAI.cs",
@@ -217,7 +234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Inventory.cs",
               "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Inventory\\Inventory.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Inventory\\Inventory.cs",
@@ -229,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "ShieldPickup.cs",
               "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Items\\ShieldPickup.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Items\\ShieldPickup.cs",
@@ -241,7 +258,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ShieldBarUI.cs",
               "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Items\\ShieldBarUI.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Items\\ShieldBarUI.cs",
@@ -253,7 +270,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Shield.cs",
               "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Items\\Shield.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Items\\Shield.cs",
