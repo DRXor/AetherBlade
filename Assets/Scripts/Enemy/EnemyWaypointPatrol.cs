@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class EnemyWaypointPatrol : MonoBehaviour
 {
@@ -10,28 +9,42 @@ public class EnemyWaypointPatrol : MonoBehaviour
     public float chaseRange = 4f;
     public float attackRange = 1.2f;
 
+    [Header("Attack Settings")]
+    public float attackDamage = 10f;
+    public float attackCooldown = 1.5f;
+
     [Header("Advanced Settings")]
     public float acceleration = 2f;
-    public float stoppingDistance = 0.5f;
+    public float stoppingDistance = 0.05f; // Уменьшено!
 
     [Header("Debug")]
     public bool drawGizmos = true;
 
     private int currentPointIndex = 0;
     private Transform player;
-    private EnemyAI enemyAI;
     private bool isChasing = false;
     private float currentSpeed = 0f;
     private Rigidbody2D rb;
+    private Health playerHealth;
+    private float lastAttackTime;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        enemyAI = GetComponent<EnemyAI>();
         rb = GetComponent<Rigidbody2D>();
 
-        if (player == null) Debug.LogError("Player not found!");
-        if (enemyAI == null) Debug.LogError("EnemyAI component not found!");
+        if (player != null)
+        {
+            playerHealth = player.GetComponent<Health>();
+            if (playerHealth == null)
+            {
+                Debug.LogWarning("Health component not found on Player!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player not found! Make sure player has 'Player' tag.");
+        }
 
         if (patrolPoints != null && patrolPoints.Length > 0)
         {
@@ -41,18 +54,22 @@ public class EnemyWaypointPatrol : MonoBehaviour
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null || playerHealth == null)
+        {
+            TryFindPlayer();
+            return;
+        }
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         // Плавное изменение скорости
         float targetSpeed = 0f;
 
-        if (distanceToPlayer <= attackRange)
+        if (distanceToPlayer <= attackRange + stoppingDistance)
         {
             // Останавливаемся для атаки
             targetSpeed = 0f;
-            Attack();
+            AttackPlayer();
         }
         else if (distanceToPlayer <= chaseRange)
         {
@@ -78,6 +95,15 @@ public class EnemyWaypointPatrol : MonoBehaviour
         else if (!isChasing)
         {
             Patrol();
+        }
+    }
+
+    void TryFindPlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (player != null)
+        {
+            playerHealth = player.GetComponent<Health>();
         }
     }
 
@@ -111,11 +137,28 @@ public class EnemyWaypointPatrol : MonoBehaviour
             transform.position = newPosition;
     }
 
-    void Attack()
+    void AttackPlayer()
     {
-        if (enemyAI != null)
+        // Атакуем только если прошел кулдаун
+        if (Time.time >= lastAttackTime + attackCooldown && playerHealth != null)
         {
-            enemyAI.AttackSequence();
+            playerHealth.TakeDamage(attackDamage);
+            Debug.Log($"Enemy attacked player for {attackDamage} damage!");
+            lastAttackTime = Time.time;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Если враг сталкивается с игроком - наносим урон сразу
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Health health = collision.gameObject.GetComponent<Health>();
+            if (health != null)
+            {
+                health.TakeDamage(attackDamage * 0.5f);
+                Debug.Log($"Enemy collided with player for {attackDamage * 0.5f} damage!");
+            }
         }
     }
 

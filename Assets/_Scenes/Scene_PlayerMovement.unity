@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1340666292486291006, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
+      propertyPath: hitEffectPrefab
+      value: 
+      objectReference: {fileID: 650594843911554863, guid: f4fc81a725277b64585c5b48aeaf260e, type: 3}
     - target: {fileID: 6520378243607823958, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.47085
@@ -172,6 +176,10 @@ PrefabInstance:
       value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 7458204294799031986, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458204294799031986, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
       propertyPath: m_TagString
       value: Bullet
       objectReference: {fileID: 0}
@@ -189,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 166277844}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -999,6 +1007,10 @@ MonoBehaviour:
   firePoint: {fileID: 1955863505}
   bulletPrefab: {fileID: 7458204294799031986, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
   fireRate: 0.2
+  baseDamage: 25
+  damageMultiplier: 1
+  bulletsPerShot: 1
+  spreadAngle: 0
 --- !u!114 &1581000455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,7 +1216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1955863505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1479,6 +1491,10 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -1654,10 +1670,15 @@ MonoBehaviour:
   max_health: 100
   current_health: 0
   immortality: 0
+  knockbackResistance: 1
+  canBeKnockbacked: 1
   EnemyDamage:
     m_PersistentCalls:
       m_Calls: []
   EnemyDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnKnockback:
     m_PersistentCalls:
       m_Calls: []
   damage_color: {r: 1, g: 1, b: 1, a: 1}
@@ -1685,6 +1706,10 @@ PrefabInstance:
     - target: {fileID: 769096265335547610, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 769096265335547610, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 769096265335547610, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
       propertyPath: m_TagString

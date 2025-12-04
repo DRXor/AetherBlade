@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
 
     [Header("Visual Feedback")]
     public Color damageColor = Color.red;
-    public Color shieldDamageColor = Color.cyan; 
+    public Color shieldDamageColor = Color.cyan;
     public float flashDuration = 0.1f;
 
     private SpriteRenderer spriteRenderer;
@@ -30,7 +30,6 @@ public class Health : MonoBehaviour
     {
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        shieldComponent = GetComponent<Shield>();
 
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
@@ -40,13 +39,12 @@ public class Health : MonoBehaviour
     {
         if (isInvulnerable) return;
 
-        int intDamage = Mathf.RoundToInt(damage);
-        currentHealth -= intDamage;
+        currentHealth -= damage;
 
-        // ÇÂÓÊ: Ïîëó÷åíèå óğîíà
-        AudioManager.instance.PlaySound(0, 0.8f); // èíäåêñ 0 - çâóê ïîëó÷åíèÿ óğîíà
+        // ÂĞÅÌÅÍÍÎ ÓÁÈĞÀÅÌ ÀÓÄÈÎÌÅÍÅÄÆÅĞ - ÅÃÎ ÍÅÒ Â ÏĞÎÅÊÒÅ
+        // AudioManager.instance.PlaySound(0, 0.8f);
 
-        Debug.Log($"Player took {damage} damage. Health: {currentHealth}/{maxHealth}");
+        Debug.Log($"{gameObject.name} took {damage} damage. Health: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0)
         {
@@ -88,9 +86,10 @@ public class Health : MonoBehaviour
 
     void Die()
     {
-        // ÇÂÓÊ: Ñìåğòü èãğîêà
-        AudioManager.instance.PlaySound(1, 1f); // èíäåêñ 1 - çâóê ñìåğòè
-        Debug.Log("Player died! Game Over");
+        // ÂĞÅÌÅÍÍÎ ÓÁÈĞÀÅÌ ÀÓÄÈÎÌÅÍÅÄÆÅĞ
+        // AudioManager.instance.PlaySound(1, 1f);
+
+        Debug.Log($"{gameObject.name} died!");
         Destroy(gameObject);
     }
 
@@ -98,16 +97,9 @@ public class Health : MonoBehaviour
     {
         currentHealth = Mathf.Min(currentHealth + healAmount, maxHealth);
 
-        // ÇÂÓÊ: Ëå÷åíèå
-        AudioManager.instance.PlaySound(2, 0.7f); // èíäåêñ 2 - çâóê ëå÷åíèÿ
+        // ÂĞÅÌÅÍÍÎ ÓÁÈĞÀÅÌ ÀÓÄÈÎÌÅÍÅÄÆÅĞ
+        // AudioManager.instance.PlaySound(2, 0.7f);
 
-        Debug.Log("Player healed. Health: " + currentHealth + "/" + maxHealth);
-    }
-
-    System.Collections.IEnumerator FlashColor(Color flashColor)
-    {
-        spriteRenderer.color = flashColor;
-        yield return new WaitForSeconds(flashDuration);
-        spriteRenderer.color = originalColor;
+        Debug.Log($"{gameObject.name} healed. Health: {currentHealth}/{maxHealth}");
     }
 }
