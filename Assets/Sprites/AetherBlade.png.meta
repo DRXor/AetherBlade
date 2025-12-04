@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2a3dad58c87a6364d9da07316afc2c82
+guid: 09f90284b1a215841a6226c9447d70b8
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -67,7 +67,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -117,19 +117,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -137,10 +124,10 @@ TextureImporter:
       name: AetherBlade_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 5
-        width: 91
-        height: 132
+        x: 5
+        y: 12
+        width: 358
+        height: 523
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +146,10 @@ TextureImporter:
       name: AetherBlade_1
       rect:
         serializedVersion: 2
-        x: 101
-        y: 73
-        width: 41
-        height: 48
+        x: 365
+        y: 285
+        width: 158
+        height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +168,10 @@ TextureImporter:
       name: AetherBlade_2
       rect:
         serializedVersion: 2
-        x: 142
-        y: 73
-        width: 45
-        height: 48
+        x: 529
+        y: 285
+        width: 174
+        height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +190,10 @@ TextureImporter:
       name: AetherBlade_3
       rect:
         serializedVersion: 2
-        x: 187
-        y: 73
-        width: 33
-        height: 48
+        x: 709
+        y: 285
+        width: 126
+        height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +212,10 @@ TextureImporter:
       name: AetherBlade_4
       rect:
         serializedVersion: 2
-        x: 220
-        y: 73
-        width: 35
-        height: 48
+        x: 841
+        y: 285
+        width: 134
+        height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +234,10 @@ TextureImporter:
       name: AetherBlade_5
       rect:
         serializedVersion: 2
-        x: 102
-        y: 19
-        width: 79
-        height: 47
+        x: 369
+        y: 68
+        width: 310
+        height: 183
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,10 +256,10 @@ TextureImporter:
       name: AetherBlade_6
       rect:
         serializedVersion: 2
-        x: 180
-        y: 19
-        width: 37
-        height: 47
+        x: 681
+        y: 68
+        width: 142
+        height: 183
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,10 +278,10 @@ TextureImporter:
       name: AetherBlade_7
       rect:
         serializedVersion: 2
-        x: 213
-        y: 19
-        width: 38
-        height: 47
+        x: 813
+        y: 68
+        width: 146
+        height: 183
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,7 +300,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
