@@ -59,7 +59,14 @@ public class HealthEnemy : MonoBehaviour
     {
         if (immortality) return;
 
+        Debug.Log($"=== DAMAGE CALLED ===");
+        Debug.Log($"Before: {current_health}");
+
         current_health -= damage;
+
+        Debug.Log($"After: {current_health}");
+        Debug.Log($"Damage taken: {damage}");
+
         EnemyDamage?.Invoke();
 
         if (sprite_renderer != null)
@@ -67,10 +74,9 @@ public class HealthEnemy : MonoBehaviour
             StartCoroutine(Flash());
         }
 
-        Debug.Log($"{gameObject.name} took {damage}. Health {current_health}");
-
         if (current_health <= 0)
         {
+            Debug.Log($"Enemy {gameObject.name} DIED!");
             die_enemy();
         }
     }
@@ -143,5 +149,36 @@ public class HealthEnemy : MonoBehaviour
         sprite_renderer.color = damage_color;
         yield return new WaitForSeconds(flash_duration);
         sprite_renderer.color = original_color;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Получение урона от пуль
+        if (other.CompareTag("Bullet"))
+        {
+            Bullet bullet = other.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                take_damage_to_enemy(bullet.damage);
+
+                // Отбрасывание от пули
+                Vector2 knockbackDirection = (transform.position - other.transform.position).normalized;
+                ApplyKnockback(knockbackDirection * 3f);
+
+                Destroy(other.gameObject); // Уничтожаем пулю
+            }
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Debug.Log($"=== HEALTHENEMY.TakeDamage() CALLED ===");
+        Debug.Log($"Object: {gameObject.name}");
+        Debug.Log($"Damage: {damage}");
+        Debug.Log($"Current health before: {current_health}");
+
+        take_damage_to_enemy(damage);
+
+        Debug.Log($"Current health after: {current_health}");
     }
 }
