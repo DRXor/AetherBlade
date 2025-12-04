@@ -1,22 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\",
+  "WorkspaceRootPath": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\ShieldTester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\ShieldTester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|c:\\users\\darya\\desktop\\unity projects\\aetherblade\\assets\\scripts\\audiomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\audiomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\ShieldPickup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\ShieldPickup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|c:\\users\\darya\\desktop\\unity projects\\aetherblade\\assets\\sounds\\sounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\sounds\\sounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Player\\ShieldBarUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Player\\ShieldBarUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\player\\healthbarui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\healthbarui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Player\\Shield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Player\\Shield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\player\\health.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\health.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\shieldtester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\shieldtester.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\enemy\\enemywaypointpatrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemywaypointpatrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\enemy\\enemyai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemyai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\assets\\scripts\\enemy\\enemypatrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemypatrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\ShieldPickup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\ShieldPickup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\ShieldBarUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\Player\\ShieldBarUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\Shield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B81B47E-A1B3-5BDC-2A50-F540E8B935CD}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\Player\\Shield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,75 +54,153 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ShieldTester.cs",
-              "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\ShieldTester.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ShieldTester.cs",
-              "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\ShieldTester.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ShieldTester.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAJAAAAAAAAAA==",
+              "Title": "AudioManager.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\AudioManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AudioManager.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\AudioManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\AudioManager.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAADgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T12:29:58.288Z",
+              "WhenOpened": "2025-11-21T14:15:34.009Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ShieldPickup.cs",
-              "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\ShieldPickup.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\ShieldPickup.cs",
-              "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\ShieldPickup.cs",
-              "RelativeToolTip": "Assets\\Scripts\\ShieldPickup.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAbAAAAAAAAAA==",
+              "Title": "sounds.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\sounds\\sounds.cs",
+              "RelativeDocumentMoniker": "Assets\\sounds\\sounds.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\sounds\\sounds.cs",
+              "RelativeToolTip": "Assets\\sounds\\sounds.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAuwBsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T12:28:34.927Z",
+              "WhenOpened": "2025-11-21T13:14:48.125Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ShieldBarUI.cs",
-              "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Player\\ShieldBarUI.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\ShieldBarUI.cs",
-              "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Player\\ShieldBarUI.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player\\ShieldBarUI.cs",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAAAIEAAAAhAAAAAAAAAA==",
+              "Title": "HealthBarUI.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\HealthBarUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\HealthBarUI.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\HealthBarUI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\HealthBarUI.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAgwEUAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T12:24:07.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-20T21:45:52.246Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Shield.cs",
-              "DocumentMoniker": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Player\\Shield.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\Shield.cs",
-              "ToolTip": "C:\\Users\\jannd\\Documents\\GitHub\\AetherBlade\\Assets\\Scripts\\Player\\Shield.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player\\Shield.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAAuAAAAAAAAAA==",
+              "Title": "Health.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\Health.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\Health.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\Health.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\Health.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAYwFEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T12:23:38.242Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-20T21:29:53.251Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EnemyPatrol.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyPatrol.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyPatrol.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyPatrol.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy\\EnemyPatrol.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAYwIEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T21:18:06.981Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EnemyAI.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyAI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyAI.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyAI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy\\EnemyAI.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T18:37:48.688Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EnemyWaypointPatrol.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyWaypointPatrol.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyWaypointPatrol.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Enemy\\EnemyWaypointPatrol.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Enemy\\EnemyWaypointPatrol.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAA/wHUAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T18:36:51.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ShieldTester.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\ShieldTester.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ShieldTester.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\ShieldTester.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ShieldTester.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T12:29:58.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ShieldPickup.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\ShieldPickup.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ShieldPickup.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\ShieldPickup.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ShieldPickup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T12:28:34.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ShieldBarUI.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\ShieldBarUI.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\ShieldBarUI.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\ShieldBarUI.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\ShieldBarUI.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAqwIsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T12:24:07.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Shield.cs",
+              "DocumentMoniker": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\Shield.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\Shield.cs",
+              "ToolTip": "C:\\Users\\Darya\\Desktop\\Unity projects\\AetherBlade\\Assets\\Scripts\\Player\\Shield.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\Shield.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAqwF0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T12:23:38.242Z"
             }
           ]
         }

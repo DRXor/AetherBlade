@@ -1,78 +1,147 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyWaypointPatrol : MonoBehaviour
 {
-    [Header("Waypoints")]
-    public Transform[] waypoints;
-    public float moveSpeed = 2f;
-    public float waitTime = 1f;
+    [Header("Patrol Settings")]
+    public Transform[] patrolPoints;
+    public float patrolSpeed = 1.5f;
+    public float chaseSpeed = 2.5f;
+    public float chaseRange = 4f;
+    public float attackRange = 1.2f;
 
-    private int currentWaypointIndex = 0;
-    private bool isWaiting = false;
-    private float waitTimer = 0f;
+    [Header("Advanced Settings")]
+    public float acceleration = 2f;
+    public float stoppingDistance = 0.5f;
+
+    [Header("Debug")]
+    public bool drawGizmos = true;
+
+    private int currentPointIndex = 0;
+    private Transform player;
+    private EnemyAI enemyAI;
+    private bool isChasing = false;
+    private float currentSpeed = 0f;
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        enemyAI = GetComponent<EnemyAI>();
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (player == null) Debug.LogError("Player not found!");
+        if (enemyAI == null) Debug.LogError("EnemyAI component not found!");
+
+        if (patrolPoints != null && patrolPoints.Length > 0)
+        {
+            transform.position = patrolPoints[0].position;
+        }
     }
 
     void Update()
     {
-        if (waypoints.Length == 0) return;
+        if (player == null) return;
 
-        if (isWaiting)
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        // Плавное изменение скорости
+        float targetSpeed = 0f;
+
+        if (distanceToPlayer <= attackRange)
         {
-            waitTimer += Time.deltaTime;
-            if (waitTimer >= waitTime)
-            {
-                isWaiting = false;
-                waitTimer = 0f;
-                currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
-            }
-            return;
+            // Останавливаемся для атаки
+            targetSpeed = 0f;
+            Attack();
+        }
+        else if (distanceToPlayer <= chaseRange)
+        {
+            // Преследование с плавным ускорением
+            targetSpeed = chaseSpeed;
+            isChasing = true;
+        }
+        else
+        {
+            // Патрулирование
+            targetSpeed = patrolSpeed;
+            isChasing = false;
         }
 
-        MoveToWaypoint();
+        // Плавное изменение скорости
+        currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
+
+        // Движение
+        if (isChasing && distanceToPlayer > attackRange + stoppingDistance)
+        {
+            ChasePlayer();
+        }
+        else if (!isChasing)
+        {
+            Patrol();
+        }
     }
 
-    void MoveToWaypoint()
+    void Patrol()
     {
-        Vector2 targetPosition = waypoints[currentWaypointIndex].position;
-        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+        if (patrolPoints == null || patrolPoints.Length == 0) return;
 
-        rb.linearVelocity = new Vector2(direction.x * moveSpeed, rb.linearVelocity.y);
+        Transform targetPoint = patrolPoints[currentPointIndex];
+        if (targetPoint == null) return;
 
-        // Поворот спрайта
-        if (spriteRenderer != null)
+        Vector2 newPosition = Vector2.MoveTowards(transform.position, targetPoint.position, currentSpeed * Time.deltaTime);
+
+        if (rb != null)
+            rb.MovePosition(newPosition);
+        else
+            transform.position = newPosition;
+
+        if (Vector2.Distance(transform.position, targetPoint.position) < 0.1f)
         {
-            spriteRenderer.flipX = direction.x < 0;
+            currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length;
         }
+    }
 
-        // Проверка достижения точки
-        float distance = Vector2.Distance(transform.position, targetPosition);
-        if (distance < 0.1f)
+    void ChasePlayer()
+    {
+        Vector2 newPosition = Vector2.MoveTowards(transform.position, player.position, currentSpeed * Time.deltaTime);
+
+        if (rb != null)
+            rb.MovePosition(newPosition);
+        else
+            transform.position = newPosition;
+    }
+
+    void Attack()
+    {
+        if (enemyAI != null)
         {
-            isWaiting = true;
-            rb.linearVelocity = Vector2.zero;
+            enemyAI.AttackSequence();
         }
     }
 
     void OnDrawGizmosSelected()
     {
-        if (waypoints == null) return;
+        if (!drawGizmos) return;
 
-        Gizmos.color = Color.cyan;
-        for (int i = 0; i < waypoints.Length; i++)
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        if (patrolPoints != null && patrolPoints.Length > 1)
         {
-            if (waypoints[i] != null)
+            Gizmos.color = Color.blue;
+            for (int i = 0; i < patrolPoints.Length; i++)
             {
-                Gizmos.DrawWireSphere(waypoints[i].position, 0.3f);
-                if (i < waypoints.Length - 1 && waypoints[i + 1] != null)
+                if (patrolPoints[i] != null)
                 {
-                    Gizmos.DrawLine(waypoints[i].position, waypoints[i + 1].position);
+                    Gizmos.DrawSphere(patrolPoints[i].position, 0.2f);
+                    int nextIndex = (i + 1) % patrolPoints.Length;
+                    if (patrolPoints[nextIndex] != null)
+                    {
+                        Gizmos.DrawLine(patrolPoints[i].position, patrolPoints[nextIndex].position);
+                    }
                 }
             }
         }
