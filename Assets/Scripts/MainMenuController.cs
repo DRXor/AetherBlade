@@ -23,11 +23,6 @@ public class MainMenuController : MonoBehaviour
 
         if (quitButton != null)
             quitButton.onClick.AddListener(QuitGame);
-
-#if !UNITY_ANDROID && !UNITY_IOS
-        if (startButton != null)
-            startButton.Select();
-#endif
     }
 
     public void StartGame()
@@ -46,12 +41,6 @@ public class MainMenuController : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Выход из игры...");
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 
     void Update()
