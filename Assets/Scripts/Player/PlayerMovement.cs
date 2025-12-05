@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject coinPrefab;
     public Text CoinCount;
 
+    // ДОБАВЛЕНИЕ: Переменная для управления анимациями
+    private Animator anim;
+
     private Rigidbody2D rb;
     private int coin;
     private Vector2 moveInput;
@@ -32,6 +35,13 @@ public class PlayerMovement : MonoBehaviour
             // Настройки по умолчанию для 2D платформера
             rb.freezeRotation = true;
             rb.gravityScale = 0f; // Для top-down игры
+        }
+
+        // ДОБАВЛЕНИЕ: Получаем компонент Animator для управления анимациями
+        anim = GetComponent<Animator>();
+        if (anim == null)
+        {
+            Debug.LogWarning("Animator not found on player! Animation system may not work.");
         }
 
         coin = 0;
@@ -90,6 +100,13 @@ public class PlayerMovement : MonoBehaviour
         moveInput.y = Input.GetAxisRaw("Vertical");
 
         moveInput = moveInput.normalized;
+
+        // ДОБАВЛЕНИЕ: Передаем параметры направления движения в аниматор
+        if (anim != null)
+        {
+            anim.SetFloat("MoveX", moveInput.x);
+            anim.SetFloat("MoveY", moveInput.y);
+        }
     }
 
 
@@ -130,6 +147,13 @@ public class PlayerMovement : MonoBehaviour
             // Полная остановка при очень малой скорости
             if (rb.linearVelocity.magnitude < 0.1f)
                 rb.linearVelocity = Vector2.zero;
+        }
+
+        // ДОБАВЛЕНИЕ: Передаем параметр скорости в аниматор (нормализованная скорость)
+        if (anim != null)
+        {
+            float speed = rb.linearVelocity.magnitude / maxSpeed;
+            anim.SetFloat("Speed", speed);
         }
     }
 
