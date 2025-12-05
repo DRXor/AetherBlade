@@ -11740,7 +11740,7 @@ GameObject:
   - component: {fileID: 1372695115}
   - component: {fileID: 1372695116}
   m_Layer: 0
-  m_Name: HealthPotion
+  m_Name: HealthPotion1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12302,7 +12302,7 @@ GameObject:
   - component: {fileID: 1393523241}
   - component: {fileID: 1393523240}
   m_Layer: 0
-  m_Name: Shield
+  m_Name: Shield1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
