@@ -1,4 +1,4 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.Events;
 
 public class HealthEnemy : MonoBehaviour
@@ -11,7 +11,7 @@ public class HealthEnemy : MonoBehaviour
     [Header("Damage Reaction Settings")]
     public bool canBeKnockbacked = true;
     public float knockbackResistance = 1f;
-    public bool disableAIOnDamage = true; // Новый параметр!
+    public bool disableAIOnDamage = true;
     public float aiDisableDuration = 0.5f;
 
     [Header("Events")]
@@ -26,24 +26,22 @@ public class HealthEnemy : MonoBehaviour
     private SpriteRenderer sprite_renderer;
     private Color original_color;
     private Rigidbody2D rb;
-    private MonoBehaviour aiScript; // Будет работать с ЛЮБЫМ AI скриптом
+    private MonoBehaviour aiScript;
 
     void Start()
     {
+        EnemyManager.Instance.RegisterEnemy();
+
         current_health = max_health;
         sprite_renderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-
-        // Автопоиск AI скрипта (EnemyPatrol, EnemyChase, EnemyShooter и т.д.)
         FindAIScript();
-
         if (sprite_renderer != null)
             original_color = sprite_renderer.color;
     }
 
     void FindAIScript()
     {
-        // Ищем любой скрипт с "Enemy" в названии как AI компонент
         MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
         foreach (MonoBehaviour script in scripts)
         {
@@ -85,7 +83,6 @@ public class HealthEnemy : MonoBehaviour
     {
         if (!canBeKnockbacked || rb == null) return;
 
-        // Условное отключение AI (только если включено в настройках)
         if (disableAIOnDamage && aiScript != null)
         {
             aiScript.enabled = false;
@@ -114,13 +111,16 @@ public class HealthEnemy : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        if (sprite != null && current_health > 0) // Не меняем цвет если умер
+        if (sprite != null && current_health > 0)
             sprite.color = original;
     }
 
     void die_enemy()
     {
         Debug.Log($"{gameObject.name} died!");
+
+        EnemyManager.Instance.EnemyDied();
+
         EnemyDeath?.Invoke();
 
         CreateDeathEffect();
@@ -135,7 +135,6 @@ public class HealthEnemy : MonoBehaviour
             sprite.color = Color.gray;
         }
 
-        // Отключаем ВСЕ при смерти
         if (aiScript != null)
             aiScript.enabled = false;
 
@@ -153,7 +152,6 @@ public class HealthEnemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Получение урона от пуль
         if (other.CompareTag("Bullet"))
         {
             Bullet bullet = other.GetComponent<Bullet>();
@@ -161,11 +159,10 @@ public class HealthEnemy : MonoBehaviour
             {
                 take_damage_to_enemy(bullet.damage);
 
-                // Отбрасывание от пули
                 Vector2 knockbackDirection = (transform.position - other.transform.position).normalized;
                 ApplyKnockback(knockbackDirection * 3f);
 
-                Destroy(other.gameObject); // Уничтожаем пулю
+                Destroy(other.gameObject);
             }
         }
     }
