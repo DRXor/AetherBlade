@@ -13,132 +13,106 @@ public class SimpleEnemyPatrol : MonoBehaviour
     [Header("Преследование")]
     public float chaseRange = 4f;
     public float chaseSpeed = 2.5f;
-    public float attackRange = 1.2f;
+    public float attackRange = 2.0f;
     public float attackDamage = 10f;
     public float attackCooldown = 1.5f;
 
-    [Header("Информация")]
-    public bool movingToB = true;
-    public float distanceToTarget;
-
-    private SpriteRenderer spriteRenderer;
+    // Ссылки
     private Transform player;
-    private float lastAttackTime;
+    private SpriteRenderer spriteRenderer;
+    private Animator anim;
+
+    // Состояние
+    private bool movingToB = true;
+    private float lastAttackTime = 0f;
+    private bool isAttacking = false;
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();  // Добавляем получение Animator
 
-        // Проверяем точки
-        if (pointA == null)
-            Debug.LogError($"{name}: Точка A не назначена!");
-        if (pointB == null)
-            Debug.LogError($"{name}: Точка B не назначена!");
-
-        if (pointA != null)
-            Debug.Log($"{name}: Точка A на {pointA.position}");
-        if (pointB != null)
-            Debug.Log($"{name}: Точка B на {pointB.position}");
-
-        // Начинаем с позиции между точками
-        if (pointA != null)
-            transform.position = pointA.position;
+        if (pointA == null || pointB == null)
+            Debug.LogError("Назначь точки патрулирования!");
     }
 
     void Update()
     {
-        // Если точек нет - выходим
-        if (pointA == null || pointB == null)
-        {
-            Debug.LogWarning($"{name}: Нет точек для патрулирования!");
-            return;
-        }
-
-        // Если игрока нет - просто патрулируем
-        if (player == null)
-        {
-            Patrol();
-            return;
-        }
+        if (player == null) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= attackRange)
+        if (distanceToPlayer <= chaseRange)
         {
-            // Атака
-            Attack();
-        }
-        else if (distanceToPlayer <= chaseRange)
-        {
-            // Преследование
-            Chase();
+            if (distanceToPlayer > attackRange)
+            {
+                ChasePlayer();
+            }
+            else
+            {
+                Attack();
+            }
         }
         else
         {
-            // Патрулирование
             Patrol();
         }
     }
 
     void Patrol()
     {
-        // Выбираем цель
         Transform target = movingToB ? pointB : pointA;
+        MoveToTarget(target.position, speed);
 
-        // Вычисляем направление
-        Vector2 direction = (target.position - transform.position).normalized;
-
-        // Двигаемся к цели
-        transform.position = Vector2.MoveTowards(
-            transform.position,
-            target.position,
-            speed * Time.deltaTime
-        );
-
-        // Поворачиваем спрайт
-        if (spriteRenderer != null)
+        if (Vector2.Distance(transform.position, target.position) < stoppingDistance)
         {
-            spriteRenderer.flipX = direction.x < 0;
+            movingToB = !movingToB;
         }
 
-        // Проверяем расстояние до цели
-        distanceToTarget = Vector2.Distance(transform.position, target.position);
-
-        // Если достигли цели - меняем направление
-        if (distanceToTarget < stoppingDistance)
+        if (spriteRenderer != null)
         {
-            Debug.Log($"{name}: Достиг точку {(movingToB ? "B" : "A")}! Меняю направление.");
-            movingToB = !movingToB;
+            Vector2 direction = target.position - transform.position;
+            spriteRenderer.flipX = direction.x < 0;
         }
     }
 
-    void Chase()
+    void ChasePlayer()
     {
-        transform.position = Vector2.MoveTowards(
-            transform.position,
-            player.position,
-            chaseSpeed * Time.deltaTime
-        );
+        MoveToTarget(player.position, chaseSpeed);
 
-        // Поворачиваемся к игроку
         if (spriteRenderer != null)
         {
-            Vector2 direction = (player.position - transform.position).normalized;
+            Vector2 direction = player.position - transform.position;
             spriteRenderer.flipX = direction.x < 0;
         }
     }
 
     void Attack()
     {
+        // Останавливаемся для атаки
+        transform.position = transform.position;
+
+        // Поворот спрайта к игроку
         if (spriteRenderer != null)
         {
             Vector2 direction = (player.position - transform.position).normalized;
             spriteRenderer.flipX = direction.x < 0;
         }
 
-        if (Time.time >= lastAttackTime + attackCooldown)
+        if (Time.time >= lastAttackTime + attackCooldown && !isAttacking)
         {
+            // Запускаем анимацию атаки
+            if (anim != null)
+            {
+                anim.SetBool("IsAttacking", true);
+                isAttacking = true;
+                Debug.Log($"{name}: Запускаю анимацию атаки");
+
+                // Отключаем анимацию атаки через время
+                Invoke("ResetAttackAnimation", 1.2f); // Увеличь если анимация длиннее
+            }
+
             Health playerHealth = player.GetComponent<Health>();
             if (playerHealth != null)
             {
@@ -148,6 +122,21 @@ public class SimpleEnemyPatrol : MonoBehaviour
 
             lastAttackTime = Time.time;
         }
+    }
+
+    void ResetAttackAnimation()
+    {
+        if (anim != null)
+        {
+            anim.SetBool("IsAttacking", false);
+            isAttacking = false;
+            Debug.Log($"{name}: Сбрасываю анимацию атаки");
+        }
+    }
+
+    void MoveToTarget(Vector2 target, float moveSpeed)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
     }
 
     void OnDrawGizmosSelected()
@@ -170,5 +159,13 @@ public class SimpleEnemyPatrol : MonoBehaviour
             Transform target = movingToB ? pointB : pointA;
             Gizmos.DrawLine(transform.position, target.position);
         }
+
+        // Рисуем зону атаки
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        // Рисуем зону преследования
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 }
