@@ -139,11 +139,27 @@ public class SimpleEnemyPatrol : MonoBehaviour
 
         if (Time.time >= lastAttackTime + attackCooldown)
         {
-            Health playerHealth = player.GetComponent<Health>();
-            if (playerHealth != null)
+            Shield playerShield = player.GetComponent<Shield>();
+            bool shieldAbsorbed = false;
+
+            if (playerShield != null && playerShield.isShieldActive)
             {
-                playerHealth.TakeDamage(attackDamage);
-                Debug.Log($"{name}: јтаковал игрока на {attackDamage} урона!");
+                shieldAbsorbed = playerShield.TakeDamage(attackDamage);
+
+                if (shieldAbsorbed)
+                {
+                    Debug.Log($"{name}: ”дар поглощЄн щитом! ўит: {playerShield.currentShield}/{playerShield.maxShield}");
+                }
+            }
+
+            if (!shieldAbsorbed)
+            {
+                Health playerHealth = player.GetComponent<Health>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(attackDamage);
+                    Debug.Log($"{name}: јтаковал игрока на {attackDamage} урона!");
+                }
             }
 
             lastAttackTime = Time.time;
