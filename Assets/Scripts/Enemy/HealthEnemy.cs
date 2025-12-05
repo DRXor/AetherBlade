@@ -11,7 +11,7 @@ public class HealthEnemy : MonoBehaviour
     [Header("Damage Reaction Settings")]
     public bool canBeKnockbacked = true;
     public float knockbackResistance = 1f;
-    public bool disableAIOnDamage = true; // Новый параметр!
+    public bool disableAIOnDamage = true;
     public float aiDisableDuration = 0.5f;
 
     [Header("Events")]
@@ -26,24 +26,27 @@ public class HealthEnemy : MonoBehaviour
     private SpriteRenderer sprite_renderer;
     private Color original_color;
     private Rigidbody2D rb;
-    private MonoBehaviour aiScript; // Будет работать с ЛЮБЫМ AI скриптом
+    private MonoBehaviour aiScript;
+    private Animator anim;
+    private bool isDead = false;
 
     void Start()
     {
-        current_health = max_health;
+        current_health = max_health; // ВАЖНО: здоровье должно быть max_health
         sprite_renderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
-        // Автопоиск AI скрипта (EnemyPatrol, EnemyChase, EnemyShooter и т.д.)
         FindAIScript();
 
         if (sprite_renderer != null)
             original_color = sprite_renderer.color;
+
+        Debug.Log($"{name} инициализирован. Здоровье: {current_health}/{max_health}");
     }
 
     void FindAIScript()
     {
-        // Ищем любой скрипт с "Enemy" в названии как AI компонент
         MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
         foreach (MonoBehaviour script in scripts)
         {
@@ -57,15 +60,18 @@ public class HealthEnemy : MonoBehaviour
 
     public void take_damage_to_enemy(float damage)
     {
-        if (immortality) return;
+        if (immortality || isDead)
+        {
+            Debug.Log($"{name}: Бессмертен или уже мертв, урон игнорируется");
+            return;
+        }
 
-        Debug.Log($"=== DAMAGE CALLED ===");
-        Debug.Log($"Before: {current_health}");
+        Debug.Log($"=== {name} ПОЛУЧИЛ УРОН ===");
+        Debug.Log($"До: {current_health}, Урон: {damage}");
 
         current_health -= damage;
 
-        Debug.Log($"After: {current_health}");
-        Debug.Log($"Damage taken: {damage}");
+        Debug.Log($"После: {current_health}");
 
         EnemyDamage?.Invoke();
 
@@ -76,16 +82,15 @@ public class HealthEnemy : MonoBehaviour
 
         if (current_health <= 0)
         {
-            Debug.Log($"Enemy {gameObject.name} DIED!");
+            Debug.Log($"{name} УМИРАЕТ! Текущее здоровье: {current_health}");
             die_enemy();
         }
     }
 
     public void ApplyKnockback(Vector2 force, ForceMode2D forceMode = ForceMode2D.Impulse)
     {
-        if (!canBeKnockbacked || rb == null) return;
+        if (!canBeKnockbacked || rb == null || isDead) return;
 
-        // Условное отключение AI (только если включено в настройках)
         if (disableAIOnDamage && aiScript != null)
         {
             aiScript.enabled = false;
@@ -102,83 +107,181 @@ public class HealthEnemy : MonoBehaviour
 
     void EnableAI()
     {
-        if (aiScript != null)
+        if (aiScript != null && !isDead)
             aiScript.enabled = true;
     }
 
     System.Collections.IEnumerator StunEffect(float duration)
     {
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        Color original = sprite.color;
-        sprite.color = Color.yellow;
+        if (sprite_renderer == null) yield break;
+
+        Color original = sprite_renderer.color;
+        sprite_renderer.color = Color.yellow;
 
         yield return new WaitForSeconds(duration);
 
-        if (sprite != null && current_health > 0) // Не меняем цвет если умер
-            sprite.color = original;
+        if (sprite_renderer != null && current_health > 0)
+            sprite_renderer.color = original;
     }
 
     void die_enemy()
     {
-        Debug.Log($"{gameObject.name} died!");
-        EnemyDeath?.Invoke();
-
-        CreateDeathEffect();
-        Destroy(gameObject, 0.1f);
-    }
-
-    void CreateDeathEffect()
-    {
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        if (sprite != null)
+        if (isDead)
         {
-            sprite.color = Color.gray;
+            Debug.LogWarning($"{name}: Попытка умереть повторно!");
+            return;
         }
 
-        // Отключаем ВСЕ при смерти
-        if (aiScript != null)
-            aiScript.enabled = false;
+        isDead = true;
+        Debug.Log($"=== {name} НАЧИНАЕТ УМИРАТЬ ===");
 
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null)
-            collider.enabled = false;
+        // 1. ОТКЛЮЧАЕМ ВСЕ СКРИПТЫ И КОМПОНЕНТЫ СРАЗУ
+        Debug.Log("Отключаю все компоненты...");
+
+        // Отключаем все MonoBehaviour кроме этого
+        MonoBehaviour[] allScripts = GetComponents<MonoBehaviour>();
+        foreach (MonoBehaviour script in allScripts)
+        {
+            if (script != this && script != anim) // Оставляем этот скрипт и аниматор
+            {
+                script.enabled = false;
+                Debug.Log($"Отключил: {script.GetType().Name}");
+            }
+        }
+
+        // Отключаем физику
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.simulated = false;
+            Debug.Log("Отключил Rigidbody2D");
+        }
+
+        // Отключаем коллайдеры
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (Collider2D col in colliders)
+        {
+            col.enabled = false;
+        }
+        Debug.Log("Отключил все коллайдеры");
+
+        // 2. ЗАПУСКАЕМ АНИМАЦИЮ СМЕРТИ
+        Debug.Log("Запускаю анимацию смерти...");
+
+        if (anim == null)
+        {
+            anim = GetComponent<Animator>();
+            Debug.Log($"Animator получен: {anim != null}");
+        }
+
+        if (anim != null)
+        {
+            // Проверяем параметры аниматора
+            Debug.Log($"Проверяю параметры Animator (всего: {anim.parameterCount}):");
+            foreach (AnimatorControllerParameter param in anim.parameters)
+            {
+                Debug.Log($"  - {param.name} ({param.type})");
+            }
+
+            // Сбрасываем все параметры
+            anim.SetBool("IsAttacking", false);
+
+            // Запускаем анимацию смерти
+            anim.SetBool("IsDead", true);
+
+            // Принудительно обновляем аниматор
+            anim.Update(0.1f);
+
+            Debug.Log("Анимация смерти запущена (IsDead = true)");
+
+            // Получаем длину анимации смерти
+            float deathAnimLength = GetDeathAnimationLength();
+            Debug.Log($"Длина анимации смерти: {deathAnimLength} секунд");
+
+            // Уничтожаем после анимации
+            Destroy(gameObject, deathAnimLength + 0.5f);
+            Debug.Log($"Объект будет уничтожен через {deathAnimLength + 0.5f} секунд");
+        }
+        else
+        {
+            Debug.LogError("Animator не найден!");
+            Destroy(gameObject, 1f);
+        }
+
+        // 3. ВЫЗЫВАЕМ СОБЫТИЯ
+        EnemyDeath?.Invoke();
+        Debug.Log("Событие EnemyDeath вызвано");
+    }
+
+    float GetDeathAnimationLength()
+    {
+        if (anim == null || anim.runtimeAnimatorController == null)
+            return 1.2f; // Значение по умолчанию
+
+        RuntimeAnimatorController ac = anim.runtimeAnimatorController;
+        foreach (AnimationClip clip in ac.animationClips)
+        {
+            if (clip.name.ToLower().Contains("death"))
+            {
+                Debug.Log($"Найден клип смерти: {clip.name}, длина: {clip.length}");
+                return clip.length;
+            }
+        }
+
+        Debug.LogWarning("Клип смерти не найден, использую 1.2 секунды");
+        return 1.2f;
     }
 
     System.Collections.IEnumerator Flash()
     {
+        if (sprite_renderer == null) yield break;
+
         sprite_renderer.color = damage_color;
         yield return new WaitForSeconds(flash_duration);
-        sprite_renderer.color = original_color;
+
+        if (sprite_renderer != null)
+            sprite_renderer.color = original_color;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Получение урона от пуль
-        if (other.CompareTag("Bullet"))
+        if (other.CompareTag("Bullet") && !isDead)
         {
             Bullet bullet = other.GetComponent<Bullet>();
             if (bullet != null)
             {
                 take_damage_to_enemy(bullet.damage);
 
-                // Отбрасывание от пули
                 Vector2 knockbackDirection = (transform.position - other.transform.position).normalized;
                 ApplyKnockback(knockbackDirection * 3f);
 
-                Destroy(other.gameObject); // Уничтожаем пулю
+                Destroy(other.gameObject);
             }
         }
     }
 
     public void TakeDamage(float damage)
     {
-        Debug.Log($"=== HEALTHENEMY.TakeDamage() CALLED ===");
-        Debug.Log($"Object: {gameObject.name}");
-        Debug.Log($"Damage: {damage}");
-        Debug.Log($"Current health before: {current_health}");
-
+        Debug.Log($"TakeDamage вызван: {damage} урона");
         take_damage_to_enemy(damage);
+    }
 
-        Debug.Log($"Current health after: {current_health}");
+    // Методы для отладки
+    public void DebugDeath()
+    {
+        if (!isDead)
+        {
+            Debug.Log("=== ТЕСТ СМЕРТИ (вручную) ===");
+            die_enemy();
+        }
+    }
+
+    public void DebugTakeDamage(float damage = 25f)
+    {
+        if (!isDead)
+        {
+            Debug.Log($"=== ТЕСТ УРОНА {damage} ===");
+            take_damage_to_enemy(damage);
+        }
     }
 }
