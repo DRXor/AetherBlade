@@ -13,130 +13,157 @@ public class SimpleEnemyPatrol : MonoBehaviour
     [Header("Преследование")]
     public float chaseRange = 4f;
     public float chaseSpeed = 2.5f;
-    public float attackRange = 2.0f;
+    public float attackRange = 1.2f;
     public float attackDamage = 10f;
     public float attackCooldown = 1.5f;
 
-    // Ссылки
-    private Transform player;
-    private SpriteRenderer spriteRenderer;
-    private Animator anim;
+    [Header("Информация")]
+    public bool movingToB = true;
+    public float distanceToTarget;
 
-    // Состояние
-    private bool movingToB = true;
-    private float lastAttackTime = 0f;
-    private bool isAttacking = false;
+    private SpriteRenderer spriteRenderer;
+    private Transform player;
+    private float lastAttackTime;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();  // Добавляем получение Animator
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        if (pointA == null || pointB == null)
-            Debug.LogError("Назначь точки патрулирования!");
+        // Проверяем точки
+        if (pointA == null)
+            Debug.LogError($"{name}: Точка A не назначена!");
+        if (pointB == null)
+            Debug.LogError($"{name}: Точка B не назначена!");
+
+        if (pointA != null)
+            Debug.Log($"{name}: Точка A на {pointA.position}");
+        if (pointB != null)
+            Debug.Log($"{name}: Точка B на {pointB.position}");
+
+        // Начинаем с позиции между точками
+        if (pointA != null)
+            transform.position = pointA.position;
     }
 
     void Update()
     {
-        if (player == null) return;
+        // Если точек нет - выходим
+        if (pointA == null || pointB == null)
+        {
+            Debug.LogWarning($"{name}: Нет точек для патрулирования!");
+            return;
+        }
+
+        // Если игрока нет - просто патрулируем
+        if (player == null)
+        {
+            Patrol();
+            return;
+        }
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= chaseRange)
+        if (distanceToPlayer <= attackRange)
         {
-            if (distanceToPlayer > attackRange)
-            {
-                ChasePlayer();
-            }
-            else
-            {
-                Attack();
-            }
+            // Атака
+            Attack();
+        }
+        else if (distanceToPlayer <= chaseRange)
+        {
+            // Преследование
+            Chase();
         }
         else
         {
+            // Патрулирование
             Patrol();
         }
     }
 
     void Patrol()
     {
+        // Выбираем цель
         Transform target = movingToB ? pointB : pointA;
-        MoveToTarget(target.position, speed);
 
-        if (Vector2.Distance(transform.position, target.position) < stoppingDistance)
-        {
-            movingToB = !movingToB;
-        }
+        // Вычисляем направление
+        Vector2 direction = (target.position - transform.position).normalized;
 
+        // Двигаемся к цели
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            target.position,
+            speed * Time.deltaTime
+        );
+
+        // Поворачиваем спрайт
         if (spriteRenderer != null)
         {
-            Vector2 direction = target.position - transform.position;
             spriteRenderer.flipX = direction.x < 0;
+        }
+
+        // Проверяем расстояние до цели
+        distanceToTarget = Vector2.Distance(transform.position, target.position);
+
+        // Если достигли цели - меняем направление
+        if (distanceToTarget < stoppingDistance)
+        {
+            Debug.Log($"{name}: Достиг точку {(movingToB ? "B" : "A")}! Меняю направление.");
+            movingToB = !movingToB;
         }
     }
 
-    void ChasePlayer()
+    void Chase()
     {
-        MoveToTarget(player.position, chaseSpeed);
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            player.position,
+            chaseSpeed * Time.deltaTime
+        );
 
+        // Поворачиваемся к игроку
         if (spriteRenderer != null)
         {
-            Vector2 direction = player.position - transform.position;
+            Vector2 direction = (player.position - transform.position).normalized;
             spriteRenderer.flipX = direction.x < 0;
         }
     }
 
     void Attack()
     {
-        // Останавливаемся для атаки
-        transform.position = transform.position;
-
-        // Поворот спрайта к игроку
         if (spriteRenderer != null)
         {
             Vector2 direction = (player.position - transform.position).normalized;
             spriteRenderer.flipX = direction.x < 0;
         }
 
-        if (Time.time >= lastAttackTime + attackCooldown && !isAttacking)
+        if (Time.time >= lastAttackTime + attackCooldown)
         {
-            // Запускаем анимацию атаки
-            if (anim != null)
-            {
-                anim.SetBool("IsAttacking", true);
-                isAttacking = true;
-                Debug.Log($"{name}: Запускаю анимацию атаки");
+            Shield playerShield = player.GetComponent<Shield>();
+            bool shieldAbsorbed = false;
 
-                // Отключаем анимацию атаки через время
-                Invoke("ResetAttackAnimation", 1.2f); // Увеличь если анимация длиннее
+            if (playerShield != null && playerShield.isShieldActive)
+            {
+                shieldAbsorbed = playerShield.TakeDamage(attackDamage);
+
+                if (shieldAbsorbed)
+                {
+                    Debug.Log($"{name}: Удар поглощён щитом! Щит: {playerShield.currentShield}/{playerShield.maxShield}");
+                }
             }
 
-            Health playerHealth = player.GetComponent<Health>();
-            if (playerHealth != null)
+            if (!shieldAbsorbed)
             {
-                playerHealth.TakeDamage(attackDamage);
-                Debug.Log($"{name}: Атаковал игрока на {attackDamage} урона!");
+                Health playerHealth = player.GetComponent<Health>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(attackDamage);
+                    Debug.Log($"{name}: Атаковал игрока на {attackDamage} урона!");
+                }
             }
 
             lastAttackTime = Time.time;
         }
-    }
-
-    void ResetAttackAnimation()
-    {
-        if (anim != null)
-        {
-            anim.SetBool("IsAttacking", false);
-            isAttacking = false;
-            Debug.Log($"{name}: Сбрасываю анимацию атаки");
-        }
-    }
-
-    void MoveToTarget(Vector2 target, float moveSpeed)
-    {
-        transform.position = Vector2.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
     }
 
     void OnDrawGizmosSelected()
@@ -159,13 +186,5 @@ public class SimpleEnemyPatrol : MonoBehaviour
             Transform target = movingToB ? pointB : pointA;
             Gizmos.DrawLine(transform.position, target.position);
         }
-
-        // Рисуем зону атаки
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-
-        // Рисуем зону преследования
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 }
