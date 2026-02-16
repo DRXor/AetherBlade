@@ -17612,8 +17612,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3667596941424045948, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3667596941424045948, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3667596941424045948, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1646407785
       objectReference: {fileID: 0}
     - target: {fileID: 4208395762349429770, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
       propertyPath: m_BodyType
@@ -17884,8 +17892,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2128800689
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 5285455951909287687, guid: 22d76bb38ea252443aab0f0a556a2013, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -22097,7 +22105,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 0000000097cfdd9db1ebe27e
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
