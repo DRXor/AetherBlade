@@ -7,14 +7,6 @@ public class GameManager : MonoBehaviour
     public string mainMenuScene = "MainMenu";
     public KeyCode pauseKey = KeyCode.Escape;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(pauseKey))
-        {
-            ReturnToMainMenu();
-        }
-    }
-
     public void ReturnToMainMenu()
     {
         Debug.Log("Возвращаемся в главное меню...");
