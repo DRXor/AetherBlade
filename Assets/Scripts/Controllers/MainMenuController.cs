@@ -47,17 +47,4 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
 #endif
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            QuitGame();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
-        {
-            StartGame();
-        }
-    }
 }
