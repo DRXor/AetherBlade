@@ -14,7 +14,7 @@ public class PlayerShooting : MonoBehaviour
     public int bulletsPerShot = 1;
     public float spreadAngle = 0f;
     [Header("Recoil Settings")]
-    public RigitBody2D playerRb;
+    public Rigidbody2D playerRb;
     public float recoilForce = 4f;
     public bool recoilPerShoot = false;
     private float nextFireTime = 0f;
@@ -82,12 +82,12 @@ public class PlayerShooting : MonoBehaviour
     }
     void ApplyRecoil()
     {
-        if (playerRb = null && firePoint == null)
+        if ((playerRb == null) && (firePoint == null))
 
         {
             Vector2 shootDir = firePoint.right;
             Vector2 recoilDir = -shootDir.normalized;
-            playerRsb.AddForce(recoilDir * recoilForce, ForceMode2D.Impulse);
+            playerRb.AddForce(recoilDir * recoilForce, ForceMode2D.Impulse);
         }
         else 
         {
