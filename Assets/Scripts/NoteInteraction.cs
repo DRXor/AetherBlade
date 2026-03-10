@@ -1,63 +1,96 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class NoteInteraction : MonoBehaviour
 {
-    public GameObject hintText;    // Подсказка "Нажми E"
-    public GameObject noteText;    // Текст записки
+    [Header("UI Elements")]
+    public GameObject notePromptUI;     // "РќР°Р¶РјРёС‚Рµ Р•"
+    public GameObject noteTextUI;       // РўРµРєСЃС‚ Р·Р°РїРёСЃРєРё
+    
+    [Header("Texts")]
+    public string notePrompt = "Р—Р°РїРёСЃРєР°, РЅР°Р¶РјРёС‚Рµ Р•, С‡С‚РѕР±С‹ РїСЂРѕС‡РёС‚Р°С‚СЊ";
+    public string noteText = "Р•С‰Рµ РѕРґРЅР° СЃРјРµРЅР°. Р”РѕРєС‚РѕСЂ РђСЂС…РµР№ СЃРµРіРѕРґРЅСЏ РїСЂРѕРІРѕРґРёС‚ Р»РёС‡РЅС‹Р№ РѕСЃРјРѕС‚СЂ Р РµР°РєС‚РѕСЂР°. РРЅС‚РµСЂРµСЃРЅРѕ, СЏ С…РѕС‚СЊ СЂР°Р· СѓРІРёР¶Сѓ РµРіРѕ РІР¶РёРІСѓСЋ? Р’СЃРµ С‚СѓС‚ РіРѕРІРѕСЂСЏС‚ Рѕ \"РџСЂРѕС‚РѕРєРѕР»Рµ РљР»РёРЅРѕРє\" вЂ” РєР°РєРѕРј-С‚Рѕ СЃСѓРїРµСЂРѕСЂСѓР¶РёРё. Р—РІСѓС‡РёС‚ РєР°Рє СЃРєР°Р·РєР°.";
+    
     private bool playerInRange = false;
-
+    private bool noteActive = false;
+    
     void Start()
     {
-        // Гарантируем, что тексты скрыты при старте
-        if (hintText) hintText.SetActive(false);
-        if (noteText) noteText.SetActive(false);
+        // РћС‚РєР»СЋС‡Р°РµРј UI РїСЂРё СЃС‚Р°СЂС‚Рµ
+        if (notePromptUI != null)
+            notePromptUI.SetActive(false);
+        
+        if (noteTextUI != null)
+            noteTextUI.SetActive(false);
     }
-
+    
     void Update()
     {
-        // Если игрок в зоне и нажал E
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            if (noteText && !noteText.activeSelf)
-            {
-                // Показать записку
-                noteText.SetActive(true);
-                if (hintText) hintText.SetActive(false);
-            }
-            else if (noteText)
-            {
-                // Скрыть записку
-                noteText.SetActive(false);
-            }
-        }
-
-        // Закрыть записку по Escape
-        if (noteText && noteText.activeSelf && Input.GetKeyDown(KeyCode.Escape))
-        {
-            noteText.SetActive(false);
+            if (!noteActive)
+                ShowNoteText();
+            else
+                HideNoteText();
         }
     }
-
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            if (hintText && !noteText.activeSelf)
-            {
-                hintText.SetActive(true);
-            }
+            ShowNotePrompt();
         }
     }
-
+    
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            if (hintText) hintText.SetActive(false);
-            if (noteText) noteText.SetActive(false);
+            HideNotePrompt();
+            HideNoteText();
         }
+    }
+    
+    void ShowNotePrompt()
+    {
+        if (notePromptUI != null)
+        {
+            notePromptUI.SetActive(true);
+            Text text = notePromptUI.GetComponentInChildren<Text>();
+            if (text != null) 
+                text.text = notePrompt;
+        }
+    }
+    
+    void HideNotePrompt()
+    {
+        if (notePromptUI != null)
+            notePromptUI.SetActive(false);
+    }
+    
+    void ShowNoteText()
+    {
+        noteActive = true;
+        if (noteTextUI != null)
+        {
+            noteTextUI.SetActive(true);
+            Text text = noteTextUI.GetComponentInChildren<Text>();
+            if (text != null) 
+                text.text = noteText;
+        }
+        HideNotePrompt();
+    }
+    
+    void HideNoteText()
+    {
+        noteActive = false;
+        if (noteTextUI != null)
+            noteTextUI.SetActive(false);
+        
+        if (playerInRange)
+            ShowNotePrompt();
     }
 }

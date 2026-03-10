@@ -13,12 +13,15 @@ public class PlayerShooting : MonoBehaviour
     public float damageMultiplier = 1f;
     public int bulletsPerShot = 1;
     public float spreadAngle = 0f;
-
+    [Header("Recoil Settings")]
+    public Rigidbody2D playerRb;
+    public float recoilForce = 4f;
+    public bool recoilPerShoot = false;
     private float nextFireTime = 0f;
 
     void Update()
     {
-        // Поворот оружия к курсору
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (weaponPivot != null)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -26,14 +29,14 @@ public class PlayerShooting : MonoBehaviour
             weaponPivot.right = direction;
         }
 
-        // Стрельба по ЛКМ
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
         {
             Shoot();
             nextFireTime = Time.time + fireRate;
         }
 
-        // Тестовая ближняя атака по F
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ F
         if (Input.GetKeyDown(KeyCode.F))
         {
             PerformMeleeAttack();
@@ -44,20 +47,29 @@ public class PlayerShooting : MonoBehaviour
     {
         if (bulletPrefab != null && firePoint != null)
         {
+            if (recoilPerShoot) 
+            {
+                ApplyRecoil();
+            }
             for (int i = 0; i < bulletsPerShot; i++)
             {
-                // Расчет разброса
+
+                // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 float currentSpread = (bulletsPerShot > 1) ? spreadAngle : 0f;
                 float angleVariation = (i - (bulletsPerShot - 1) / 2f) * currentSpread;
                 Quaternion bulletRotation = firePoint.rotation * Quaternion.Euler(0, 0, angleVariation);
 
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, bulletRotation);
 
-                // Настройка урона пули
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 Bullet bulletComponent = bullet.GetComponent<Bullet>();
                 if (bulletComponent != null)
                 {
                     bulletComponent.damage = baseDamage * damageMultiplier;
+                }
+                if (!recoilPerShoot) 
+                {
+                    ApplyRecoil();
                 }
             }
 
@@ -66,6 +78,20 @@ public class PlayerShooting : MonoBehaviour
         else
         {
             Debug.Log("Missing bullet prefab or fire point!");
+        }
+    }
+    void ApplyRecoil()
+    {
+        if ((playerRb == null) && (firePoint == null))
+
+        {
+            Vector2 shootDir = firePoint.right;
+            Vector2 recoilDir = -shootDir.normalized;
+            playerRb.AddForce(recoilDir * recoilForce, ForceMode2D.Impulse);
+        }
+        else 
+        {
+            return;
         }
     }
 
@@ -86,7 +112,7 @@ public class PlayerShooting : MonoBehaviour
                 {
                     enemyHealth.take_damage_to_enemy(meleeDamage);
 
-                    // Отбрасывание при ближней атаке
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                     Vector2 knockbackDir = (enemy.transform.position - transform.position).normalized;
                     enemyHealth.ApplyKnockback(knockbackDir * meleeKnockback);
 
@@ -96,7 +122,7 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    // Методы для апгрейда оружия
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void UpgradeDamage(float multiplier)
     {
         damageMultiplier *= multiplier;
@@ -114,7 +140,7 @@ public class PlayerShooting : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // Визуализация радиуса ближней атаки
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 1.5f);
     }
