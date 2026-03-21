@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -90,7 +91,27 @@ public class Health : MonoBehaviour
         // AudioManager.instance.PlaySound(1, 1f);
 
         Debug.Log($"{gameObject.name} died!");
-        Destroy(gameObject);
+
+        // Проверяем, игрок ли это (по тегу)
+        if (gameObject.CompareTag("Player"))
+        {
+            // Вызываем GameOver через GameManager
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.GameOver();
+            }
+            else
+            {
+                Debug.LogError("GameManager.Instance is null! Add GameManager to scene.");
+                // Запасной вариант: просто перезагрузить сцену
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+        else
+        {
+            // Враг или другой объект — просто уничтожаем
+            Destroy(gameObject);
+        }
     }
 
     public void Heal(int healAmount)
