@@ -26,4 +26,4 @@
 # Visual Studio
 .vs/
 *.vsidx
-*.vspcc
+*.vspcc.vs/
