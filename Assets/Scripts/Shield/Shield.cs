@@ -23,26 +23,6 @@ public class Shield : MonoBehaviour
         isShieldActive = false;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ToggleShield();
-        }
-    }
-
-    void ToggleShield()
-    {
-        if (isShieldActive)
-        {
-            DeactivateShield();
-        }
-        else
-        {
-            ActivateShield();
-        }
-    }
-
     public bool TakeDamage(float damage)
     {
         if (!isShieldActive || currentShield <= 0)
@@ -67,6 +47,8 @@ public class Shield : MonoBehaviour
         hasShieldItem = true;
         currentShield = shieldAmount;
         OnShieldPickup?.Invoke();
+
+        ActivateShield();
     }
 
     public void ActivateShield()
