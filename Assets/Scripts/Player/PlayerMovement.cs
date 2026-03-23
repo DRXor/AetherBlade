@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Sprite Setup")]
     public bool autoSetupCollider = true;
 
+    [Header("Buff Settings")]
+    public float speedMultiplier = 1f;
+    private float originalSpeed;
+
     void Start()
     {
         // ИСПРАВЛЕНИЕ: Добавлена проверка и автоматическое создание Rigidbody2D
@@ -57,6 +61,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         SetupSpriteAndCollider();
+
+
+        // Сохраняем исходную скорость
+        originalSpeed = moveSpeed;
     }
 
     void SetupSpriteAndCollider()
@@ -200,5 +208,23 @@ public class PlayerMovement : MonoBehaviour
     public int GetCoinCount()
     {
         return coin;
+    }
+
+    public void ApplySpeedBuff(float multiplier, float duration)
+    {
+        StartCoroutine(SpeedBuffCoroutine(multiplier, duration));
+    }
+
+    private System.Collections.IEnumerator SpeedBuffCoroutine(float multiplier, float duration)
+    {
+        Debug.Log($"💨 Скорость увеличена x{multiplier}");
+        speedMultiplier = multiplier;
+        moveSpeed = originalSpeed * multiplier; // меняем скорость
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = originalSpeed; // возвращаем скорость
+        speedMultiplier = 1f;
+        Debug.Log("Скорость вернулась к норме");
     }
 }

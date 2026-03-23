@@ -144,4 +144,15 @@ public class PlayerShooting : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 1.5f);
     }
+
+    public float GetDamageMultiplier()
+    {
+        // Ищем компонент Health на том же объекте
+        Health playerHealth = GetComponent<Health>();
+        if (playerHealth != null)
+        {
+            return playerHealth.damageMultiplier;
+        }
+        return 1f;
+    }
 }
