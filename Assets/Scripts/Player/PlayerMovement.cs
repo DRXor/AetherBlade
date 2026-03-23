@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,12 +19,13 @@ public class PlayerMovement : MonoBehaviour
     private int coin;
     private Vector2 moveInput;
 
+    private float originalSpeed;
+
+    // Для отслеживания последней нажатой клавиши
+    private string lastPressedKey = "";
+
     [Header("Sprite Setup")]
     public bool autoSetupCollider = true;
-
-    [Header("Buff Settings")]
-    public float speedMultiplier = 1f;
-    private float originalSpeed;
 
     void Start()
     {
@@ -44,9 +46,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         SetupSpriteAndCollider();
-
-
-        // Сохраняем исходную скорость
         originalSpeed = moveSpeed;
     }
 
@@ -81,14 +80,100 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
-        moveInput = moveInput.normalized;
+        // Получаем ввод для движения
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
+        moveInput = new Vector2(horizontal, vertical);
+        if (moveInput.magnitude > 1) moveInput.Normalize();
+
+        // ========== ОТСЛЕЖИВАЕМ ПОСЛЕДНЮЮ НАЖАТУЮ КЛАВИШУ ==========
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            lastPressedKey = "up";
+        }
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            lastPressedKey = "down";
+        }
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            lastPressedKey = "left";
+        }
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            lastPressedKey = "right";
+        }
+
+        // Проверяем, не отпустили ли последнюю нажатую клавишу
+        if (lastPressedKey == "up" && !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+        {
+            // Ищем другую зажатую клавишу
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) lastPressedKey = "down";
+            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) lastPressedKey = "left";
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) lastPressedKey = "right";
+            else lastPressedKey = "";
+        }
+        else if (lastPressedKey == "down" && !(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) lastPressedKey = "up";
+            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) lastPressedKey = "left";
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) lastPressedKey = "right";
+            else lastPressedKey = "";
+        }
+        else if (lastPressedKey == "left" && !(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) lastPressedKey = "up";
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) lastPressedKey = "down";
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) lastPressedKey = "right";
+            else lastPressedKey = "";
+        }
+        else if (lastPressedKey == "right" && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) lastPressedKey = "up";
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) lastPressedKey = "down";
+            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) lastPressedKey = "left";
+            else lastPressedKey = "";
+        }
+
+        // Определяем, двигается ли персонаж
+        bool isMoving = (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f);
+
+        // Отправляем в аниматор
         if (anim != null)
         {
-            anim.SetFloat("MoveX", moveInput.x);
-            anim.SetFloat("MoveY", moveInput.y);
+            if (isMoving && lastPressedKey != "")
+            {
+                // Отправляем направление в зависимости от последней нажатой клавиши
+                switch (lastPressedKey)
+                {
+                    case "up":
+                        // W = вверх экрана, должен идти спиной (анимация Up)
+                        anim.SetFloat("MoveX", 0);
+                        anim.SetFloat("MoveY", 1);
+                        break;
+                    case "down":
+                        // S = вниз экрана, должен идти лицом (анимация Down)
+                        anim.SetFloat("MoveX", 0);
+                        anim.SetFloat("MoveY", -1);
+                        break;
+                    case "left":
+                        anim.SetFloat("MoveX", -1);
+                        anim.SetFloat("MoveY", 0);
+                        break;
+                    case "right":
+                        anim.SetFloat("MoveX", 1);
+                        anim.SetFloat("MoveY", 0);
+                        break;
+                }
+                anim.SetFloat("Speed", 1f);
+            }
+            else
+            {
+                anim.SetFloat("MoveX", 0);
+                anim.SetFloat("MoveY", 0);
+                anim.SetFloat("Speed", 0f);
+            }
         }
     }
 
@@ -109,19 +194,9 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.magnitude < 0.1f)
         {
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, friction * Time.fixedDeltaTime);
-        }
-
-        if (moveInput.magnitude < 0.1f)
-        {
             rb.linearVelocity *= (1f - drag * Time.fixedDeltaTime);
             if (rb.linearVelocity.magnitude < 0.1f)
                 rb.linearVelocity = Vector2.zero;
-        }
-
-        if (anim != null)
-        {
-            float speed = rb.linearVelocity.magnitude / maxSpeed;
-            anim.SetFloat("Speed", speed);
         }
     }
 
@@ -157,16 +232,10 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(SpeedBuffCoroutine(multiplier, duration));
     }
 
-    private System.Collections.IEnumerator SpeedBuffCoroutine(float multiplier, float duration)
+    private IEnumerator SpeedBuffCoroutine(float multiplier, float duration)
     {
-        Debug.Log($"💨 Скорость увеличена x{multiplier}");
-        speedMultiplier = multiplier;
-        moveSpeed = originalSpeed * multiplier; // меняем скорость
-
+        moveSpeed = originalSpeed * multiplier;
         yield return new WaitForSeconds(duration);
-
-        moveSpeed = originalSpeed; // возвращаем скорость
-        speedMultiplier = 1f;
-        Debug.Log("Скорость вернулась к норме");
+        moveSpeed = originalSpeed;
     }
 }
