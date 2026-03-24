@@ -16555,6 +16555,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7458204294799031986, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1594517745}
+    - targetCorrespondingSourceObject: {fileID: 7458204294799031986, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1594517746}
   m_SourcePrefab: {fileID: 100100000, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
 --- !u!1 &1271356323
 GameObject:
@@ -21623,6 +21626,33 @@ MonoBehaviour:
   damage: 25
   speed: 15
   lifeTime: 2
+--- !u!50 &1594517746
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594517739}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1608633674
 GameObject:
   m_ObjectHideFlags: 0
