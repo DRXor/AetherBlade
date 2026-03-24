@@ -11,6 +11,11 @@ public class EnemyAI : MonoBehaviour
     public float attackCooldown = 1.5f;
     public float attackWindup = 0.5f;
 
+    [Header("Wasp Settings")]
+    public float dashForce = 8f;
+    public float dashCooldown = 2f;
+    private bool isDashing = false;
+
     private Transform player;
     private Rigidbody2D rb;
     private Animator anim; // ДОБАВЛЕНО: для анимаций
@@ -40,7 +45,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (player == null || isAttacking) return;
+        if (player == null || isAttacking || isDashing) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -99,45 +104,35 @@ public class EnemyAI : MonoBehaviour
     public IEnumerator AttackSequence()
     {
         isAttacking = true;
-        canAttack = false;
+        isDashing = true;
 
-        // ДОБАВЛЕНО: Запускаем анимацию атаки
-        if (anim != null)
-        {
-            anim.SetBool("IsAttacking", true);
-        }
+        Vector2 direction = (player.position - transform.position).normalized;
 
-        // ЗВУК: Подготовка к атаке
-        if (AudioManager.instance != null)
-            AudioManager.instance.PlaySound(3, 0.6f);
+        // РЫВОК
+        rb.linearVelocity = direction * dashForce;
 
-        Debug.Log("Enemy preparing to attack...");
-
-        // Ждем задержку перед атакой
-        yield return new WaitForSeconds(attackWindup);
-
-        // ЗВУК: Сама атака
+        // звук атаки
         if (AudioManager.instance != null)
             AudioManager.instance.PlaySound(4, 1f);
 
-        // Наносим урон игроку
-        if (playerHealth != null)
+        yield return new WaitForSeconds(0.2f);
+
+        // урон если рядом
+        float distance = Vector2.Distance(transform.position, player.position);
+        if (distance < attackRange && playerHealth != null)
         {
             playerHealth.TakeDamage((int)attackDamage);
-            Debug.Log("Enemy attacked for " + attackDamage + " damage!");
         }
 
-        // ДОБАВЛЕНО: Завершаем анимацию атаки
-        if (anim != null)
-        {
-            anim.SetBool("IsAttacking", false);
-        }
+        // ОТСКОК назад
+        rb.linearVelocity = -direction * (dashForce * 0.5f);
 
+        yield return new WaitForSeconds(0.3f);
+
+        isDashing = false;
         isAttacking = false;
 
-        // Ждем откат атаки
-        yield return new WaitForSeconds(attackCooldown);
-        canAttack = true;
+        yield return new WaitForSeconds(dashCooldown);
     }
 
     // ДОБАВЛЕН: Метод для смерти врага (вызывается из HealthEnemy)
