@@ -152,6 +152,8 @@ public class HealthEnemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("TRIGGER: " + other.name);
+
         if (other.CompareTag("Bullet"))
         {
             Bullet bullet = other.GetComponent<Bullet>();
