@@ -25,6 +25,8 @@ public class SimpleEnemyPatrol : MonoBehaviour
     private Transform player;
     private float lastAttackTime;
 
+    public AudioClip attackSound;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -139,6 +141,11 @@ public class SimpleEnemyPatrol : MonoBehaviour
 
         if (Time.time >= lastAttackTime + attackCooldown)
         {
+            if (attackSound != null)
+            {
+                AudioManager.instance.PlaySound(attackSound);
+            }
+
             Shield playerShield = player.GetComponent<Shield>();
             bool shieldAbsorbed = false;
 
