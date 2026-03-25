@@ -30,7 +30,7 @@ public class HealthEnemy : MonoBehaviour
 
     void Start()
     {
-        EnemyManager.Instance.RegisterEnemy();
+        EnemyManager.Instance.RegisterEnemy(gameObject);
 
         current_health = max_health;
         sprite_renderer = GetComponent<SpriteRenderer>();
@@ -121,7 +121,7 @@ public class HealthEnemy : MonoBehaviour
     {
         Debug.Log($"{gameObject.name} died!");
 
-        EnemyManager.Instance.EnemyDied();
+        EnemyManager.Instance.EnemyDied(gameObject);
 
         EnemyDeath?.Invoke();
 

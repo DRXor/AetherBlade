@@ -45,6 +45,8 @@ public class EnemyAI : MonoBehaviour
             playerHealth = player.GetComponent<Health>();
         else
             Debug.LogError("Player not found! Make sure player has 'Player' tag.");
+
+        EnemyManager.Instance.RegisterEnemy(gameObject);
     }
 
     void Update()
