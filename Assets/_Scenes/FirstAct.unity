@@ -1980,7 +1980,6 @@ Transform:
   - {fileID: 1439818057}
   - {fileID: 919978908}
   - {fileID: 1119153613}
-  - {fileID: 405101661}
   m_Father: {fileID: 1203992733}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &182548633
@@ -4984,6 +4983,7 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
+  attackSound: {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
 --- !u!114 &359423845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5364,83 +5364,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 15, y: 1}
   m_EdgeRadius: 0
---- !u!1001 &405101660
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 178911309}
-    m_Modifications:
-    - target: {fileID: 2661714424152508655, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_Name
-      value: Enemy_Wasp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2661714424152508655, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
---- !u!4 &405101661 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-  m_PrefabInstance: {fileID: 405101660}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &405101666 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3224533030953963126, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
-  m_PrefabInstance: {fileID: 405101660}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a8db8baac1969499c5171739a41209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthEnemy
 --- !u!1 &421134581
 GameObject:
   m_ObjectHideFlags: 0
@@ -9151,6 +9074,7 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
+  attackSound: {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
 --- !u!114 &651730643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10765,6 +10689,7 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
+  attackSound: {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
 --- !u!114 &721331197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11311,6 +11236,7 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
+  attackSound: {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &763401770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12836,6 +12762,7 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
+  attackSound: {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
 --- !u!114 &931858510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22619,7 +22546,7 @@ PrefabInstance:
     - target: {fileID: 5013794549260568871, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: enemyHealth
       value: 
-      objectReference: {fileID: 405101666}
+      objectReference: {fileID: 0}
     - target: {fileID: 5013794549260568871, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: healthSlider
       value: 
@@ -24643,6 +24570,7 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
+  attackSound: {fileID: 8300000, guid: fdf3e181498ddc84d9fc320b746def17, type: 3}
 --- !u!114 &1885837168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26031,6 +25959,7 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
+  attackSound: {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &1971981315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27663,6 +27592,10 @@ PrefabInstance:
       propertyPath: pointB
       value: 
       objectReference: {fileID: 1592924898}
+    - target: {fileID: 7298751046305001446, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
