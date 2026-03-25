@@ -60,6 +60,7 @@ public class PlayerShooting : MonoBehaviour
                 Quaternion bulletRotation = firePoint.rotation * Quaternion.Euler(0, 0, angleVariation);
 
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, bulletRotation);
+                AudioManager.instance.PlaySound(AudioManager.instance.shootSound);
 
                 // ��������� ����� ����
                 Bullet bulletComponent = bullet.GetComponent<Bullet>();
