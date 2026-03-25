@@ -55,6 +55,8 @@ public class HealthEnemy : MonoBehaviour
 
     public void take_damage_to_enemy(float damage)
     {
+        AudioManager.instance.PlaySound(AudioManager.instance.hitSound);
+
         if (immortality) return;
 
         Debug.Log($"=== DAMAGE CALLED ===");
@@ -152,6 +154,8 @@ public class HealthEnemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("TRIGGER: " + other.name);
+
         if (other.CompareTag("Bullet"))
         {
             Bullet bullet = other.GetComponent<Bullet>();
