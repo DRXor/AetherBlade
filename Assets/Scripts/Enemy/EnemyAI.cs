@@ -24,6 +24,10 @@ public class EnemyAI : MonoBehaviour
     private bool isAttacking = false;
     private bool canAttack = true;
 
+    public AudioClip moveSound;
+    private float soundTimer;
+    public float soundDelay = 2f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,6 +52,14 @@ public class EnemyAI : MonoBehaviour
         if (player == null || isAttacking || isDashing) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        soundTimer -= Time.deltaTime;
+
+        if (soundTimer <= 0f)
+        {
+            AudioManager.instance.PlaySound(moveSound);
+            soundTimer = soundDelay;
+        }
 
         // Преследование игрока
         if (distanceToPlayer <= detectionRange && distanceToPlayer > attackRange)
@@ -110,10 +122,7 @@ public class EnemyAI : MonoBehaviour
 
         // РЫВОК
         rb.linearVelocity = direction * dashForce;
-
-        // звук атаки
-        if (AudioManager.instance != null)
-            AudioManager.instance.PlaySound(4, 1f);
+        AudioManager.instance.PlaySound(AudioManager.instance.enemySound);
 
         yield return new WaitForSeconds(0.2f);
 
