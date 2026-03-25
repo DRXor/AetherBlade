@@ -441,6 +441,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!1 &4173498965514158322
 GameObject:
   m_ObjectHideFlags: 0
