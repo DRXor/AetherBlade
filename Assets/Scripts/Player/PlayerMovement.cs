@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
 
     private float originalSpeed;
 
+    public AudioClip[] footstepSounds;
+    private float stepTimer;
+    public float stepDelay = 0.4f;
+
     // Для отслеживания последней нажатой клавиши
     private string lastPressedKey = "";
 
@@ -139,6 +143,26 @@ public class PlayerMovement : MonoBehaviour
         // Определяем, двигается ли персонаж
         bool isMoving = (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f);
 
+        if (isMoving)
+        {
+            stepTimer -= Time.deltaTime;
+
+            if (stepTimer <= 0f)
+            {
+                if (footstepSounds.Length > 0)
+                {
+                    int i = Random.Range(0, footstepSounds.Length);
+                    AudioManager.instance.PlaySound(footstepSounds[i]);
+                }
+
+                stepTimer = Random.Range(0.5f, 0.7f); //задержка между шагами
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+        }
+
         // Отправляем в аниматор
         if (anim != null)
         {
@@ -204,6 +228,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Coin"))
         {
+            AudioManager.instance.PlaySound(AudioManager.instance.pickupSound);
+
             coin += 1;
             if (CoinCount != null)
             {
