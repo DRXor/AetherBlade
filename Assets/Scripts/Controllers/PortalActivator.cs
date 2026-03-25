@@ -13,7 +13,7 @@ public class PortalActivator : MonoBehaviour
     void Update()
     {
         if (EnemyManager.Instance != null &&
-            EnemyManager.Instance.aliveEnemies == 0)
+            EnemyManager.Instance.AliveEnemiesCount <= 0)
         {
             if (portal != null && !portal.activeSelf)
                 portal.SetActive(true);
