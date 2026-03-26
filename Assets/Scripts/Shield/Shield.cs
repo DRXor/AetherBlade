@@ -23,26 +23,6 @@ public class Shield : MonoBehaviour
         isShieldActive = false;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ToggleShield();
-        }
-    }
-
-    void ToggleShield()
-    {
-        if (isShieldActive)
-        {
-            DeactivateShield();
-        }
-        else
-        {
-            ActivateShield();
-        }
-    }
-
     public bool TakeDamage(float damage)
     {
         if (!isShieldActive || currentShield <= 0)
@@ -65,8 +45,12 @@ public class Shield : MonoBehaviour
     public void PickupShield(float shieldAmount)
     {
         hasShieldItem = true;
-        currentShield = shieldAmount;
+
+        currentShield = Mathf.Clamp(currentShield + shieldAmount, 0, maxShield);
+
         OnShieldPickup?.Invoke();
+
+        ActivateShield();
     }
 
     public void ActivateShield()
@@ -89,6 +73,7 @@ public class Shield : MonoBehaviour
 
     public float GetShieldPercentage()
     {
+        if (maxShield <= 0) return 0;
         return currentShield / maxShield;
     }
 }

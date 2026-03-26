@@ -21,8 +21,16 @@ public class PlayerMovement : MonoBehaviour
 
     private float originalSpeed;
 
+    public AudioClip[] footstepSounds;
+    private float stepTimer;
+    public float stepDelay = 0.4f;
+
     // Для отслеживания последней нажатой клавиши
     private string lastPressedKey = "";
+
+    private bool isRecoiling = false;
+    private float recoilTimer = 0f;
+    private Vector2 recoilVelocity = Vector2.zero;
 
     [Header("Sprite Setup")]
     public bool autoSetupCollider = true;
@@ -139,6 +147,26 @@ public class PlayerMovement : MonoBehaviour
         // Определяем, двигается ли персонаж
         bool isMoving = (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f);
 
+        if (isMoving)
+        {
+            stepTimer -= Time.deltaTime;
+
+            if (stepTimer <= 0f)
+            {
+                if (footstepSounds.Length > 0)
+                {
+                    int i = Random.Range(0, footstepSounds.Length);
+                    AudioManager.instance.PlaySound(footstepSounds[i]);
+                }
+
+                stepTimer = Random.Range(0.5f, 0.7f); //задержка между шагами
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+        }
+
         // Отправляем в аниматор
         if (anim != null)
         {
@@ -181,29 +209,53 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb == null) return;
 
-        Vector2 targetVelocity = moveInput * moveSpeed;
-        Vector2 velocityDiff = targetVelocity - rb.linearVelocity;
-        Vector2 movement = velocityDiff * acceleration;
-        rb.AddForce(movement);
-
-        if (rb.linearVelocity.magnitude > maxSpeed)
+        if (isRecoiling)
         {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+            recoilTimer -= Time.fixedDeltaTime;
+
+            rb.linearVelocity = recoilVelocity;
+            recoilVelocity *= 0.88f;
+
+            if (recoilTimer <= 0f)
+            {
+                isRecoiling = false;
+                recoilVelocity = Vector2.zero;
+            }
+            return;
         }
+
+        // Обычное движение
+        Vector2 targetVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, 13f * Time.fixedDeltaTime);
 
         if (moveInput.magnitude < 0.1f)
         {
-            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, friction * Time.fixedDeltaTime);
-            rb.linearVelocity *= (1f - drag * Time.fixedDeltaTime);
-            if (rb.linearVelocity.magnitude < 0.1f)
+            rb.linearVelocity *= 0.84f;
+
+            if (rb.linearVelocity.magnitude < 0.06f)
                 rb.linearVelocity = Vector2.zero;
         }
+    }
+
+    public void TriggerRecoil(Vector2 direction, float force, float duration = 0.26f)
+    {
+        if (rb == null) return;
+
+        isRecoiling = true;
+        recoilTimer = duration;
+        recoilVelocity = direction * force;
+
+        rb.AddForce(direction * force * 28f, ForceMode2D.Impulse);
+
+        Debug.Log($"RECOIL ACTIVATED | X:{direction.x:F2} Y:{direction.y:F2} | Force:{force}");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Coin"))
         {
+            AudioManager.instance.PlaySound(AudioManager.instance.pickupSound);
+
             coin += 1;
             if (CoinCount != null)
             {

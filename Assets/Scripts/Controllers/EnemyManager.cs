@@ -1,31 +1,38 @@
 using UnityEngine;
+using System.Collections.Generic; 
 
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
 
-    public int aliveEnemies = 0;
+    [SerializeField] private List<GameObject> activeEnemies = new List<GameObject>();
+
+    public int AliveEnemiesCount => activeEnemies.Count;
 
     void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    public void RegisterEnemy()
+    public void RegisterEnemy(GameObject enemy)
     {
-        aliveEnemies++;
-        Debug.Log("Enemy Registered! Total: " + aliveEnemies);
+        if (!activeEnemies.Contains(enemy))
+        {
+            activeEnemies.Add(enemy);
+            Debug.Log($"Registered: {enemy.name}. Total: {activeEnemies.Count}");
+        }
     }
 
-    public void EnemyDied()
+    public void EnemyDied(GameObject enemy)
     {
-        aliveEnemies--;
-        Debug.Log("Enemy Died! Remaining: " + aliveEnemies);
+        if (activeEnemies.Contains(enemy))
+        {
+            activeEnemies.Remove(enemy);
+            Debug.Log($"Died: {enemy.name}. Remaining: {activeEnemies.Count}");
+        }
 
-        if (aliveEnemies <= 0)
+        if (activeEnemies.Count <= 0)
         {
             Debug.Log("ALL ENEMIES ARE DEAD!");
         }
