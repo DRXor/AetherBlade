@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -45,54 +46,52 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot()
     {
-        if (bulletPrefab != null && firePoint != null)
+        if (bulletPrefab == null || firePoint == null)
         {
-            if (recoilPerShoot) 
-            {
-                ApplyRecoil();
-            }
-            for (int i = 0; i < bulletsPerShot; i++)
-            {
-
-                // ������ ��������
-                float currentSpread = (bulletsPerShot > 1) ? spreadAngle : 0f;
-                float angleVariation = (i - (bulletsPerShot - 1) / 2f) * currentSpread;
-                Quaternion bulletRotation = firePoint.rotation * Quaternion.Euler(0, 0, angleVariation);
-
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, bulletRotation);
-
-                // ��������� ����� ����
-                Bullet bulletComponent = bullet.GetComponent<Bullet>();
-                if (bulletComponent != null)
-                {
-                    bulletComponent.damage = baseDamage * damageMultiplier;
-                }
-                if (!recoilPerShoot) 
-                {
-                    ApplyRecoil();
-                }
-            }
-
-            Debug.Log("BANG!");
-        }
-        else
-        {
-            Debug.Log("Missing bullet prefab or fire point!");
-        }
-    }
-    void ApplyRecoil()
-    {
-        if ((playerRb == null) && (firePoint == null))
-
-        {
-            Vector2 shootDir = firePoint.right;
-            Vector2 recoilDir = -shootDir.normalized;
-            playerRb.AddForce(recoilDir * recoilForce, ForceMode2D.Impulse);
-        }
-        else 
-        {
+            Debug.LogWarning("Missing bullet prefab or fire point!");
             return;
         }
+
+        // Создаём пули
+        for (int i = 0; i < bulletsPerShot; i++)
+        {
+            float currentSpread = (bulletsPerShot > 1) ? spreadAngle : 0f;
+            float angleVariation = (i - (bulletsPerShot - 1) / 2f) * currentSpread;
+            Quaternion bulletRotation = firePoint.rotation * Quaternion.Euler(0, 0, angleVariation);
+
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, bulletRotation);
+
+            Bullet bulletComponent = bullet.GetComponent<Bullet>();
+            if (bulletComponent != null)
+            {
+                bulletComponent.damage = baseDamage * damageMultiplier;
+            }
+
+            AudioManager.instance.PlaySound(AudioManager.instance.shootSound);
+        }
+
+        // Отдача применяется **один раз** после всех пуль
+        ApplyRecoil();
+
+        Debug.Log("BANG! + Recoil applied");
+    }
+
+    void ApplyRecoil()
+    {
+        PlayerMovement movement = GetComponent<PlayerMovement>();
+        if (movement == null) return;
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 shootDir = (mousePos - transform.position).normalized;
+        Vector2 recoilDir = -shootDir;
+
+        float strength = recoilForce * 22f;
+
+        // Усиление горизонтальной отдачи
+        if (Mathf.Abs(recoilDir.x) > 0.65f)
+            strength *= 1.65f;
+
+        movement.TriggerRecoil(recoilDir, strength, 0.26f);
     }
 
     void PerformMeleeAttack()
