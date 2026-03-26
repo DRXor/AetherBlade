@@ -9351,6 +9351,25 @@ Transform:
   - {fileID: 45234370}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &671184333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5281274552028504519, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+  m_PrefabInstance: {fileID: 2090591180}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &671184338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671184333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb1440f0d848a144b30a3e1e5a150c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealthBar
+  healthSlider: {fileID: 1765379749}
+  enemyHealth: {fileID: 0}
 --- !u!1001 &674534596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11311,6 +11330,14 @@ PrefabInstance:
     - target: {fileID: 2661714424152508655, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_Name
       value: Enemy_Wasp (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721241191829185431, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325093556234863080, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_LocalScale.x
@@ -13288,6 +13315,14 @@ PrefabInstance:
     - target: {fileID: 2661714424152508655, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_Name
       value: Enemy_Wasp (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721241191829185431, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325093556234863080, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_LocalScale.x
@@ -44463,6 +44498,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 55189472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1765379749 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5283753375064632557, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+  m_PrefabInstance: {fileID: 2090591180}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1789677559
 GameObject:
   m_ObjectHideFlags: 0
@@ -46030,9 +46076,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 55189472}
     m_Modifications:
+    - target: {fileID: 1842274930704141211, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933921372957723922, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2077347238627499740, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2661714424152508655, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_Name
       value: Enemy_Wasp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661714424152508655, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721241191829185431, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5013794549260568871, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1765379749}
+    - target: {fileID: 5281274552028504519, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325093556234863080, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_LocalScale.x
@@ -46082,14 +46160,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8683923724574482612, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8751366780161611209, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5013794549260568871, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5281274552028504519, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 671184338}
   m_SourcePrefab: {fileID: 100100000, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
 --- !u!4 &2090591181 stripped
 Transform:
