@@ -11,13 +11,20 @@ public class ShieldPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Shield playerShield = other.GetComponent<Shield>();
-            if (playerShield != null && !playerShield.hasShieldItem)
+
+            if (playerShield != null)
             {
                 playerShield.PickupShield(shieldAmount);
-                Inventory.Instance.PickupShield();
+
+                if (Inventory.Instance != null)
+                {
+                    Inventory.Instance.PickupShield();
+                }
 
                 if (pickupEffect != null)
+                {
                     Instantiate(pickupEffect, transform.position, transform.rotation);
+                }
 
                 Destroy(gameObject);
             }

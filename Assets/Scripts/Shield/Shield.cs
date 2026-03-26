@@ -45,7 +45,9 @@ public class Shield : MonoBehaviour
     public void PickupShield(float shieldAmount)
     {
         hasShieldItem = true;
-        currentShield = shieldAmount;
+
+        currentShield = Mathf.Clamp(currentShield + shieldAmount, 0, maxShield);
+
         OnShieldPickup?.Invoke();
 
         ActivateShield();
@@ -71,6 +73,7 @@ public class Shield : MonoBehaviour
 
     public float GetShieldPercentage()
     {
+        if (maxShield <= 0) return 0;
         return currentShield / maxShield;
     }
 }
