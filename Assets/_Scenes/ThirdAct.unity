@@ -6288,13 +6288,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4721930307995528981, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 213727582}
   m_SourcePrefab: {fileID: 100100000, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
 --- !u!4 &213727580 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1652275792411444372, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
   m_PrefabInstance: {fileID: 213727579}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &213727581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4721930307995528981, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
+  m_PrefabInstance: {fileID: 213727579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &213727582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213727581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: b346bbcf94b53dd47b8e777e576375e0, type: 3}
 --- !u!1 &241220999
 GameObject:
   m_ObjectHideFlags: 0
@@ -6883,6 +6904,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 454076275}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 454076278}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &454076273 stripped
 Transform:
@@ -6956,6 +6980,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &454076278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454076274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &469481317
 GameObject:
   m_ObjectHideFlags: 0
@@ -6968,6 +7005,7 @@ GameObject:
   - component: {fileID: 469481321}
   - component: {fileID: 469481320}
   - component: {fileID: 469481319}
+  - component: {fileID: 469481322}
   m_Layer: 0
   m_Name: HealthPotion
   m_TagString: Untagged
@@ -7109,6 +7147,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &469481322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469481317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
 --- !u!1001 &480996020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7535,6 +7586,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 665227682}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 665227685}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &665227680 stripped
 Transform:
@@ -7608,6 +7662,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &665227685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665227681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &699740170
 GameObject:
   m_ObjectHideFlags: 0
@@ -7827,6 +7894,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 727074924}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 727074927}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &727074922 stripped
 Transform:
@@ -7900,6 +7970,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &727074927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727074923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &754799379
 GameObject:
   m_ObjectHideFlags: 0
@@ -9253,6 +9336,26 @@ PrefabInstance:
       propertyPath: coinPrefab
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: footstepSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: 'footstepSounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a610a016909dabb47a6f2f99d094d0be, type: 3}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: 'footstepSounds.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f1e4c0f526ced8e45b11c71ad3b0b7ab, type: 3}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: 'footstepSounds.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 7340289496fa2924ea90d9b8fbf4c40d, type: 3}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: 'footstepSounds.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 435bdebebe351234f95486354e70a8a6, type: 3}
     - target: {fileID: 7870151432474287884, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -9419,7 +9522,7 @@ MonoBehaviour:
   bulletsPerShot: 1
   spreadAngle: 0
   playerRb: {fileID: 0}
-  recoilForce: 4
+  recoilForce: 0.2
   recoilPerShoot: 0
 --- !u!1 &1247719370
 GameObject:
@@ -10375,6 +10478,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1468621901}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1468621904}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1468621899 stripped
 Transform:
@@ -10448,6 +10554,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1468621904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468621900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &1489125803
 GameObject:
   m_ObjectHideFlags: 0
@@ -10805,6 +10924,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1593207255}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1593207258}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1593207253 stripped
 Transform:
@@ -10878,6 +11000,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1593207258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593207254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &1611112739
 GameObject:
   m_ObjectHideFlags: 0
@@ -28766,6 +28901,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1867104296}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1867104299}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1867104294 stripped
 Transform:
@@ -28839,6 +28977,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1867104299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867104295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &1872844670
 GameObject:
   m_ObjectHideFlags: 0
@@ -28851,6 +29002,7 @@ GameObject:
   - component: {fileID: 1872844674}
   - component: {fileID: 1872844673}
   - component: {fileID: 1872844672}
+  - component: {fileID: 1872844675}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -28992,6 +29144,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1872844675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872844670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
 --- !u!1001 &1922070087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29299,6 +29464,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1984284840}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1984284843}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1984284838 stripped
 Transform:
@@ -29372,6 +29540,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1984284843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984284839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &1984799605
 GameObject:
   m_ObjectHideFlags: 0

@@ -7954,13 +7954,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4721930307995528981, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 263015072}
   m_SourcePrefab: {fileID: 100100000, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
 --- !u!4 &263015070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1652275792411444372, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
   m_PrefabInstance: {fileID: 263015069}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &263015071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4721930307995528981, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
+  m_PrefabInstance: {fileID: 263015069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &263015072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263015071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: b346bbcf94b53dd47b8e777e576375e0, type: 3}
 --- !u!1001 &398752604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8016,13 +8037,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4721930307995528981, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 398752607}
   m_SourcePrefab: {fileID: 100100000, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
 --- !u!4 &398752605 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1652275792411444372, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
   m_PrefabInstance: {fileID: 398752604}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &398752606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4721930307995528981, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
+  m_PrefabInstance: {fileID: 398752604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &398752607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398752606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: b346bbcf94b53dd47b8e777e576375e0, type: 3}
 --- !u!1 &400308038
 GameObject:
   m_ObjectHideFlags: 0
@@ -8035,6 +8077,7 @@ GameObject:
   - component: {fileID: 400308042}
   - component: {fileID: 400308041}
   - component: {fileID: 400308040}
+  - component: {fileID: 400308043}
   m_Layer: 0
   m_Name: Shield (2)
   m_TagString: Untagged
@@ -8176,6 +8219,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &400308043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400308038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
 --- !u!1 &415624505
 GameObject:
   m_ObjectHideFlags: 0
@@ -8645,13 +8701,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4721930307995528981, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 514047951}
   m_SourcePrefab: {fileID: 100100000, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
 --- !u!4 &514047949 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1652275792411444372, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
   m_PrefabInstance: {fileID: 514047948}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &514047950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4721930307995528981, guid: 558f2d198021d8e4fb0cc49ad4e20965, type: 3}
+  m_PrefabInstance: {fileID: 514047948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &514047951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514047950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: b346bbcf94b53dd47b8e777e576375e0, type: 3}
 --- !u!4 &563117341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1814243411871787956, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
@@ -8700,6 +8777,7 @@ GameObject:
   - component: {fileID: 603369598}
   - component: {fileID: 603369597}
   - component: {fileID: 603369596}
+  - component: {fileID: 603369599}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -8841,6 +8919,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &603369599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603369594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
 --- !u!4 &620771305 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1814243411871787956, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
@@ -8858,6 +8949,7 @@ GameObject:
   - component: {fileID: 622771431}
   - component: {fileID: 622771430}
   - component: {fileID: 622771429}
+  - component: {fileID: 622771432}
   m_Layer: 0
   m_Name: HealthPotion (1)
   m_TagString: Untagged
@@ -8999,6 +9091,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &622771432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622771427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
 --- !u!1 &623812448
 GameObject:
   m_ObjectHideFlags: 0
@@ -9339,6 +9444,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 685038482}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 685038485}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &685038480 stripped
 Transform:
@@ -9412,6 +9520,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &685038485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685038481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1001 &697800580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9493,6 +9614,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 697800583}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 697800586}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &697800581 stripped
 Transform:
@@ -9566,6 +9690,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &697800586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697800582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &699444661
 GameObject:
   m_ObjectHideFlags: 0
@@ -10452,6 +10589,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 927949524}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 927949527}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &927949522 stripped
 Transform:
@@ -10525,6 +10665,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &927949527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927949523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &952489923
 GameObject:
   m_ObjectHideFlags: 0
@@ -11378,6 +11531,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1108196350}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1108196353}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1108196348 stripped
 Transform:
@@ -11451,6 +11607,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1108196353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108196349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1001 &1150337240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11532,6 +11701,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1150337243}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1150337246}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1150337241 stripped
 Transform:
@@ -11605,6 +11777,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1150337246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150337242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!4 &1150373350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1814243411871787956, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
@@ -11722,6 +11907,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1251369641}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1251369644}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1251369639 stripped
 Transform:
@@ -11795,6 +11983,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1251369644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251369640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &1266241780
 GameObject:
   m_ObjectHideFlags: 0
@@ -12398,6 +12599,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1370379388}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1370379391}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1370379386 stripped
 Transform:
@@ -12471,6 +12675,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1370379391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370379387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1001 &1392447178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12657,6 +12874,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1394232077}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1394232080}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1394232075 stripped
 Transform:
@@ -12730,6 +12950,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1394232080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394232076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &1421775643
 GameObject:
   m_ObjectHideFlags: 0
@@ -12742,6 +12975,7 @@ GameObject:
   - component: {fileID: 1421775647}
   - component: {fileID: 1421775646}
   - component: {fileID: 1421775645}
+  - component: {fileID: 1421775648}
   m_Layer: 0
   m_Name: HealthPotion
   m_TagString: Untagged
@@ -12883,6 +13117,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1421775648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421775643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
 --- !u!1 &1427269378
 GameObject:
   m_ObjectHideFlags: 0
@@ -13117,6 +13364,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1490060151}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1490060154}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1490060149 stripped
 Transform:
@@ -13190,6 +13440,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1490060154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490060150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &1513502266
 GameObject:
   m_ObjectHideFlags: 0
@@ -13440,6 +13703,26 @@ PrefabInstance:
       propertyPath: coinPrefab
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: footstepSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: 'footstepSounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a610a016909dabb47a6f2f99d094d0be, type: 3}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: 'footstepSounds.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f1e4c0f526ced8e45b11c71ad3b0b7ab, type: 3}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: 'footstepSounds.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 7340289496fa2924ea90d9b8fbf4c40d, type: 3}
+    - target: {fileID: 5287809013710644567, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
+      propertyPath: 'footstepSounds.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 435bdebebe351234f95486354e70a8a6, type: 3}
     - target: {fileID: 7870151432474287884, guid: b6a53fce88a847246a692a466843ccd2, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -13606,7 +13889,7 @@ MonoBehaviour:
   bulletsPerShot: 1
   spreadAngle: 0
   playerRb: {fileID: 0}
-  recoilForce: 4
+  recoilForce: 0.2
   recoilPerShoot: 0
 --- !u!1 &1568647389
 GameObject:
@@ -43390,6 +43673,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1703031184}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1703031187}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1703031182 stripped
 Transform:
@@ -43463,6 +43749,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1703031187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703031183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1001 &1713394234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43544,6 +43843,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1713394237}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1713394240}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1713394235 stripped
 Transform:
@@ -43617,6 +43919,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1713394240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713394236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!1 &1717241162
 GameObject:
   m_ObjectHideFlags: 0
@@ -44141,6 +44456,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1809353842}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1809353845}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &1809353840 stripped
 Transform:
@@ -44214,6 +44532,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &1809353845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809353841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 0}
 --- !u!1 &1819108533
 GameObject:
   m_ObjectHideFlags: 0
@@ -44663,6 +44994,7 @@ GameObject:
   - component: {fileID: 1925214757}
   - component: {fileID: 1925214756}
   - component: {fileID: 1925214755}
+  - component: {fileID: 1925214758}
   m_Layer: 0
   m_Name: Shield (1)
   m_TagString: Untagged
@@ -44804,6 +45136,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1925214758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925214753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
 --- !u!1 &1930689004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7458204294799031986, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
@@ -45611,6 +45956,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2095572241}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2095572244}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 267da1bbb59675a4cb5e75f4683091d4, type: 3}
 --- !u!4 &2095572239 stripped
 Transform:
@@ -45684,6 +46032,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.02, y: 0.215}
   m_Radius: 0.055000007
+--- !u!114 &2095572244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095572240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
 --- !u!4 &2118406499 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1814243411871787956, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
