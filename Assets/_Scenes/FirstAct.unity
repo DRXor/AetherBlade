@@ -3591,11 +3591,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &238055302 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 375879450183590547, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
-  m_PrefabInstance: {fileID: 8288499877507393850}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &269394883
 GameObject:
   m_ObjectHideFlags: 0
@@ -4983,7 +4978,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &359423845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9211,7 +9208,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &651730643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10084,13 +10083,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d85cb92c6f1d2a4faf702fc34422fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  mainMenuScene: MainMenu
-  firstLevelScene: FirstAct
-  pauseKey: 27
   gameOverPanel: {fileID: 1172081242}
   pauseMenuPanel: {fileID: 554841885}
+  levelCompletePanel: {fileID: 0}
   isGameOver: 0
   isPaused: 0
+  pauseKey: 27
 --- !u!4 &676485495
 Transform:
   m_ObjectHideFlags: 0
@@ -10959,7 +10957,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &721331197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11506,7 +11506,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &763401770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13032,7 +13034,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &931858510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23828,7 +23832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8365ab181ee522e428a0310850531778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PortalScript
-  levelCompleteUI: {fileID: 238055302}
 --- !u!1 &1801309216
 GameObject:
   m_ObjectHideFlags: 0
@@ -24835,7 +24838,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &1885837168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26179,7 +26184,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &1971981315
 MonoBehaviour:
   m_ObjectHideFlags: 0
