@@ -14525,6 +14525,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+--- !u!1 &1069715691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3957779189215620830, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
+  m_PrefabInstance: {fileID: 8288499877507393850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1081757768
 GameObject:
   m_ObjectHideFlags: 0
@@ -28199,6 +28204,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 175
       objectReference: {fileID: 0}
+    - target: {fileID: 3957779189215620830, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4049044112080662801, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -28206,6 +28215,10 @@ PrefabInstance:
     - target: {fileID: 4765211470891456017, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5351619247015002284, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5752981739839893166, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
       propertyPath: m_text
@@ -28215,6 +28228,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -150
       objectReference: {fileID: 0}
+    - target: {fileID: 6473044037662516000, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
+      propertyPath: pauseMenuUI
+      value: 
+      objectReference: {fileID: 1069715691}
     - target: {fileID: 7047853083334831812, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
       propertyPath: m_IsActive
       value: 1
