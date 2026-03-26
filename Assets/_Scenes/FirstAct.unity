@@ -4983,7 +4983,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSound: {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &359423845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9074,7 +9076,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSound: {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &651730643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10689,7 +10693,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSound: {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &721331197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11236,7 +11242,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSound: {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &763401770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12762,7 +12770,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSound: {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &931858510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24570,7 +24580,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSound: {fileID: 8300000, guid: fdf3e181498ddc84d9fc320b746def17, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &1885837168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25959,7 +25971,9 @@ MonoBehaviour:
   attackCooldown: 0.8
   movingToB: 1
   distanceToTarget: 0
-  attackSound: {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
+  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
 --- !u!114 &1971981315
 MonoBehaviour:
   m_ObjectHideFlags: 0
