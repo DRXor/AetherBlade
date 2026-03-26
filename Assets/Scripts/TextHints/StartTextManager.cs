@@ -6,7 +6,7 @@ public class StartTextManager : MonoBehaviour
 {
     public GameObject startTextPanel; // Панель с текстом
     public string startMessage = "Корпорация \"Эфир\", Сектор технического обслуживания";
-    public float displayTime = 3f; // Сколько секунд показывать
+    public float displayTime = 7f; // Сколько секунд показывать
     
     void Start()
     {
@@ -26,10 +26,10 @@ public class StartTextManager : MonoBehaviour
             {
                 textComponent.text = startMessage;
             }
-            
+
             // Ждём 3 секунды
-            yield return new WaitForSeconds(displayTime);
-            
+            yield return new WaitForSecondsRealtime(displayTime);
+
             // Скрываем панель
             startTextPanel.SetActive(false);
         }
