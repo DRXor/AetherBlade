@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +60,7 @@ public class NoteInteraction : MonoBehaviour
         if (notePromptUI != null)
         {
             notePromptUI.SetActive(true);
-            Text text = notePromptUI.GetComponentInChildren<Text>();
+            TMP_Text text = notePromptUI.GetComponentInChildren<TMP_Text>();
             if (text != null) 
                 text.text = notePrompt;
         }
@@ -77,7 +78,7 @@ public class NoteInteraction : MonoBehaviour
         if (noteTextUI != null)
         {
             noteTextUI.SetActive(true);
-            Text text = noteTextUI.GetComponentInChildren<Text>();
+            TMP_Text text = noteTextUI.GetComponentInChildren<TMP_Text>();
             if (text != null) 
                 text.text = noteText;
         }
