@@ -1,33 +1,30 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; 
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; // Singleton для доступа из других скриптов
+    public static GameManager Instance;
 
-    [Header("Настройки сцен")]
-    public string mainMenuScene = "MainMenu";
-    public string firstLevelScene = "FirstAct";
-
-    [Header("Настройки управления")]
-    public KeyCode pauseKey = KeyCode.Escape;
-
-    [Header("UI")]
+    [Header("UI Panels")]
     public GameObject gameOverPanel;
     public GameObject pauseMenuPanel;
+    public GameObject levelCompletePanel; 
 
-    [Header("Состояние игры")]
+    [Header("State")]
     public bool isGameOver = false;
     public bool isPaused = false;
 
+    [Header("Controls")]
+    public KeyCode pauseKey = KeyCode.Escape; 
+
     void Awake()
     {
-        // Singleton паттерн - чтобы GameManager был один
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Не уничтожать между сценами
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -36,75 +33,167 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void LoadNextLevel()
     {
-        // Находим UI элементы на сцене (если не назначены в инспекторе)
-        if (gameOverPanel == null)
-            gameOverPanel = GameObject.Find("GameOverPanel");
-        if (pauseMenuPanel == null)
-            pauseMenuPanel = GameObject.Find("PauseMenuPanel");
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        // Скрываем панели при старте
-        if (gameOverPanel != null)
-            gameOverPanel.SetActive(false);
-        if (pauseMenuPanel != null)
-            pauseMenuPanel.SetActive(false);
-    }
+        int nextSceneIndex = currentSceneIndex + 1;
 
-    void Update()
-    {
-        // Обработка паузы (только если игра не окончена)
-        if (!isGameOver && Input.GetKeyDown(pauseKey))
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
-            TogglePause();
-        }
-    }
-
-    // ========== МЕТОДЫ СМЕРТИ ==========
-
-    public void GameOver()
-    {
-        if (isGameOver) return;
-        isGameOver = true;
-        isPaused = false; // Снимаем паузу, если была
-
-        Debug.Log("GAME OVER!");
-
-        // Останавливаем время
-        Time.timeScale = 0f;
-
-        // Показываем панель Game Over
-        if (gameOverPanel != null)
-        {
-            gameOverPanel.SetActive(true);
-
+            Debug.Log($"Loading Level Index: {nextSceneIndex}");
+            ResetGameState();
+            SceneManager.LoadScene(nextSceneIndex);
         }
         else
         {
-            Debug.LogWarning("GameOverPanel не назначен в GameManager!");
+            Debug.Log("End of the game reached! Returning to Menu.");
+            ReturnToMainMenu();
+        }
+    }
+
+    public void CompleteLevel()
+    {
+        Time.timeScale = 0f;
+
+        if (levelCompletePanel != null)
+        {
+            levelCompletePanel.SetActive(true);
+
+            Transform nextBtn = levelCompletePanel.transform.Find("NextLevelButton");
+            Transform menuBtn = levelCompletePanel.transform.Find("BackToMainMenu");
+
+            int currentIdx = SceneManager.GetActiveScene().buildIndex;
+            bool isLastLevel = (currentIdx + 1 >= SceneManager.sceneCountInBuildSettings);
+
+            if (isLastLevel)
+            {
+                Debug.Log("Final Level Complete! Showing Menu button only.");
+
+                if (nextBtn != null) nextBtn.gameObject.SetActive(false); 
+                if (menuBtn != null) menuBtn.gameObject.SetActive(true); 
+            }
+            else
+            {
+                Debug.Log("Level Complete! Showing Next Level button.");
+
+                if (nextBtn != null) nextBtn.gameObject.SetActive(true);  
+            }
+        }
+        else
+        {
+            Debug.LogWarning("GameManager: levelCompletePanel is not assigned!");
+        }
+    }
+    public void GameOver()
+    {
+        if (isGameOver) return;
+
+        isGameOver = true;
+        isPaused = false;
+
+        Debug.Log("GAME OVER! Player has died.");
+
+        Time.timeScale = 0f;
+
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("GameManager: gameOverPanel is not assigned!");
         }
 
-        // Отключаем управление игроком
         DisablePlayerControl();
     }
 
-    void DisablePlayerControl()
+    private void DisablePlayerControl()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            // Отключаем все компоненты, которые могут управлять игроком
             var scripts = player.GetComponents<MonoBehaviour>();
             foreach (var script in scripts)
             {
-                // Не отключаем сам Health, чтобы не сломать логику
-                if (script.GetType() != typeof(Health))
+                if (script != this && script.enabled)
                     script.enabled = false;
             }
         }
     }
 
-    // ========== МЕТОДЫ ПАУЗЫ ==========
+    public void ResetGameState()
+    {
+        Time.timeScale = 1f;
+        isGameOver = false;
+        isPaused = false;
+    }
+
+    public void ReturnToMainMenu()
+    {
+        ResetGameState();
+        SceneManager.LoadScene(0);
+    }
+
+    void OnEnable() { SceneManager.sceneLoaded += OnSceneLoaded; }
+    void OnDisable() { SceneManager.sceneLoaded -= OnSceneLoaded; }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetGameState();
+
+        gameOverPanel = GameObject.Find("GameOverPanel");
+        pauseMenuPanel = GameObject.Find("PauseMenuPanel");
+        levelCompletePanel = GameObject.Find("LevelCompletePanel");
+
+        if (gameOverPanel) gameOverPanel.SetActive(false);
+        if (pauseMenuPanel) pauseMenuPanel.SetActive(false);
+        if (levelCompletePanel) levelCompletePanel.SetActive(false);
+
+        SetupButtons();
+    }
+
+    void SetupButtons()
+    {
+        GameObject canvas = GameObject.Find("Canvas_Main");
+        if (canvas == null) return;
+
+        Button[] allButtons = canvas.GetComponentsInChildren<Button>(true);
+
+        foreach (var btn in allButtons)
+        {
+            btn.onClick.RemoveAllListeners();
+
+            if (btn.name == "ResumeButton")
+            {
+                btn.onClick.AddListener(ResumeGame);
+                Debug.Log("Connected Resume button");
+            }
+            else if (btn.name == "NextLevelButton")
+            {
+                btn.onClick.AddListener(LoadNextLevel);
+                Debug.Log("Connected Next Level button");
+            }
+            else if (btn.name == "RestartButton")
+            {
+                btn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
+                Debug.Log("Connected Restart button");
+            }
+            else if (btn.name == "MenuButton" || btn.name == "BackToMainMenu")
+            {
+                btn.onClick.AddListener(ReturnToMainMenu);
+                Debug.Log("Connected Menu button");
+            }
+        }
+    }
+
+    void Update()
+    {
+        if (!isGameOver && Input.GetKeyDown(pauseKey))
+        {
+            TogglePause();
+        }
+    }
 
     public void TogglePause()
     {
@@ -116,163 +205,25 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (isGameOver) return; // Нельзя паузу, если игра окончена
+        if (isGameOver) return;
 
         isPaused = true;
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; 
 
         if (pauseMenuPanel != null)
             pauseMenuPanel.SetActive(true);
 
-        Debug.Log("Игра на паузе");
+        Debug.Log("Game Paused");
     }
 
     public void ResumeGame()
     {
         isPaused = false;
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; 
 
         if (pauseMenuPanel != null)
             pauseMenuPanel.SetActive(false);
 
-        Debug.Log("Игра продолжена");
-    }
-
-    // ========== МЕТОДЫ ЗАГРУЗКИ СЦЕН ==========
-
-    public void RestartLevel()
-    {
-        Debug.Log("=== RESTART BUTTON CLICKED ==="); // <-- добавить
-
-        Debug.Log("Перезапуск уровня...");
-
-        // Скрываем панель Game Over ДО перезагрузки
-        if (gameOverPanel != null)
-            gameOverPanel.SetActive(false);
-
-        // Сбрасываем выделение, чтобы не было "залипшей" кнопки
-        if (EventSystem.current != null)
-            EventSystem.current.SetSelectedGameObject(null);
-
-        Time.timeScale = 1f;
-        isGameOver = false;
-        isPaused = false;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void ReturnToMainMenu()
-    {
-        Debug.Log("Возвращаемся в главное меню...");
-
-        // Проверяем, есть ли сцена в билде
-        bool sceneExists = false;
-        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
-        {
-            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
-            if (scenePath.Contains(mainMenuScene))
-            {
-                sceneExists = true;
-                break;
-            }
-        }
-
-        if (!sceneExists)
-        {
-            Debug.LogError("Сцена " + mainMenuScene + " не найдена в Build Settings!");
-            return;
-        }
-
-        // Сбрасываем выделение
-        if (EventSystem.current != null)
-            EventSystem.current.SetSelectedGameObject(null);
-
-        // Сбрасываем состояние
-        Time.timeScale = 1f;
-        isGameOver = false;
-        isPaused = false;
-
-        // Загружаем главное меню
-        SceneManager.LoadScene(mainMenuScene);
-    }
-
-    public void LoadLevel(string levelName)
-    {
-        Time.timeScale = 1f;
-        isGameOver = false;
-        isPaused = false;
-        SceneManager.LoadScene(levelName);
-    }
-
-    public void QuitGame()
-    {
-        Debug.Log("Выход из игры...");
-        Application.Quit();
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false; // Для тестирования в редакторе
-#endif
-    }
-
-    // ========== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ==========
-
-    // Вызывается при загрузке новой сцены
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // После загрузки сцены сбрасываем состояние
-        Time.timeScale = 1f;
-        isGameOver = false;
-        isPaused = false;
-
-        //Ищем панели заново на новой сцене
-        gameOverPanel = GameObject.Find("GameOverPanel");
-        pauseMenuPanel = GameObject.Find("PauseMenuPanel");
-
-        // Скрываем панели
-        if (gameOverPanel != null)
-        {
-            gameOverPanel.SetActive(false);
-
-            // НАЙТИ КНОПКИ И ПЕРЕНАЗНАЧИТЬ
-            var buttons = gameOverPanel.GetComponentsInChildren<UnityEngine.UI.Button>();
-
-            foreach (var btn in buttons)
-            {
-                if (btn.name == "RestartButton")
-                {
-                    btn.onClick.RemoveAllListeners();
-                    btn.onClick.AddListener(RestartLevel);
-                }
-
-                if (btn.name == "MenuButton")
-                {
-                    btn.onClick.RemoveAllListeners();
-                    btn.onClick.AddListener(ReturnToMainMenu);
-                }
-            }
-        }
-        if (pauseMenuPanel != null)
-            pauseMenuPanel.SetActive(false);
-
-        // Ищем игрока на новой сцене
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            Debug.Log("Игрок найден на сцене: " + player.name);
-        }
-        else
-        {
-            Debug.LogWarning("Игрок не найден на сцене " + scene.name);
-        }
+        Debug.Log("Game Resumed");
     }
 }

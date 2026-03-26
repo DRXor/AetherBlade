@@ -1,26 +1,21 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    public GameObject levelCompleteUI;
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("LEVEL COMPLETE!");
+            Debug.Log("Portal: Player entered! Notifying GameManager...");
 
-            if (levelCompleteUI != null)
-                levelCompleteUI.SetActive(true);
-
-            Time.timeScale = 0f;
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.CompleteLevel();
+            }
+            else
+            {
+                Debug.LogError("Portal: GameManager Instance not found!");
+            }
         }
-    }
-
-    public void ReturnToMainMenu()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
     }
 }
