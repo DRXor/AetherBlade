@@ -6523,7 +6523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2019479924479850235, guid: 6941d91c86980714fa39f726358fac06, type: 3}
       propertyPath: displayTime
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2019479924479850235, guid: 6941d91c86980714fa39f726358fac06, type: 3}
       propertyPath: startTextPanel
