@@ -9,8 +9,6 @@ public class ArtifactPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Inventory.Instance.CollectArtifact();
-
             if (pickupEffect != null)
                 Instantiate(pickupEffect, transform.position, transform.rotation);
 
