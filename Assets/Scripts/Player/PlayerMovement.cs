@@ -28,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
     // Для отслеживания последней нажатой клавиши
     private string lastPressedKey = "";
 
+    private bool isRecoiling = false;
+    private float recoilTimer = 0f;
+    private Vector2 recoilVelocity = Vector2.zero;
+
     [Header("Sprite Setup")]
     public bool autoSetupCollider = true;
 
@@ -205,21 +209,45 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb == null) return;
 
-        Vector2 velocity = rb.linearVelocity;
+        if (isRecoiling)
+        {
+            recoilTimer -= Time.fixedDeltaTime;
 
-        Vector2 inputVelocity = moveInput * moveSpeed;
+            rb.linearVelocity = recoilVelocity;
+            recoilVelocity *= 0.88f;
 
-        // ВАЖНО: добавляем разницу, а не перезаписываем
-        Vector2 change = inputVelocity - new Vector2(velocity.x, velocity.y);
+            if (recoilTimer <= 0f)
+            {
+                isRecoiling = false;
+                recoilVelocity = Vector2.zero;
+            }
+            return;
+        }
 
-        rb.linearVelocity += change;
+        // Обычное движение
+        Vector2 targetVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, 13f * Time.fixedDeltaTime);
 
         if (moveInput.magnitude < 0.1f)
         {
-            rb.linearVelocity *= 0.85f;   // было 0.9f — можно ослабить
-            if (rb.linearVelocity.magnitude < 0.1f)
+            rb.linearVelocity *= 0.84f;
+
+            if (rb.linearVelocity.magnitude < 0.06f)
                 rb.linearVelocity = Vector2.zero;
         }
+    }
+
+    public void TriggerRecoil(Vector2 direction, float force, float duration = 0.26f)
+    {
+        if (rb == null) return;
+
+        isRecoiling = true;
+        recoilTimer = duration;
+        recoilVelocity = direction * force;
+
+        rb.AddForce(direction * force * 28f, ForceMode2D.Impulse);
+
+        Debug.Log($"RECOIL ACTIVATED | X:{direction.x:F2} Y:{direction.y:F2} | Force:{force}");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

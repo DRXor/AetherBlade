@@ -46,55 +46,52 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot()
     {
-        if (bulletPrefab != null && firePoint != null)
+        if (bulletPrefab == null || firePoint == null)
         {
-            if (recoilPerShoot) 
+            Debug.LogWarning("Missing bullet prefab or fire point!");
+            return;
+        }
+
+        // Создаём пули
+        for (int i = 0; i < bulletsPerShot; i++)
+        {
+            float currentSpread = (bulletsPerShot > 1) ? spreadAngle : 0f;
+            float angleVariation = (i - (bulletsPerShot - 1) / 2f) * currentSpread;
+            Quaternion bulletRotation = firePoint.rotation * Quaternion.Euler(0, 0, angleVariation);
+
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, bulletRotation);
+
+            Bullet bulletComponent = bullet.GetComponent<Bullet>();
+            if (bulletComponent != null)
             {
-                ApplyRecoil();
-            }
-            for (int i = 0; i < bulletsPerShot; i++)
-            {
-
-                // ������ ��������
-                float currentSpread = (bulletsPerShot > 1) ? spreadAngle : 0f;
-                float angleVariation = (i - (bulletsPerShot - 1) / 2f) * currentSpread;
-                Quaternion bulletRotation = firePoint.rotation * Quaternion.Euler(0, 0, angleVariation);
-
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, bulletRotation);
-                AudioManager.instance.PlaySound(AudioManager.instance.shootSound);
-
-                // ��������� ����� ����
-                Bullet bulletComponent = bullet.GetComponent<Bullet>();
-                if (bulletComponent != null)
-                {
-                    bulletComponent.damage = baseDamage * damageMultiplier;
-                }
-                if (!recoilPerShoot) 
-                {
-                    ApplyRecoil();
-                }
+                bulletComponent.damage = baseDamage * damageMultiplier;
             }
 
-            Debug.Log("BANG!");
+            AudioManager.instance.PlaySound(AudioManager.instance.shootSound);
         }
-        else
-        {
-            Debug.Log("Missing bullet prefab or fire point!");
-        }
+
+        // Отдача применяется **один раз** после всех пуль
+        ApplyRecoil();
+
+        Debug.Log("BANG! + Recoil applied");
     }
+
     void ApplyRecoil()
     {
-        if (playerRb == null) return;
+        PlayerMovement movement = GetComponent<PlayerMovement>();
+        if (movement == null) return;
 
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 shootDir = (mousePosition - transform.position).normalized;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 shootDir = (mousePos - transform.position).normalized;
         Vector2 recoilDir = -shootDir;
 
-        // Добавляем импульс (AddForce с Impulse почти не конфликтует с твоим движением)
-        playerRb.AddForce(recoilDir * recoilForce * 60f, ForceMode2D.Impulse);   // 50-80 — подбери под ощущения
+        float strength = recoilForce * 22f;
 
-        // Дополнительно можно чуть усилить velocity (на случай, если AddForce "съедается")
-        // playerRb.linearVelocity += recoilDir * recoilForce * 0.6f;
+        // Усиление горизонтальной отдачи
+        if (Mathf.Abs(recoilDir.x) > 0.65f)
+            strength *= 1.65f;
+
+        movement.TriggerRecoil(recoilDir, strength, 0.26f);
     }
 
     void PerformMeleeAttack()
