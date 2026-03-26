@@ -205,20 +205,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rb == null) return;
 
-        Vector2 targetVelocity = moveInput * moveSpeed;
-        Vector2 velocityDiff = targetVelocity - rb.linearVelocity;
-        Vector2 movement = velocityDiff * acceleration;
-        rb.AddForce(movement);
+        Vector2 velocity = rb.linearVelocity;
 
-        if (rb.linearVelocity.magnitude > maxSpeed)
-        {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
-        }
+        Vector2 inputVelocity = moveInput * moveSpeed;
+
+        // ВАЖНО: добавляем разницу, а не перезаписываем
+        Vector2 change = inputVelocity - new Vector2(velocity.x, velocity.y);
+
+        rb.linearVelocity += change;
 
         if (moveInput.magnitude < 0.1f)
         {
-            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, friction * Time.fixedDeltaTime);
-            rb.linearVelocity *= (1f - drag * Time.fixedDeltaTime);
+            rb.linearVelocity *= 0.85f;   // было 0.9f — можно ослабить
             if (rb.linearVelocity.magnitude < 0.1f)
                 rb.linearVelocity = Vector2.zero;
         }

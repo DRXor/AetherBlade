@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -83,17 +84,17 @@ public class PlayerShooting : MonoBehaviour
     }
     void ApplyRecoil()
     {
-        if ((playerRb == null) && (firePoint == null))
+        if (playerRb == null) return;
 
-        {
-            Vector2 shootDir = firePoint.right;
-            Vector2 recoilDir = -shootDir.normalized;
-            playerRb.AddForce(recoilDir * recoilForce, ForceMode2D.Impulse);
-        }
-        else 
-        {
-            return;
-        }
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 shootDir = (mousePosition - transform.position).normalized;
+        Vector2 recoilDir = -shootDir;
+
+        // Добавляем импульс (AddForce с Impulse почти не конфликтует с твоим движением)
+        playerRb.AddForce(recoilDir * recoilForce * 60f, ForceMode2D.Impulse);   // 50-80 — подбери под ощущения
+
+        // Дополнительно можно чуть усилить velocity (на случай, если AddForce "съедается")
+        // playerRb.linearVelocity += recoilDir * recoilForce * 0.6f;
     }
 
     void PerformMeleeAttack()
