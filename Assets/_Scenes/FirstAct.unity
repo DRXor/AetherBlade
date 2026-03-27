@@ -5010,6 +5010,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 359423844}
+    - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 359423852}
   m_SourcePrefab: {fileID: 100100000, guid: be5213596b9c498438d8ec54078912e4, type: 3}
 --- !u!4 &359423842 stripped
 Transform:
@@ -5200,6 +5203,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &359423852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359423843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f0d88b11de334ebc1c870bf60fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameRateFix
+  targetFrameRate: 60
+  useVSync: 0
+  autoDetectMonitor: 0
 --- !u!1 &381709811
 GameObject:
   m_ObjectHideFlags: 0
@@ -9287,6 +9305,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 651730642}
+    - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 651730650}
   m_SourcePrefab: {fileID: 100100000, guid: be5213596b9c498438d8ec54078912e4, type: 3}
 --- !u!1 &651730640 stripped
 GameObject:
@@ -9477,6 +9498,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &651730650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651730640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f0d88b11de334ebc1c870bf60fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameRateFix
+  targetFrameRate: 60
+  useVSync: 0
+  autoDetectMonitor: 0
 --- !u!1 &651929782
 GameObject:
   m_ObjectHideFlags: 0
@@ -10872,6 +10908,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 721331196}
+    - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 721331204}
   m_SourcePrefab: {fileID: 100100000, guid: be5213596b9c498438d8ec54078912e4, type: 3}
 --- !u!4 &721331194 stripped
 Transform:
@@ -11062,6 +11101,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &721331204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721331195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f0d88b11de334ebc1c870bf60fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameRateFix
+  targetFrameRate: 60
+  useVSync: 0
+  autoDetectMonitor: 0
 --- !u!1 &740481226
 GameObject:
   m_ObjectHideFlags: 0
@@ -11421,6 +11475,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 763401769}
+    - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 763401777}
   m_SourcePrefab: {fileID: 100100000, guid: be5213596b9c498438d8ec54078912e4, type: 3}
 --- !u!4 &763401767 stripped
 Transform:
@@ -11611,6 +11668,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &763401777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763401768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f0d88b11de334ebc1c870bf60fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameRateFix
+  targetFrameRate: 60
+  useVSync: 0
+  autoDetectMonitor: 0
 --- !u!1 &770927810
 GameObject:
   m_ObjectHideFlags: 0
@@ -13087,6 +13159,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 931858509}
+    - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931858517}
   m_SourcePrefab: {fileID: 100100000, guid: be5213596b9c498438d8ec54078912e4, type: 3}
 --- !u!4 &931858507 stripped
 Transform:
@@ -13277,6 +13352,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &931858517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931858508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f0d88b11de334ebc1c870bf60fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameRateFix
+  targetFrameRate: 60
+  useVSync: 0
+  autoDetectMonitor: 0
 --- !u!1 &961162831
 GameObject:
   m_ObjectHideFlags: 0
@@ -25229,6 +25319,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1885837167}
+    - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1885837175}
   m_SourcePrefab: {fileID: 100100000, guid: be5213596b9c498438d8ec54078912e4, type: 3}
 --- !u!4 &1885837165 stripped
 Transform:
@@ -25419,6 +25512,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1885837175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885837166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f0d88b11de334ebc1c870bf60fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameRateFix
+  targetFrameRate: 60
+  useVSync: 0
+  autoDetectMonitor: 0
 --- !u!1 &1908372727
 GameObject:
   m_ObjectHideFlags: 0
@@ -26652,6 +26760,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1971981314}
+    - targetCorrespondingSourceObject: {fileID: 275585724183820745, guid: be5213596b9c498438d8ec54078912e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1971981322}
   m_SourcePrefab: {fileID: 100100000, guid: be5213596b9c498438d8ec54078912e4, type: 3}
 --- !u!4 &1971981312 stripped
 Transform:
@@ -26842,6 +26953,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1971981322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971981313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f0d88b11de334ebc1c870bf60fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameRateFix
+  targetFrameRate: 60
+  useVSync: 0
+  autoDetectMonitor: 0
 --- !u!1 &2010295768
 GameObject:
   m_ObjectHideFlags: 0
