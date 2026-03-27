@@ -130,26 +130,14 @@ GameObject:
   - component: {fileID: 26088624}
   - component: {fileID: 26088623}
   - component: {fileID: 26088622}
-  - component: {fileID: 26088621}
+  - component: {fileID: 26088625}
   m_Layer: 0
-  m_Name: Portal
+  m_Name: PortalFinal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &26088621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26088620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8365ab181ee522e428a0310850531778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PortalScript
 --- !u!58 &26088622
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -260,6 +248,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &26088625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26088620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a39d41a75a5c84b894647e28c953f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndGamePortal
+  mainMenuSceneName: MainMenu
+  delayBeforeExit: 0.5
 --- !u!1 &32081383
 GameObject:
   m_ObjectHideFlags: 0
@@ -6328,6 +6330,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Wasp (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7194649874023778805, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194649874023778805, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -6708,6 +6718,14 @@ PrefabInstance:
     - target: {fileID: 2661714424152508655, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_Name
       value: Enemy_Wasp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194649874023778805, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194649874023778805, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8279949797932962934, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_LocalScale.x
