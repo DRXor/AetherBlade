@@ -28330,7 +28330,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
---- !u!1001 &3433506051453499760
+--- !u!1001 &2910517307764418958
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -28344,10 +28344,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1578961063269288876, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2908492180392524390, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
-      propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4273549911572466848, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
@@ -28434,48 +28430,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_UI
       objectReference: {fileID: 0}
-    - target: {fileID: 4741983201001789495, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741983201001789495, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741983201001789495, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7303429521261558947, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7303429521261558947, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7303429521261558947, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7303429521261558947, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7976105283884632261, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8870264322902581911, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
+    - target: {fileID: 7771009292710863524, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8870264322902581911, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
+    - target: {fileID: 7771009292710863524, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3250850259331608284, guid: dae4eb115c7cd0047844a77a7ca1f8a2, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -28766,6 +28729,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_Main
       objectReference: {fileID: 0}
+    - target: {fileID: 7369053563301699823, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -28794,6 +28761,6 @@ SceneRoots:
   - {fileID: 163218875}
   - {fileID: 1788047096}
   - {fileID: 8288499877507393850}
-  - {fileID: 3433506051453499760}
+  - {fileID: 2910517307764418958}
   - {fileID: 1910639251}
   - {fileID: 115031026}
