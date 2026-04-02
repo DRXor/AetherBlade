@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System;
 
 public class Inventory : MonoBehaviour
@@ -7,9 +6,7 @@ public class Inventory : MonoBehaviour
     public static Inventory Instance;
 
     [Header("Inventory Stats")]
-    public int artifactsCollected = 0;
     public int coinsCollected = 0;
-    public int keysCollected = 0;
 
     [Header("Active Items")]
     public bool hasShield = false;
@@ -17,9 +14,7 @@ public class Inventory : MonoBehaviour
     private Shield cachedPlayerShield;
     private Health cachedPlayerHealth;
 
-    public event Action<int> OnArtifactsChanged;
     public event Action<int> OnCoinsChanged;
-    public event Action<int> OnKeysChanged;
     public event Action<bool> OnShieldChanged;
 
     void Awake()
@@ -52,22 +47,10 @@ public class Inventory : MonoBehaviour
             cachedPlayerHealth = FindAnyObjectByType<Health>();
     }
 
-    public void CollectArtifact()
-    {
-        artifactsCollected++;
-        OnArtifactsChanged?.Invoke(artifactsCollected);
-    }
-
     public void CollectCoins(int amount = 1)
     {
         coinsCollected += amount;
         OnCoinsChanged?.Invoke(coinsCollected);
-    }
-
-    public void CollectKey()
-    {
-        keysCollected++;
-        OnKeysChanged?.Invoke(keysCollected);
     }
 
     public void PickupShield()

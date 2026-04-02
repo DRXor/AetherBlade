@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/FirstAct.unity
     guid: 636763be0acbd5c4e8fcda29e4213a5f
+  - enabled: 1
+    path: Assets/_Scenes/SecondAct.unity
+    guid: 4827e3de08990f847870cbc66ef8b35f
+  - enabled: 1
+    path: Assets/_Scenes/ThirdAct.unity
+    guid: d04d1578f6ff2eb4bb20cdeef11fabb0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
