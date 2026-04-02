@@ -1,6 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,49 +14,47 @@ public class PlayerMovement : MonoBehaviour
     public GameObject coinPrefab;
     public Text CoinCount;
 
-    // ДОБАВЛЕНИЕ: Переменная для управления анимациями
     private Animator anim;
-
     private Rigidbody2D rb;
     private int coin;
     private Vector2 moveInput;
+
+    private float originalSpeed;
+
+    public AudioClip[] footstepSounds;
+    private float stepTimer;
+    public float stepDelay = 0.4f;
+
+    // Для отслеживания последней нажатой клавиши
+    private string lastPressedKey = "";
+
+    private bool isRecoiling = false;
+    private float recoilTimer = 0f;
+    private Vector2 recoilVelocity = Vector2.zero;
 
     [Header("Sprite Setup")]
     public bool autoSetupCollider = true;
 
     void Start()
     {
-        // ИСПРАВЛЕНИЕ: Добавлена проверка и автоматическое создание Rigidbody2D
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
         {
-            Debug.LogWarning("Rigidbody2D not found! Adding one automatically.");
             rb = gameObject.AddComponent<Rigidbody2D>();
-            // Настройки по умолчанию для 2D платформера
             rb.freezeRotation = true;
-            rb.gravityScale = 0f; // Для top-down игры
+            rb.gravityScale = 0f;
         }
 
-        // ДОБАВЛЕНИЕ: Получаем компонент Animator для управления анимациями
         anim = GetComponent<Animator>();
-        if (anim == null)
-        {
-            Debug.LogWarning("Animator not found on player! Animation system may not work.");
-        }
-
         coin = 0;
 
-        // ИСПРАВЛЕНИЕ: Проверка на null для UI элемента
         if (CoinCount != null)
         {
             CoinCount.text = $"Coin: {coin}";
         }
-        else
-        {
-            Debug.LogWarning("CoinCount Text not assigned in inspector!");
-        }
 
         SetupSpriteAndCollider();
+        originalSpeed = moveSpeed;
     }
 
     void SetupSpriteAndCollider()
@@ -68,10 +66,6 @@ public class PlayerMovement : MonoBehaviour
         {
             collider.size = spriteRenderer.bounds.size;
             collider.offset = new Vector2(0, 0);
-        }
-        else
-        {
-            Debug.LogWarning("SpriteRenderer or BoxCollider2D not found for auto-setup");
         }
 
         if (autoSetupCollider)
@@ -89,116 +83,211 @@ public class PlayerMovement : MonoBehaviour
         {
             collider.size = sr.sprite.bounds.size;
             collider.offset = Vector2.zero;
-            Debug.Log($"Auto-setup collider for {gameObject.name}: {collider.size}");
         }
     }
 
     void Update()
     {
-        // Получаем ввод от клавиатуры
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
+        // Получаем ввод для движения
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        moveInput = moveInput.normalized;
+        moveInput = new Vector2(horizontal, vertical);
+        if (moveInput.magnitude > 1) moveInput.Normalize();
 
-        // ДОБАВЛЕНИЕ: Передаем параметры направления движения в аниматор
+        // ========== ОТСЛЕЖИВАЕМ ПОСЛЕДНЮЮ НАЖАТУЮ КЛАВИШУ ==========
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            lastPressedKey = "up";
+        }
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            lastPressedKey = "down";
+        }
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            lastPressedKey = "left";
+        }
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            lastPressedKey = "right";
+        }
+
+        // Проверяем, не отпустили ли последнюю нажатую клавишу
+        if (lastPressedKey == "up" && !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+        {
+            // Ищем другую зажатую клавишу
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) lastPressedKey = "down";
+            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) lastPressedKey = "left";
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) lastPressedKey = "right";
+            else lastPressedKey = "";
+        }
+        else if (lastPressedKey == "down" && !(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) lastPressedKey = "up";
+            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) lastPressedKey = "left";
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) lastPressedKey = "right";
+            else lastPressedKey = "";
+        }
+        else if (lastPressedKey == "left" && !(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) lastPressedKey = "up";
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) lastPressedKey = "down";
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) lastPressedKey = "right";
+            else lastPressedKey = "";
+        }
+        else if (lastPressedKey == "right" && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) lastPressedKey = "up";
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) lastPressedKey = "down";
+            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) lastPressedKey = "left";
+            else lastPressedKey = "";
+        }
+
+        // Определяем, двигается ли персонаж
+        bool isMoving = (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f);
+
+        if (isMoving)
+        {
+            stepTimer -= Time.deltaTime;
+
+            if (stepTimer <= 0f)
+            {
+                if (footstepSounds.Length > 0)
+                {
+                    int i = Random.Range(0, footstepSounds.Length);
+                    AudioManager.instance.PlaySound(footstepSounds[i]);
+                }
+
+                stepTimer = Random.Range(0.5f, 0.7f); //задержка между шагами
+            }
+        }
+        else
+        {
+            stepTimer = 0f;
+        }
+
+        // Отправляем в аниматор
         if (anim != null)
         {
-            anim.SetFloat("MoveX", moveInput.x);
-            anim.SetFloat("MoveY", moveInput.y);
+            if (isMoving && lastPressedKey != "")
+            {
+                // Отправляем направление в зависимости от последней нажатой клавиши
+                switch (lastPressedKey)
+                {
+                    case "up":
+                        // W = вверх экрана, должен идти спиной (анимация Up)
+                        anim.SetFloat("MoveX", 0);
+                        anim.SetFloat("MoveY", 1);
+                        break;
+                    case "down":
+                        // S = вниз экрана, должен идти лицом (анимация Down)
+                        anim.SetFloat("MoveX", 0);
+                        anim.SetFloat("MoveY", -1);
+                        break;
+                    case "left":
+                        anim.SetFloat("MoveX", -1);
+                        anim.SetFloat("MoveY", 0);
+                        break;
+                    case "right":
+                        anim.SetFloat("MoveX", 1);
+                        anim.SetFloat("MoveY", 0);
+                        break;
+                }
+                anim.SetFloat("Speed", 1f);
+            }
+            else
+            {
+                anim.SetFloat("MoveX", 0);
+                anim.SetFloat("MoveY", 0);
+                anim.SetFloat("Speed", 0f);
+            }
         }
     }
 
-
     void FixedUpdate()
     {
-        // ИСПРАВЛЕНИЕ: Проверка rb на null перед использованием
         if (rb == null) return;
 
-        // Вычисляем желаемую скорость
+        if (isRecoiling)
+        {
+            recoilTimer -= Time.fixedDeltaTime;
+
+            rb.linearVelocity = recoilVelocity;
+            recoilVelocity *= 0.88f;
+
+            if (recoilTimer <= 0f)
+            {
+                isRecoiling = false;
+                recoilVelocity = Vector2.zero;
+            }
+            return;
+        }
+
+        // Обычное движение
         Vector2 targetVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, 13f * Time.fixedDeltaTime);
 
-        // Вычисляем разницу между желаемой и текущей скоростью
-        Vector2 velocityDiff = targetVelocity - rb.linearVelocity;
-
-        // Вычисляем силу для движения
-        Vector2 movement = velocityDiff * acceleration;
-
-        // Применяем силу к физическому телу
-        rb.AddForce(movement);
-
-        // ОГРАНИЧЕНИЕ МАКСИМАЛЬНОЙ СКОРОСТИ
-        if (rb.linearVelocity.magnitude > maxSpeed)
-        {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
-        }
-
-        // Трение, когда не двигаемся
         if (moveInput.magnitude < 0.1f)
         {
-            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, friction * Time.fixedDeltaTime);
-        }
+            rb.linearVelocity *= 0.84f;
 
-        // Естественное трение через физический drag
-        if (moveInput.magnitude < 0.1f)
-        {
-            rb.linearVelocity *= (1f - drag * Time.fixedDeltaTime);
-
-            // Полная остановка при очень малой скорости
-            if (rb.linearVelocity.magnitude < 0.1f)
+            if (rb.linearVelocity.magnitude < 0.06f)
                 rb.linearVelocity = Vector2.zero;
         }
+    }
 
-        // ДОБАВЛЕНИЕ: Передаем параметр скорости в аниматор (нормализованная скорость)
-        if (anim != null)
-        {
-            float speed = rb.linearVelocity.magnitude / maxSpeed;
-            anim.SetFloat("Speed", speed);
-        }
+    public void TriggerRecoil(Vector2 direction, float force, float duration = 0.26f)
+    {
+        if (rb == null) return;
+
+        isRecoiling = true;
+        recoilTimer = duration;
+        recoilVelocity = direction * force;
+
+        rb.AddForce(direction * force * 28f, ForceMode2D.Impulse);
+
+        Debug.Log($"RECOIL ACTIVATED | X:{direction.x:F2} Y:{direction.y:F2} | Force:{force}");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Coin"))
         {
-            coin += 1;
+            AudioManager.instance.PlaySound(AudioManager.instance.pickupSound);
 
-            // ИСПРАВЛЕНИЕ: Проверка на null для UI
+            coin += 1;
             if (CoinCount != null)
             {
                 CoinCount.text = $"Coin: {coin}";
             }
-
             Destroy(collision.gameObject);
-
-            // ЗВУК: Подбор монетки
-            if (AudioManager.instance != null)
-            {
-                AudioManager.instance.PlaySound(5, 0.7f); // индекс 5 - звук монетки
-            }
         }
     }
 
-    // Дополнительный метод для сбора монет из других скриптов
     public void AddCoin(int amount = 1)
     {
         coin += amount;
-
         if (CoinCount != null)
         {
             CoinCount.text = $"Coin: {coin}";
         }
-
-        // ЗВУК: Подбор монетки
-        if (AudioManager.instance != null)
-        {
-            AudioManager.instance.PlaySound(5, 0.7f);
-        }
     }
 
-    // Метод для получения текущего количества монет
     public int GetCoinCount()
     {
         return coin;
+    }
+
+    public void ApplySpeedBuff(float multiplier, float duration)
+    {
+        StartCoroutine(SpeedBuffCoroutine(multiplier, duration));
+    }
+
+    private IEnumerator SpeedBuffCoroutine(float multiplier, float duration)
+    {
+        moveSpeed = originalSpeed * multiplier;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = originalSpeed;
     }
 }
