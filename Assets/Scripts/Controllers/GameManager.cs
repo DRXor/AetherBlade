@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using System.Collections.Generic; 
 
 public class GameManager : MonoBehaviour
 {
@@ -10,14 +11,18 @@ public class GameManager : MonoBehaviour
     [Header("UI Panels")]
     public GameObject gameOverPanel;
     public GameObject pauseMenuPanel;
-    public GameObject levelCompletePanel; 
+    public GameObject levelCompletePanel;
 
     [Header("State")]
     public bool isGameOver = false;
     public bool isPaused = false;
 
     [Header("Controls")]
-    public KeyCode pauseKey = KeyCode.Escape; 
+    public KeyCode pauseKey = KeyCode.Escape;
+
+    [Header("Level Order")]
+    private List<int> randomLevelOrder;
+    private int currentLevelProgress = 0;
 
     void Awake()
     {
@@ -33,21 +38,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void StartRandomGame()
+    {
+        randomLevelOrder = new List<int> { 1, 2, 3 };
+
+        for (int i = 0; i < randomLevelOrder.Count; i++)
+        {
+            int temp = randomLevelOrder[i];
+            int randomIndex = Random.Range(i, randomLevelOrder.Count);
+            randomLevelOrder[i] = randomLevelOrder[randomIndex];
+            randomLevelOrder[randomIndex] = temp;
+        }
+
+        currentLevelProgress = 0;
+        LoadNextLevel(); 
+    }
+
     public void LoadNextLevel()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-        int nextSceneIndex = currentSceneIndex + 1;
-
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        if (randomLevelOrder != null && currentLevelProgress < randomLevelOrder.Count)
         {
-            Debug.Log($"Loading Level Index: {nextSceneIndex}");
+            int nextSceneIndex = randomLevelOrder[currentLevelProgress];
+            currentLevelProgress++;
+
+            Debug.Log($"Загружаем случайный уровень с индексом: {nextSceneIndex}");
             ResetGameState();
             SceneManager.LoadScene(nextSceneIndex);
         }
         else
         {
-            Debug.Log("End of the game reached! Returning to Menu.");
+            Debug.Log("Уровни закончились! Возврат в меню.");
             ReturnToMainMenu();
         }
     }
@@ -60,50 +80,42 @@ public class GameManager : MonoBehaviour
         {
             levelCompletePanel.SetActive(true);
 
+            Transform current = levelCompletePanel.transform;
+            while (current.parent != null)
+            {
+                current = current.parent;
+                current.gameObject.SetActive(true);
+            }
+
+            Debug.Log("Уровень пройден! Мы принудительно включили всю иерархию до самого верха.");
+
             Transform nextBtn = levelCompletePanel.transform.Find("NextLevelButton");
             Transform menuBtn = levelCompletePanel.transform.Find("BackToMainMenu");
 
-            int currentIdx = SceneManager.GetActiveScene().buildIndex;
-            bool isLastLevel = (currentIdx + 1 >= SceneManager.sceneCountInBuildSettings);
+            bool isLastLevel = (randomLevelOrder != null && currentLevelProgress >= randomLevelOrder.Count);
 
             if (isLastLevel)
             {
-                Debug.Log("Final Level Complete! Showing Menu button only.");
-
-                if (nextBtn != null) nextBtn.gameObject.SetActive(false); 
-                if (menuBtn != null) menuBtn.gameObject.SetActive(true); 
+                if (nextBtn != null) nextBtn.gameObject.SetActive(false);
+                if (menuBtn != null) menuBtn.gameObject.SetActive(true);
             }
             else
             {
-                Debug.Log("Level Complete! Showing Next Level button.");
-
-                if (nextBtn != null) nextBtn.gameObject.SetActive(true);  
+                if (nextBtn != null) nextBtn.gameObject.SetActive(true);
             }
         }
-        else
-        {
-            Debug.LogWarning("GameManager: levelCompletePanel is not assigned!");
-        }
     }
+
     public void GameOver()
     {
         if (isGameOver) return;
 
         isGameOver = true;
         isPaused = false;
-
-        Debug.Log("GAME OVER! Player has died.");
-
+        Debug.Log("GAME OVER!");
         Time.timeScale = 0f;
 
-        if (gameOverPanel != null)
-        {
-            gameOverPanel.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("GameManager: gameOverPanel is not assigned!");
-        }
+        if (gameOverPanel != null) gameOverPanel.SetActive(true);
 
         DisablePlayerControl();
     }
@@ -116,8 +128,7 @@ public class GameManager : MonoBehaviour
             var scripts = player.GetComponents<MonoBehaviour>();
             foreach (var script in scripts)
             {
-                if (script != this && script.enabled)
-                    script.enabled = false;
+                if (script != this && script.enabled) script.enabled = false;
             }
         }
     }
@@ -132,6 +143,8 @@ public class GameManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         ResetGameState();
+        currentLevelProgress = 0;
+        randomLevelOrder = null;  
         SceneManager.LoadScene(0);
     }
 
@@ -142,9 +155,12 @@ public class GameManager : MonoBehaviour
     {
         ResetGameState();
 
-        gameOverPanel = GameObject.Find("GameOverPanel");
-        pauseMenuPanel = GameObject.Find("PauseMenuPanel");
-        levelCompletePanel = GameObject.Find("LevelCompletePanel");
+        gameOverPanel = FindGameObjectAnywhere("GameOverPanel");
+        pauseMenuPanel = FindGameObjectAnywhere("PauseMenuPanel");
+        levelCompletePanel = FindGameObjectAnywhere("LevelCompletePanel");
+
+        if (levelCompletePanel == null)
+            Debug.LogError($"!!! GameManager не нашел 'LevelCompletePanel' на сцене {scene.name}. Проверь имя в иерархии!");
 
         if (gameOverPanel) gameOverPanel.SetActive(false);
         if (pauseMenuPanel) pauseMenuPanel.SetActive(false);
@@ -153,77 +169,58 @@ public class GameManager : MonoBehaviour
         SetupButtons();
     }
 
+    private GameObject FindGameObjectAnywhere(string name)
+    {
+        foreach (GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>())
+        {
+            if (obj.name == name && obj.scene.isLoaded)
+            {
+                return obj;
+            }
+        }
+        return null;
+    }
+
     void SetupButtons()
     {
-        GameObject canvas = GameObject.Find("Canvas_Main");
-        if (canvas == null) return;
-
-        Button[] allButtons = canvas.GetComponentsInChildren<Button>(true);
+        Button[] allButtons = Resources.FindObjectsOfTypeAll<Button>();
 
         foreach (var btn in allButtons)
         {
+            if (!btn.gameObject.scene.isLoaded) continue;
+
             btn.onClick.RemoveAllListeners();
 
-            if (btn.name == "ResumeButton")
-            {
-                btn.onClick.AddListener(ResumeGame);
-                Debug.Log("Connected Resume button");
-            }
-            else if (btn.name == "NextLevelButton")
-            {
-                btn.onClick.AddListener(LoadNextLevel);
-                Debug.Log("Connected Next Level button");
-            }
-            else if (btn.name == "RestartButton")
-            {
-                btn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
-                Debug.Log("Connected Restart button");
-            }
-            else if (btn.name == "MenuButton" || btn.name == "BackToMainMenu")
-            {
-                btn.onClick.AddListener(ReturnToMainMenu);
-                Debug.Log("Connected Menu button");
-            }
+            if (btn.name == "ResumeButton") btn.onClick.AddListener(ResumeGame);
+            else if (btn.name == "NextLevelButton") btn.onClick.AddListener(LoadNextLevel);
+            else if (btn.name == "RestartButton") btn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
+            else if (btn.name == "MenuButton" || btn.name == "BackToMainMenu") btn.onClick.AddListener(ReturnToMainMenu);
         }
     }
 
     void Update()
     {
-        if (!isGameOver && Input.GetKeyDown(pauseKey))
-        {
-            TogglePause();
-        }
+        if (!isGameOver && Input.GetKeyDown(pauseKey)) TogglePause();
     }
 
     public void TogglePause()
     {
-        if (isPaused)
-            ResumeGame();
-        else
-            PauseGame();
+        if (isPaused) ResumeGame();
+        else PauseGame();
     }
 
     public void PauseGame()
     {
         if (isGameOver) return;
-
         isPaused = true;
-        Time.timeScale = 0f; 
-
-        if (pauseMenuPanel != null)
-            pauseMenuPanel.SetActive(true);
-
-        Debug.Log("Game Paused");
+        Time.timeScale = 0f;
+        if (pauseMenuPanel != null) pauseMenuPanel.SetActive(true);
     }
 
     public void ResumeGame()
     {
         isPaused = false;
-        Time.timeScale = 1f; 
-
-        if (pauseMenuPanel != null)
-            pauseMenuPanel.SetActive(false);
-
-        Debug.Log("Game Resumed");
+        Time.timeScale = 1f;
+        if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
     }
 }
