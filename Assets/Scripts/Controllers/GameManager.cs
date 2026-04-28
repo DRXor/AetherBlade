@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; 
@@ -10,7 +10,10 @@ public class GameManager : MonoBehaviour
     [Header("UI Panels")]
     public GameObject gameOverPanel;
     public GameObject pauseMenuPanel;
-    public GameObject levelCompletePanel; 
+    public GameObject levelCompletePanel;
+
+    [Header("Upgrade")]
+    public UpgradeUI upgradeUI;
 
     [Header("State")]
     public bool isGameOver = false;
@@ -54,35 +57,15 @@ public class GameManager : MonoBehaviour
 
     public void CompleteLevel()
     {
-        Time.timeScale = 0f;
+        Debug.Log("Level Complete → showing upgrades");
 
-        if (levelCompletePanel != null)
+        if (upgradeUI != null)
         {
-            levelCompletePanel.SetActive(true);
-
-            Transform nextBtn = levelCompletePanel.transform.Find("NextLevelButton");
-            Transform menuBtn = levelCompletePanel.transform.Find("BackToMainMenu");
-
-            int currentIdx = SceneManager.GetActiveScene().buildIndex;
-            bool isLastLevel = (currentIdx + 1 >= SceneManager.sceneCountInBuildSettings);
-
-            if (isLastLevel)
-            {
-                Debug.Log("Final Level Complete! Showing Menu button only.");
-
-                if (nextBtn != null) nextBtn.gameObject.SetActive(false); 
-                if (menuBtn != null) menuBtn.gameObject.SetActive(true); 
-            }
-            else
-            {
-                Debug.Log("Level Complete! Showing Next Level button.");
-
-                if (nextBtn != null) nextBtn.gameObject.SetActive(true);  
-            }
+            upgradeUI.Show();
         }
         else
         {
-            Debug.LogWarning("GameManager: levelCompletePanel is not assigned!");
+            Debug.LogWarning("UpgradeUI not assigned!");
         }
     }
     public void GameOver()
@@ -105,22 +88,9 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("GameManager: gameOverPanel is not assigned!");
         }
 
-        DisablePlayerControl();
+        Time.timeScale = 0f;
     }
 
-    private void DisablePlayerControl()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            var scripts = player.GetComponents<MonoBehaviour>();
-            foreach (var script in scripts)
-            {
-                if (script != this && script.enabled)
-                    script.enabled = false;
-            }
-        }
-    }
 
     public void ResetGameState()
     {
@@ -146,7 +116,10 @@ public class GameManager : MonoBehaviour
         pauseMenuPanel = GameObject.Find("PauseMenuPanel");
         levelCompletePanel = GameObject.Find("LevelCompletePanel");
 
-        if (gameOverPanel) gameOverPanel.SetActive(false);
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(false);
+        }
         if (pauseMenuPanel) pauseMenuPanel.SetActive(false);
         if (levelCompletePanel) levelCompletePanel.SetActive(false);
 
@@ -176,7 +149,7 @@ public class GameManager : MonoBehaviour
             }
             else if (btn.name == "RestartButton")
             {
-                btn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
+                btn.onClick.AddListener(RestartRun);
                 Debug.Log("Connected Restart button");
             }
             else if (btn.name == "MenuButton" || btn.name == "BackToMainMenu")
@@ -225,5 +198,15 @@ public class GameManager : MonoBehaviour
             pauseMenuPanel.SetActive(false);
 
         Debug.Log("Game Resumed");
+    }
+
+    public void RestartRun()
+    {
+        Debug.Log("Restarting run...");
+
+        Time.timeScale = 1f;
+        ResetGameState();
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
