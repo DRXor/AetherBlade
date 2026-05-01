@@ -142,9 +142,9 @@ public class GameManager : MonoBehaviour
     {
         ResetGameState();
 
-        gameOverPanel = GameObject.Find("GameOverPanel");
-        pauseMenuPanel = GameObject.Find("PauseMenuPanel");
-        levelCompletePanel = GameObject.Find("LevelCompletePanel");
+        //gameOverPanel = GameObject.Find("GameOverPanel");
+        //pauseMenuPanel = GameObject.Find("PauseMenuPanel");
+        //levelCompletePanel = GameObject.Find("LevelCompletePanel");
 
         if (gameOverPanel) gameOverPanel.SetActive(false);
         if (pauseMenuPanel) pauseMenuPanel.SetActive(false);
