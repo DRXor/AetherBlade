@@ -1,5 +1,6 @@
-<img width="184" height="314" alt="Снимок экрана 2026-03-27 112813" src="https://github.com/user-attachments/assets/f20b2577-1c50-44a0-a6ed-bd77d3843c49" />
+
 # AetherBlade
+<img width="1264" height="592" alt="image" src="https://github.com/user-attachments/assets/7655de67-e60b-41e4-ac1b-817d037c5ac8" />
 
 ##  О проекте
 
