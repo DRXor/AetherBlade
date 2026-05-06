@@ -246,6 +246,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &242439964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4438338176204331205, guid: ca61ee5670c2b8d4490f54dc9c87dad7, type: 3}
+  m_PrefabInstance: {fileID: 818991368}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &242439978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242439964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac3dc94ab7a2fc47b28733af27635e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerVisibility
+--- !u!114 &242439979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242439964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0ecbf49c140ab41a993549095de4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisableInMainMenu
 --- !u!224 &427531308 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5630380939566048797, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
@@ -457,7 +486,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4438338176204331205, guid: ca61ee5670c2b8d4490f54dc9c87dad7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 242439978}
+    - targetCorrespondingSourceObject: {fileID: 4438338176204331205, guid: ca61ee5670c2b8d4490f54dc9c87dad7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 242439979}
   m_SourcePrefab: {fileID: 100100000, guid: ca61ee5670c2b8d4490f54dc9c87dad7, type: 3}
 --- !u!1 &915109558
 GameObject:

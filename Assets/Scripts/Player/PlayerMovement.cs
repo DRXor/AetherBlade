@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -101,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0) return;
+
         if (GameManager.Instance != null && GameManager.Instance.isPaused) return;
 
         // Получаем ввод для движения
