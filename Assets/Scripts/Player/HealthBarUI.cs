@@ -3,38 +3,30 @@ using UnityEngine.UI;
 
 public class HealthBarUI : MonoBehaviour
 {
-    [Header("Health Bar Settings")]
     public Slider healthSlider;
     public Health playerHealth;
-
-    [Header("Visual Options")]
-    public bool changeColor = true;
-    public Color fullHealthColor = Color.green;
-    public Color lowHealthColor = Color.red;
 
     private Image fillImage;
 
     void Start()
     {
-        if (playerHealth == null)
-            playerHealth = FindFirstObjectByType<Health>();
-
         if (healthSlider == null)
             healthSlider = GetComponent<Slider>();
 
-        if (healthSlider != null)
-        {
-            healthSlider.maxValue = playerHealth.maxHealth;
-            healthSlider.value = playerHealth.currentHealth;
-
-            if (changeColor)
-                fillImage = healthSlider.fillRect.GetComponent<Image>();
-        }
+        if (playerHealth == null)
+            playerHealth = FindFirstObjectByType<Health>();
 
         if (playerHealth != null)
         {
             playerHealth.OnDamage.AddListener(UpdateHealthBar);
             playerHealth.OnHeal.AddListener(UpdateHealthBar);
+        }
+
+        if (healthSlider != null && playerHealth != null)
+        {
+            healthSlider.maxValue = playerHealth.maxHealth;
+            healthSlider.value = playerHealth.currentHealth;
+            fillImage = healthSlider.fillRect?.GetComponent<Image>();
         }
     }
 
@@ -58,10 +50,10 @@ public class HealthBarUI : MonoBehaviour
 
     void UpdateColor()
     {
-        if (fillImage != null && changeColor)
+        if (fillImage != null)
         {
-            float healthPercent = playerHealth.currentHealth / playerHealth.maxHealth;
-            fillImage.color = Color.Lerp(lowHealthColor, fullHealthColor, healthPercent);
+            float percent = playerHealth.currentHealth / playerHealth.maxHealth;
+            fillImage.color = Color.Lerp(Color.red, Color.green, percent);
         }
     }
 

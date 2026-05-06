@@ -32,25 +32,28 @@ public class EnemyAI : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        // ДОБАВЛЕНО: Получаем компонент Animator
         anim = GetComponent<Animator>();
         if (anim == null)
         {
             Debug.LogWarning("Animator not found on enemy! Animations will not work.");
         }
 
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
-
-        if (player != null)
-            playerHealth = player.GetComponent<Health>();
-        else
-            Debug.LogError("Player not found! Make sure player has 'Player' tag.");
-
         EnemyManager.Instance.RegisterEnemy(gameObject);
     }
 
     void Update()
     {
+        if (player == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null)
+            {
+                player = p.transform;
+                playerHealth = player.GetComponent<Health>();
+            }
+            return;
+        }
+
         if (player == null || isAttacking || isDashing) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);

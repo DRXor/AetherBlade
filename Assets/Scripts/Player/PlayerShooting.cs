@@ -14,30 +14,33 @@ public class PlayerShooting : MonoBehaviour
     public float damageMultiplier = 1f;
     public int bulletsPerShot = 1;
     public float spreadAngle = 0f;
+
     [Header("Recoil Settings")]
     public Rigidbody2D playerRb;
     public float recoilForce = 4f;
     public bool recoilPerShoot = false;
+
     private float nextFireTime = 0f;
 
     void Update()
     {
-        // ������� ������ � �������
-        if (weaponPivot != null)
+        if (GameManager.Instance != null && GameManager.Instance.isPaused) return;
+
+        // Исправлено: проверка Camera.main
+        Camera mainCamera = Camera.main;
+        if (weaponPivot != null && mainCamera != null)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePosition - transform.position).normalized;
             weaponPivot.right = direction;
         }
 
-        // �������� �� ���
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
         {
             Shoot();
             nextFireTime = Time.time + fireRate;
         }
 
-        // �������� ������� ����� �� F
         if (Input.GetKeyDown(KeyCode.F))
         {
             PerformMeleeAttack();
@@ -52,7 +55,6 @@ public class PlayerShooting : MonoBehaviour
             return;
         }
 
-        // Создаём пули
         for (int i = 0; i < bulletsPerShot; i++)
         {
             float currentSpread = (bulletsPerShot > 1) ? spreadAngle : 0f;
@@ -67,12 +69,14 @@ public class PlayerShooting : MonoBehaviour
                 bulletComponent.damage = baseDamage * damageMultiplier;
             }
 
-            AudioManager.instance.PlaySound(AudioManager.instance.shootSound);
+            // ИСПРАВЛЕНО: проверка на null
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySound(AudioManager.instance.shootSound);
+            }
         }
 
-        // Отдача применяется **один раз** после всех пуль
         ApplyRecoil();
-
         Debug.Log("BANG! + Recoil applied");
     }
 
@@ -81,13 +85,15 @@ public class PlayerShooting : MonoBehaviour
         PlayerMovement movement = GetComponent<PlayerMovement>();
         if (movement == null) return;
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null) return;
+
+        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 shootDir = (mousePos - transform.position).normalized;
         Vector2 recoilDir = -shootDir;
 
         float strength = recoilForce * 22f;
 
-        // Усиление горизонтальной отдачи
         if (Mathf.Abs(recoilDir.x) > 0.65f)
             strength *= 1.65f;
 
@@ -110,18 +116,14 @@ public class PlayerShooting : MonoBehaviour
                 if (enemyHealth != null)
                 {
                     enemyHealth.take_damage_to_enemy(meleeDamage);
-
-                    // ������������ ��� ������� �����
                     Vector2 knockbackDir = (enemy.transform.position - transform.position).normalized;
                     enemyHealth.ApplyKnockback(knockbackDir * meleeKnockback);
-
                     Debug.Log($"Melee hit enemy for {meleeDamage} damage!");
                 }
             }
         }
     }
 
-    // ������ ��� �������� ������
     public void UpgradeDamage(float multiplier)
     {
         damageMultiplier *= multiplier;
@@ -139,14 +141,12 @@ public class PlayerShooting : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // ������������ ������� ������� �����
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 1.5f);
     }
 
     public float GetDamageMultiplier()
     {
-        // Ищем компонент Health на том же объекте
         Health playerHealth = GetComponent<Health>();
         if (playerHealth != null)
         {

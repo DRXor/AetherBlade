@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 7637256578080019733}
   - component: {fileID: 3576803131890831780}
   - component: {fileID: 7298751046305001446}
+  - component: {fileID: 9014037134426358585}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -444,6 +445,21 @@ MonoBehaviour:
   attackSounds:
   - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
   - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+--- !u!114 &9014037134426358585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3714640890102023788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f0d88b11de334ebc1c870bf60fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameRateFix
+  targetFrameRate: 60
+  useVSync: 0
+  autoDetectMonitor: 0
 --- !u!1 &4173498965514158322
 GameObject:
   m_ObjectHideFlags: 0

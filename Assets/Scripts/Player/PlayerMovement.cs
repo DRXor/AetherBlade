@@ -86,8 +86,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        if (FindObjectsOfType<PlayerMovement>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.isPaused) return;
+
         // Получаем ввод для движения
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -156,7 +169,10 @@ public class PlayerMovement : MonoBehaviour
                 if (footstepSounds.Length > 0)
                 {
                     int i = Random.Range(0, footstepSounds.Length);
-                    AudioManager.instance.PlaySound(footstepSounds[i]);
+                    if (AudioManager.instance != null && AudioManager.instance.gameObject != null)
+                    {
+                        AudioManager.instance.PlaySound(footstepSounds[i]);
+                    }
                 }
 
                 stepTimer = Random.Range(0.5f, 0.7f); //задержка между шагами

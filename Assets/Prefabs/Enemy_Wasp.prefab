@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 6892536320778052927}
   - component: {fileID: 1773575712386862579}
   - component: {fileID: 5332112970987794850}
+  - component: {fileID: 3194350604450496415}
   m_Layer: 0
   m_Name: Enemy_Wasp
   m_TagString: Enemy
@@ -408,6 +409,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3194350604450496415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661714424152508655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f0d88b11de334ebc1c870bf60fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameRateFix
+  targetFrameRate: 60
+  useVSync: 0
+  autoDetectMonitor: 0
 --- !u!1 &3691104378812924692
 GameObject:
   m_ObjectHideFlags: 0
