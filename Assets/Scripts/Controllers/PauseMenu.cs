@@ -55,15 +55,21 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         AudioListener.pause = false;
+        isPaused = false;
 
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(false);
+
+        // Возвращаемся в главное меню
         if (GameManager.Instance != null)
+        {
             GameManager.Instance.ReturnToMainMenu();
+        }
         else
+        {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    }
+        }
 
-    public void Button_Exit()
-    {
-        Application.Quit();
+        Debug.Log("Returning to main menu from pause!");
     }
 }
