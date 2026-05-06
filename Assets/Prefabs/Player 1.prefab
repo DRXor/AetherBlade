@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 5651480476694594643}
   - component: {fileID: 4401669794220676956}
   - component: {fileID: 7600871404417102949}
-  - component: {fileID: 8456328396820130515}
   m_Layer: 8
   m_Name: Player 1
   m_TagString: Player
@@ -190,7 +189,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00526464, y: 0.01316151}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -200,7 +199,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6841223, y: 1.3948467}
   m_EdgeRadius: 0.1
 --- !u!114 &2120669353902340493
 MonoBehaviour:
@@ -216,8 +215,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 100
   currentHealth: 0
+  currentShield: 0
+  maxShield: 50
   invulnerabilityDuration: 1.5
-  isInvulnerable: 0
   OnDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -227,11 +227,7 @@ MonoBehaviour:
   OnHeal:
     m_PersistentCalls:
       m_Calls: []
-  damageColor: {r: 1, g: 0, b: 0, a: 1}
-  shieldDamageColor: {r: 0, g: 1, b: 1, a: 1}
-  flashDuration: 0.1
   damageMultiplier: 1
-  isBuffActive: 0
 --- !u!114 &1928639160558781837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,8 +350,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 100
   currentHealth: 0
+  currentShield: 0
+  maxShield: 50
   invulnerabilityDuration: 1.5
-  isInvulnerable: 0
   OnDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -365,11 +362,7 @@ MonoBehaviour:
   OnHeal:
     m_PersistentCalls:
       m_Calls: []
-  damageColor: {r: 1, g: 0, b: 0, a: 1}
-  shieldDamageColor: {r: 0, g: 1, b: 1, a: 1}
-  flashDuration: 0.1
   damageMultiplier: 1
-  isBuffActive: 0
 --- !u!95 &7600871404417102949
 Animator:
   serializedVersion: 7
@@ -392,19 +385,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8456328396820130515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4438338176204331205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dd9f0dc5ea243b4480196aff331d50e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawner
-  playerPrefab: {fileID: 4438338176204331205}
 --- !u!1 &6279925108300324216
 GameObject:
   m_ObjectHideFlags: 0
