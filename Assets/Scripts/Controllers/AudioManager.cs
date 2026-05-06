@@ -15,7 +15,15 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // ЭТО КЛЮЧЕВАЯ СТРОКА
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -25,7 +33,26 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
-        sfxSource.PlayOneShot(clip);
+        // Проверяем, что объект не уничтожен
+        if (this == null || gameObject == null || clip == null) return;
+
+        // Проверяем наличие AudioSource
+        AudioSource source = GetComponent<AudioSource>();
+        if (source == null)
+        {
+            Debug.LogWarning("AudioSource not found!");
+            return;
+        }
+
+        // Пытаемся воспроизвести
+        try
+        {
+            source.PlayOneShot(clip);
+        }
+        catch (MissingReferenceException)
+        {
+            Debug.LogWarning("AudioSource was destroyed, skipping sound");
+        }
     }
 
     public void PlayMusic()

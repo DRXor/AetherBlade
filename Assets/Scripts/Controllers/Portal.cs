@@ -6,15 +6,15 @@ public class Portal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Portal: Player entered! Notifying GameManager...");
+            Debug.Log("Portal: Player entered! Completing level...");
 
-            if (GameManager.Instance != null)
+            if (GameManager.Instance != null && !GameManager.Instance.isGameOver)
             {
                 GameManager.Instance.CompleteLevel();
             }
             else
             {
-                Debug.LogError("Portal: GameManager Instance not found!");
+                Debug.LogError("Portal: GameManager Instance not found or game is over!");
             }
         }
     }

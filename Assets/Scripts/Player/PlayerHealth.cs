@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using System.Collections;
 
 public class Health : MonoBehaviour
 {
@@ -9,126 +10,205 @@ public class Health : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
+    [Header("Shield Settings")]
+    public float currentShield = 0f;
+    public float maxShield = 50f;
+
+    [Header("Damage Buff")]
+    public float damageMultiplier = 1f;
+
     [Header("Invulnerability")]
-    public float invulnerabilityDuration = 1.5f;
-    public bool isInvulnerable = false;
+    public float invulnerabilityDuration = 0.5f;
+    private bool isInvulnerable = false;
 
     [Header("Events")]
     public UnityEvent OnDamage;
-    public UnityEvent OnDeath;
     public UnityEvent OnHeal;
+    public UnityEvent OnDeath;
 
-    [Header("Visual Feedback")]
-    public Color damageColor = Color.red;
-    public Color shieldDamageColor = Color.cyan;
-    public float flashDuration = 0.1f;
-
-    [Header("Buff Settings")]
-    public float damageMultiplier = 1f;
-    public bool isBuffActive = false;
-
-    private SpriteRenderer spriteRenderer;
-    private Color originalColor;
-    private Shield shieldComponent;
-    private Coroutine invincibilityBuffCoroutine;
-    private bool damageInvulnerability = false;
-    private Coroutine buffVisualCoroutine;
+    [Header("UI - НЕ ТРОГАТЬ!")]
+    public Slider healthBar;
+    public Slider shieldBar;
 
     void Start()
     {
         currentHealth = maxHealth;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        currentShield = 0f;
+        damageMultiplier = 1f;
 
-        if (spriteRenderer != null)
-            originalColor = spriteRenderer.color;
+        // ПРИНУДИТЕЛЬНЫЙ ПОИСК
+        ForceFindUI();
+
+        UpdateUI();
+    }
+
+    void ForceFindUI()
+    {
+        // Ищем через Canvas
+        Canvas canvas = FindFirstObjectByType<Canvas>();
+        if (canvas != null)
+        {
+            // Ищем HealthSlider в любом месте
+            Slider[] sliders = canvas.GetComponentsInChildren<Slider>(true);
+            foreach (Slider s in sliders)
+            {
+                if (s.name == "HealthBar" || s.name == "HealthSlider")
+                {
+                    healthBar = s;
+                    Debug.Log("HealthBar найден: " + s.name);
+                }
+                if (s.name == "ShieldBar" || s.name == "ShieldSlider")
+                {
+                    shieldBar = s;
+                    Debug.Log("ShieldBar найден: " + s.name);
+                }
+            }
+        }
+
+        // Если не нашли - ищем по имени
+        if (healthBar == null)
+        {
+            GameObject hpBarObj = GameObject.Find("HealthBar");
+            if (hpBarObj != null) healthBar = hpBarObj.GetComponent<Slider>();
+        }
+        if (shieldBar == null)
+        {
+            GameObject shBarObj = GameObject.Find("ShieldBar");
+            if (shBarObj != null) shieldBar = shBarObj.GetComponent<Slider>();
+        }
+
+        // ВАЖНО: если healthBar всё ещё null - СОЗДАЁМ
+        if (healthBar == null)
+        {
+            CreateHealthBar();
+        }
+    }
+
+    void CreateHealthBar()
+    {
+        // Создаём Canvas если нет
+        Canvas canvas = FindFirstObjectByType<Canvas>();
+        if (canvas == null)
+        {
+            GameObject canvasObj = new GameObject("Canvas");
+            canvas = canvasObj.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasObj.AddComponent<CanvasScaler>();
+            canvasObj.AddComponent<GraphicRaycaster>();
+        }
+
+        // Создаём HealthBar
+        GameObject hpBarObj = new GameObject("HealthBar");
+        hpBarObj.transform.SetParent(canvas.transform, false);
+
+        RectTransform rect = hpBarObj.AddComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0.1f, 0.9f);
+        rect.anchorMax = new Vector2(0.9f, 0.95f);
+        rect.sizeDelta = Vector2.zero;
+
+        healthBar = hpBarObj.AddComponent<Slider>();
+
+        // Создаём фон
+        GameObject bg = new GameObject("Background");
+        bg.transform.SetParent(hpBarObj.transform, false);
+        Image bgImg = bg.AddComponent<Image>();
+        bgImg.color = Color.gray;
+        RectTransform bgRect = bg.GetComponent<RectTransform>();
+        bgRect.anchorMin = Vector2.zero;
+        bgRect.anchorMax = Vector2.one;
+        bgRect.sizeDelta = Vector2.zero;
+
+        // Создаём заполнение
+        GameObject fill = new GameObject("Fill");
+        fill.transform.SetParent(hpBarObj.transform, false);
+        Image fillImg = fill.AddComponent<Image>();
+        fillImg.color = Color.green;
+        RectTransform fillRect = fill.GetComponent<RectTransform>();
+        fillRect.anchorMin = Vector2.zero;
+        fillRect.anchorMax = Vector2.one;
+        fillRect.sizeDelta = Vector2.zero;
+
+        healthBar.targetGraphic = fillImg;
+        healthBar.fillRect = fillRect;
+
+        Debug.Log("HealthBar создан автоматически!");
+    }
+
+    void UpdateUI()
+    {
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
+            healthBar.maxValue = maxHealth;
+            Debug.Log($"UI ОБНОВЛЕН: {currentHealth}/{maxHealth}");
+        }
+        else
+        {
+            Debug.LogError("HealthBar = NULL! Не могу обновить UI!");
+        }
+
+        if (shieldBar != null)
+        {
+            shieldBar.value = currentShield;
+            shieldBar.maxValue = maxShield;
+        }
     }
 
     public void TakeDamage(float damage)
     {
-        if (isInvulnerable || damageInvulnerability) return;
+        if (isInvulnerable) return;
 
-        currentHealth -= damage;
+        float remainingDamage = damage;
 
-        // ВРЕМЕННО УБИРАЕМ АУДИОМЕНЕДЖЕР - ЕГО НЕТ В ПРОЕКТЕ
-        // AudioManager.instance.PlaySound(0, 0.8f);
+        if (currentShield > 0)
+        {
+            float shieldDamage = Mathf.Min(currentShield, remainingDamage);
+            currentShield -= shieldDamage;
+            remainingDamage -= shieldDamage;
+            Debug.Log($"Щит поглотил: {shieldDamage}. Осталось щита: {currentShield}");
+        }
 
-        Debug.Log($"{gameObject.name} took {damage} damage. Health: {currentHealth}/{maxHealth}");
+        if (remainingDamage > 0)
+        {
+            currentHealth -= remainingDamage;
+            Debug.Log($"Урон по здоровью: {remainingDamage}. Здоровье: {currentHealth}/{maxHealth}");
+        }
+
+        UpdateUI(); // ЭТО ОБНОВЛЯЕТ ШКАЛУ
+        OnDamage?.Invoke();
 
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             Die();
         }
         else
         {
-            StartCoroutine(DamageEffect());
+            StartCoroutine(InvulnerabilityFrames());
         }
     }
 
-    IEnumerator DamageEffect()
+    IEnumerator InvulnerabilityFrames()
     {
-        damageInvulnerability = true;
-
-        StartCoroutine(FlashEffect(Color.red));
+        isInvulnerable = true;
         yield return new WaitForSeconds(invulnerabilityDuration);
-
-        damageInvulnerability = false;
+        isInvulnerable = false;
     }
 
-    IEnumerator FlashEffect(Color flashColor)
+    public void Heal(float amount)
     {
-        float elapsedTime = 0f;
-        float flashInterval = 0.1f;
-
-        while (elapsedTime < invulnerabilityDuration && isInvulnerable)
-        {
-            if (spriteRenderer != null)
-            {
-                spriteRenderer.color = flashColor;
-                yield return new WaitForSeconds(flashInterval);
-                spriteRenderer.color = originalColor;
-                yield return new WaitForSeconds(flashInterval);
-            }
-            elapsedTime += flashInterval * 2;
-        }
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        UpdateUI();
+        OnHeal?.Invoke();
     }
 
-    void Die()
+    public void AddShield(float amount)
     {
-        // ВРЕМЕННО УБИРАЕМ АУДИОМЕНЕДЖЕР
-        // AudioManager.instance.PlaySound(1, 1f);
-
-        Debug.Log($"{gameObject.name} died!");
-
-        // Проверяем, игрок ли это (по тегу)
-        if (gameObject.CompareTag("Player"))
-        {
-            // Вызываем GameOver через GameManager
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.GameOver();
-            }
-            else
-            {
-                Debug.LogError("GameManager.Instance is null! Add GameManager to scene.");
-                // Запасной вариант: просто перезагрузить сцену
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
-        else
-        {
-            // Враг или другой объект — просто уничтожаем
-            Destroy(gameObject);
-        }
-    }
-
-    public void Heal(int healAmount)
-    {
-        currentHealth = Mathf.Min(currentHealth + healAmount, maxHealth);
-
-        // ВРЕМЕННО УБИРАЕМ АУДИОМЕНЕДЖЕР
-        // AudioManager.instance.PlaySound(2, 0.7f);
-
-        Debug.Log($"{gameObject.name} healed. Health: {currentHealth}/{maxHealth}");
+        currentShield += amount;
+        if (currentShield > maxShield) currentShield = maxShield;
+        UpdateUI();
+        Debug.Log($"Щит увеличен: {currentShield}/{maxShield}");
     }
 
     public void ApplyDamageBuff(float multiplier, float duration)
@@ -136,73 +216,33 @@ public class Health : MonoBehaviour
         StartCoroutine(DamageBuffCoroutine(multiplier, duration));
     }
 
-    private IEnumerator DamageBuffCoroutine(float multiplier, float duration)
+    IEnumerator DamageBuffCoroutine(float multiplier, float duration)
     {
+        float original = damageMultiplier;
         damageMultiplier = multiplier;
-        isBuffActive = true;
-
-        // старт визуала
-        if (buffVisualCoroutine != null)
-            StopCoroutine(buffVisualCoroutine);
-
-        buffVisualCoroutine = StartCoroutine(BuffVisual(new Color(0.7f, 0.3f, 1f))); // фиолетовый
-
         yield return new WaitForSeconds(duration);
-
-        damageMultiplier = 1f;
-        isBuffActive = false;
-
-        // стоп визуала
-        if (buffVisualCoroutine != null)
-            StopCoroutine(buffVisualCoroutine);
-
-        if (spriteRenderer != null)
-            spriteRenderer.color = originalColor;
+        damageMultiplier = original;
     }
 
     public void ApplyInvincibility(float duration)
     {
-        if (invincibilityBuffCoroutine != null)
-        {
-            StopCoroutine(invincibilityBuffCoroutine);
-        }
-
-        invincibilityBuffCoroutine = StartCoroutine(InvincibilityBuffCoroutine(duration));
+        StartCoroutine(InvincibilityCoroutine(duration));
     }
 
-    private IEnumerator InvincibilityBuffCoroutine(float duration)
+    IEnumerator InvincibilityCoroutine(float duration)
     {
         isInvulnerable = true;
-
-        // старт визуала
-        if (buffVisualCoroutine != null)
-            StopCoroutine(buffVisualCoroutine);
-
-        buffVisualCoroutine = StartCoroutine(BuffVisual(Color.cyan));
-
         yield return new WaitForSeconds(duration);
-
         isInvulnerable = false;
-
-        // стоп визуала
-        if (buffVisualCoroutine != null)
-            StopCoroutine(buffVisualCoroutine);
-
-        if (spriteRenderer != null)
-            spriteRenderer.color = originalColor;
     }
 
-    IEnumerator BuffVisual(Color color)
+    void Die()
     {
-        while (true)
-        {
-            if (spriteRenderer != null)
-            {
-                spriteRenderer.color = color;
-                yield return new WaitForSeconds(0.1f);
-                spriteRenderer.color = originalColor;
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
+        Debug.Log("ИГРОК УМЕР!");
+        OnDeath?.Invoke();
+        if (GameManager.Instance != null)
+            GameManager.Instance.GameOver();
+        else
+            SceneManager.LoadScene(0);
     }
 }
