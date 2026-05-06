@@ -9,12 +9,18 @@ public class ArtifactPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // ========== ДОБАВЛЯЕМ ЗВУК ==========
+            if (AudioManager.instance != null && AudioManager.instance.pickupSound != null)
+            {
+                AudioManager.instance.PlaySound(AudioManager.instance.pickupSound);
+            }
+
             if (pickupEffect != null)
                 Instantiate(pickupEffect, transform.position, transform.rotation);
 
             Destroy(gameObject);
 
-            Debug.Log("Артефакт подобран!");
+            Debug.Log("Артефакт собран!");
         }
     }
 }

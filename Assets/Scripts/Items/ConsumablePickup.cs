@@ -13,6 +13,16 @@ public class ConsumablePickup : MonoBehaviour
             Health playerHealth = other.GetComponent<Health>();
             if (playerHealth != null)
             {
+                // ========== ДОБАВЛЯЕМ ЗВУК ==========
+                if (AudioManager.instance != null && AudioManager.instance.pickupSound != null)
+                {
+                    AudioManager.instance.PlaySound(AudioManager.instance.pickupSound);
+                }
+                else
+                {
+                    Debug.LogWarning("AudioManager or pickupSound is missing!");
+                }
+
                 // Восстанавливаем здоровье
                 playerHealth.Heal((int)healAmount);
 

@@ -10,6 +10,16 @@ public class CoinPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // ========== днаюбкъел гбсй ==========
+            if (AudioManager.instance != null && AudioManager.instance.pickupSound != null)
+            {
+                AudioManager.instance.PlaySound(AudioManager.instance.pickupSound);
+            }
+            else
+            {
+                Debug.LogWarning("AudioManager or pickupSound is missing!");
+            }
+
             Inventory.Instance.CollectCoins(coinValue);
 
             if (pickupEffect != null)

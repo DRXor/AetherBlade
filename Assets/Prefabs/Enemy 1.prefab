@@ -443,8 +443,9 @@ MonoBehaviour:
   movingToB: 1
   distanceToTarget: 0
   attackSounds:
-  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
-  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  - {fileID: 8300000, guid: 98825c4e5c865fd44924d214d5734e86, type: 3}
+  - {fileID: 8300000, guid: 9b1e94a23bb2118459a6aef210cea17f, type: 3}
+  - {fileID: 8300000, guid: 6ec43ba964159fa409e7dc62e7323317, type: 3}
 --- !u!114 &9014037134426358585
 MonoBehaviour:
   m_ObjectHideFlags: 0
