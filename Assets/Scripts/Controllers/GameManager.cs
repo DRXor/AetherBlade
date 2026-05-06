@@ -74,25 +74,17 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
 
         score++;
-        Debug.Log($"Level complete! Score: {score}");
+        Debug.Log($"Level complete! Score: {score} - Loading next level...");
 
-        Time.timeScale = 0f;
-
-        // Показываем меню улучшений
-        if (UpgradeManager.Instance != null)
-        {
-            UpgradeManager.Instance.ShowUpgradeMenu();
-        }
-        else
-        {
-            LoadRandomLevel();
-        }
+        // Прямая загрузка следующего уровня
+        Time.timeScale = 1f;
+        LoadRandomLevel();
     }
 
     public void ContinueAfterUpgrade()
     {
         Time.timeScale = 1f;
-        LoadRandomLevel();
+        LoadRandomLevel(); // Загружаем следующий случайный уровень
     }
 
     public void GameOver()
@@ -106,15 +98,33 @@ public class GameManager : MonoBehaviour
         {
             gameOverPanel.SetActive(true);
 
-            Text text = gameOverPanel.GetComponentInChildren<Text>();
-            if (text != null)
+            // Находим все тексты на панели и обновляем
+            Text[] texts = gameOverPanel.GetComponentsInChildren<Text>();
+            foreach (Text t in texts)
             {
-                text.text = $"GAME OVER!\nWaves survived: {score}";
+                if (t.name == "ScoreText" || t.name == "WavesText")
+                {
+                    t.text = $"Waves Completed: {score}";
+                }
+                else if (t.name == "TitleText")
+                {
+                    t.text = "GAME OVER";
+                }
+            }
+
+            // Находим кнопки и вешаем события
+            Button[] buttons = gameOverPanel.GetComponentsInChildren<Button>();
+            foreach (Button btn in buttons)
+            {
+                if (btn.name == "RestartButton")
+                    btn.onClick.AddListener(RestartRun);
+                else if (btn.name == "MenuButton")
+                    btn.onClick.AddListener(ReturnToMainMenu);
             }
         }
         else
         {
-            Debug.LogError("GameOverPanel is NULL! Assign it in Inspector!");
+            Debug.LogError("GameOverPanel is NULL!");
         }
     }
 
@@ -128,6 +138,27 @@ public class GameManager : MonoBehaviour
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
 
+        // Не удаляем игрока, а просто сбрасываем
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Health health = player.GetComponent<Health>();
+            if (health != null)
+            {
+                health.currentHealth = health.maxHealth;
+                health.currentShield = 0f;
+                health.UpdateUI();
+            }
+
+            // Перемещаем на спавн
+            GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
+            if (spawnPoint != null)
+            {
+                player.transform.position = spawnPoint.transform.position;
+            }
+        }
+
+        // Просто перезагружаем текущую сцену или новую
         LoadRandomLevel();
     }
 
@@ -143,18 +174,73 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
 
-        // НЕ СОЗДАЁМ ПАНЕЛИ - просто находим их
-        if (gameOverPanel == null)
-            gameOverPanel = GameObject.Find("GameOverPanel");
-        if (pauseMenuPanel == null)
-            pauseMenuPanel = GameObject.Find("PauseMenuPanel");
-        if (levelCompletePanel == null)
-            levelCompletePanel = GameObject.Find("LevelCompletePanel");
+        // ПОИСК ПАНЕЛЕЙ
+        Canvas[] canvases = FindObjectsByType<Canvas>(FindObjectsSortMode.None);
+        foreach (Canvas canvas in canvases)
+        {
+            if (gameOverPanel == null)
+            {
+                Transform found = canvas.transform.Find("GameOverPanel");
+                if (found != null) gameOverPanel = found.gameObject;
+            }
+            if (pauseMenuPanel == null)
+            {
+                Transform found = canvas.transform.Find("PauseMenuPanel");
+                if (found != null) pauseMenuPanel = found.gameObject;
+            }
+            if (levelCompletePanel == null)
+            {
+                Transform found = canvas.transform.Find("LevelCompletePanel");
+                if (found != null) levelCompletePanel = found.gameObject;
+            }
+        }
 
-        // Выключаем панели
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
         if (levelCompletePanel != null) levelCompletePanel.SetActive(false);
+
+        // ========== СОЗДАЁМ ИГРОКА ЕСЛИ ЕГО НЕТ ==========
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            GameData data = FindFirstObjectByType<GameData>();
+            if (data != null && data.playerPrefab != null)
+            {
+                // Создаём нового игрока
+                player = Instantiate(data.playerPrefab, Vector3.zero, Quaternion.identity);
+                player.tag = "Player";
+                Debug.Log("New player created!");
+            }
+            else
+            {
+                Debug.LogError("GameData or playerPrefab is null!");
+            }
+        }
+
+        // ========== ТЕЛЕПОРТАЦИЯ К СПАВНУ ==========
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
+
+        if (player != null && spawnPoint != null)
+        {
+            player.transform.position = spawnPoint.transform.position;
+            Debug.Log($"Player teleported to spawn: {spawnPoint.transform.position}");
+        }
+        else if (player != null)
+        {
+            player.transform.position = Vector3.zero;
+            Debug.Log("No spawn point found, teleported to (0,0)");
+        }
+
+        // ========== СБРОС ЗДОРОВЬЯ ==========
+        Health health = player?.GetComponent<Health>();
+        if (health != null)
+        {
+            health.currentHealth = health.maxHealth;
+            health.currentShield = 0f;
+            health.UpdateUI();
+            Debug.Log($"Health reset to {health.currentHealth}/{health.maxHealth}");
+        }
     }
 
     void Update()

@@ -2,40 +2,22 @@
 
 public class PauseMenu : MonoBehaviour
 {
-    [Header("Pause Menu Settings")]
-    public GameObject pauseMenuUI;     // ← Сюда должен быть перетащен PauseCanvas
-
+    public GameObject pauseMenuUI;
     private bool isPaused = false;
 
     void Start()
     {
-        Debug.Log("PauseMenu script STARTED");
-
         if (pauseMenuUI != null)
-        {
             pauseMenuUI.SetActive(false);
-            Debug.Log("Pause menu UI was disabled in Start");
-        }
-        else
-        {
-            Debug.LogError("pauseMenuUI is NOT assigned! Drag PauseCanvas into this field.");
-        }
 
         Time.timeScale = 1f;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+        // ТОЛЬКО ESC, убираем пробел
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("ESC pressed!");
-
-            if (pauseMenuUI == null)
-            {
-                Debug.LogError("pauseMenuUI is NULL! Cannot show menu.");
-                return;
-            }
-
             if (isPaused)
                 Resume();
             else
@@ -45,30 +27,43 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
         isPaused = true;
-        Debug.Log("PAUSE MENU ACTIVATED");
+        Time.timeScale = 0f;
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(true);
+
+        // Останавливаем звуки шагов
+        AudioListener.pause = true;
     }
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
         isPaused = false;
-        Debug.Log("PAUSE MENU DEACTIVATED");
+        Time.timeScale = 1f;
+        if (pauseMenuUI != null)
+            pauseMenuUI.SetActive(false);
+
+        AudioListener.pause = false;
     }
 
-    // Для кнопок на UI (Resume)
     public void Button_Resume()
     {
         Resume();
     }
 
-    // Для кнопки Exit (по желанию)
-    public void Button_Exit()
+    public void Button_MainMenu()
     {
         Time.timeScale = 1f;
+        AudioListener.pause = false;
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.ReturnToMainMenu();
+        else
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    public void Button_Exit()
+    {
         Application.Quit();
     }
 }

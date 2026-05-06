@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
-using System.Collections;
 
 public class Health : MonoBehaviour
 {
@@ -14,21 +14,22 @@ public class Health : MonoBehaviour
     public float currentShield = 0f;
     public float maxShield = 50f;
 
-    [Header("Damage Buff")]
-    public float damageMultiplier = 1f;
-
     [Header("Invulnerability")]
     public float invulnerabilityDuration = 0.5f;
     private bool isInvulnerable = false;
 
     [Header("Events")]
     public UnityEvent OnDamage;
-    public UnityEvent OnHeal;
     public UnityEvent OnDeath;
+    public UnityEvent OnHeal;
 
-    [Header("UI - НЕ ТРОГАТЬ!")]
-    public Slider healthBar;
-    public Slider shieldBar;
+    [Header("Buff Settings")]
+    public float damageMultiplier = 1f;
+
+    // UI элементы - автоматически найдутся
+    private Slider healthSlider;
+    private Slider shieldSlider;
+    private Image healthFillImage;
 
     void Start()
     {
@@ -36,121 +37,78 @@ public class Health : MonoBehaviour
         currentShield = 0f;
         damageMultiplier = 1f;
 
-        // ПРИНУДИТЕЛЬНЫЙ ПОИСК
-        ForceFindUI();
-
+        FindUIElements();
         UpdateUI();
+
+        Debug.Log($"HEALTH RESET IN START: {currentHealth}/{maxHealth}");
     }
 
-    void ForceFindUI()
+    void FindUIElements()
     {
-        // Ищем через Canvas
-        Canvas canvas = FindFirstObjectByType<Canvas>();
-        if (canvas != null)
+        // Ищем сл��йдер здоровья
+        GameObject healthCanvas = GameObject.Find("PlayerHealthCanvas");
+        if (healthCanvas != null)
         {
-            // Ищем HealthSlider в любом месте
-            Slider[] sliders = canvas.GetComponentsInChildren<Slider>(true);
-            foreach (Slider s in sliders)
+            Transform bar = healthCanvas.transform.Find("HealthBar");
+            if (bar != null)
             {
-                if (s.name == "HealthBar" || s.name == "HealthSlider")
-                {
-                    healthBar = s;
-                    Debug.Log("HealthBar найден: " + s.name);
-                }
-                if (s.name == "ShieldBar" || s.name == "ShieldSlider")
-                {
-                    shieldBar = s;
-                    Debug.Log("ShieldBar найден: " + s.name);
-                }
+                healthSlider = bar.GetComponent<Slider>();
+                if (healthSlider != null && healthSlider.fillRect != null)
+                    healthFillImage = healthSlider.fillRect.GetComponent<Image>();
             }
         }
 
-        // Если не нашли - ищем по имени
-        if (healthBar == null)
+        if (healthSlider == null)
         {
-            GameObject hpBarObj = GameObject.Find("HealthBar");
-            if (hpBarObj != null) healthBar = hpBarObj.GetComponent<Slider>();
-        }
-        if (shieldBar == null)
-        {
-            GameObject shBarObj = GameObject.Find("ShieldBar");
-            if (shBarObj != null) shieldBar = shBarObj.GetComponent<Slider>();
+            healthSlider = GameObject.Find("HealthBar")?.GetComponent<Slider>();
         }
 
-        // ВАЖНО: если healthBar всё ещё null - СОЗДАЁМ
-        if (healthBar == null)
+        // Ищем слайдер щита
+        GameObject shieldCanvas = GameObject.Find("ShieldCanvas");
+        if (shieldCanvas != null)
         {
-            CreateHealthBar();
+            Transform bar = shieldCanvas.transform.Find("ShieldBar");
+            if (bar != null)
+                shieldSlider = bar.GetComponent<Slider>();
         }
+
+        if (shieldSlider == null)
+        {
+            shieldSlider = GameObject.Find("ShieldBar")?.GetComponent<Slider>();
+        }
+
+        Debug.Log($"HealthSlider found: {healthSlider != null}");
+        Debug.Log($"ShieldSlider found: {shieldSlider != null}");
     }
 
-    void CreateHealthBar()
+    public void UpdateUI()
     {
-        // Создаём Canvas если нет
-        Canvas canvas = FindFirstObjectByType<Canvas>();
-        if (canvas == null)
+        // Обновляем здоровье
+        if (healthSlider != null)
         {
-            GameObject canvasObj = new GameObject("Canvas");
-            canvas = canvasObj.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasObj.AddComponent<CanvasScaler>();
-            canvasObj.AddComponent<GraphicRaycaster>();
+            healthSlider.value = currentHealth;
+            healthSlider.maxValue = maxHealth;
+
+            // Меняем цвет
+            if (healthFillImage != null)
+            {
+                float percent = currentHealth / maxHealth;
+                healthFillImage.color = Color.Lerp(Color.red, Color.green, percent);
+            }
         }
 
-        // Создаём HealthBar
-        GameObject hpBarObj = new GameObject("HealthBar");
-        hpBarObj.transform.SetParent(canvas.transform, false);
-
-        RectTransform rect = hpBarObj.AddComponent<RectTransform>();
-        rect.anchorMin = new Vector2(0.1f, 0.9f);
-        rect.anchorMax = new Vector2(0.9f, 0.95f);
-        rect.sizeDelta = Vector2.zero;
-
-        healthBar = hpBarObj.AddComponent<Slider>();
-
-        // Создаём фон
-        GameObject bg = new GameObject("Background");
-        bg.transform.SetParent(hpBarObj.transform, false);
-        Image bgImg = bg.AddComponent<Image>();
-        bgImg.color = Color.gray;
-        RectTransform bgRect = bg.GetComponent<RectTransform>();
-        bgRect.anchorMin = Vector2.zero;
-        bgRect.anchorMax = Vector2.one;
-        bgRect.sizeDelta = Vector2.zero;
-
-        // Создаём заполнение
-        GameObject fill = new GameObject("Fill");
-        fill.transform.SetParent(hpBarObj.transform, false);
-        Image fillImg = fill.AddComponent<Image>();
-        fillImg.color = Color.green;
-        RectTransform fillRect = fill.GetComponent<RectTransform>();
-        fillRect.anchorMin = Vector2.zero;
-        fillRect.anchorMax = Vector2.one;
-        fillRect.sizeDelta = Vector2.zero;
-
-        healthBar.targetGraphic = fillImg;
-        healthBar.fillRect = fillRect;
-
-        Debug.Log("HealthBar создан автоматически!");
-    }
-
-    void UpdateUI()
-    {
-        if (healthBar != null)
+        // Обновляем щит
+        if (shieldSlider != null)
         {
-            healthBar.value = currentHealth;
-            healthBar.maxValue = maxHealth;
-            Debug.Log($"UI ОБНОВЛЕН: {currentHealth}/{maxHealth}");
-        }
-        else
-        {
-            Debug.LogError("HealthBar = NULL! Не могу обновить UI!");
+            shieldSlider.value = currentShield;
+            shieldSlider.maxValue = maxShield;
         }
 
-        if (shieldBar != null)
+        if (healthSlider != null)
         {
-            shieldBar.value = currentShield;
-            shieldBar.maxValue = maxShield;
+            healthSlider.value = currentHealth;
+            healthSlider.maxValue = maxHealth;
+            Debug.Log($"FORCE UPDATE: healthSlider.value = {currentHealth}/{maxHealth}"); // ПРОВЕРКА
         }
     }
 
@@ -165,27 +123,36 @@ public class Health : MonoBehaviour
             float shieldDamage = Mathf.Min(currentShield, remainingDamage);
             currentShield -= shieldDamage;
             remainingDamage -= shieldDamage;
-            Debug.Log($"Щит поглотил: {shieldDamage}. Осталось щита: {currentShield}");
         }
 
         if (remainingDamage > 0)
         {
             currentHealth -= remainingDamage;
-            Debug.Log($"Урон по здоровью: {remainingDamage}. Здоровье: {currentHealth}/{maxHealth}");
         }
 
-        UpdateUI(); // ЭТО ОБНОВЛЯЕТ ШКАЛУ
-        OnDamage?.Invoke();
+        UpdateUI();
+        OnDamage?.Invoke();  // ЭТО ВАЖНО - вызывает обновление HealthBarUI
 
         if (currentHealth <= 0)
         {
-            currentHealth = 0;
             Die();
         }
         else
         {
             StartCoroutine(InvulnerabilityFrames());
+            StartCoroutine(DamageFlash());
         }
+    }
+
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        currentShield = 0f;
+        damageMultiplier = 1f;
+        isInvulnerable = false;
+        UpdateUI();
+        Debug.Log($"Health reset to {currentHealth}/{maxHealth}");
     }
 
     IEnumerator InvulnerabilityFrames()
@@ -195,12 +162,25 @@ public class Health : MonoBehaviour
         isInvulnerable = false;
     }
 
+    IEnumerator DamageFlash()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            Color original = sr.color;
+            sr.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            sr.color = original;
+        }
+    }
+
     public void Heal(float amount)
     {
         currentHealth += amount;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
         UpdateUI();
         OnHeal?.Invoke();
+        Debug.Log($"Вылечен! Здоровье: {currentHealth}");
     }
 
     public void AddShield(float amount)
@@ -240,9 +220,14 @@ public class Health : MonoBehaviour
     {
         Debug.Log("ИГРОК УМЕР!");
         OnDeath?.Invoke();
+
         if (GameManager.Instance != null)
+        {
             GameManager.Instance.GameOver();
+        }
         else
+        {
             SceneManager.LoadScene(0);
+        }
     }
 }

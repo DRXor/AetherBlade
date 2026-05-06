@@ -82,7 +82,9 @@ public class UpgradeManager : MonoBehaviour
             Debug.LogError("Player not found!");
             waitingForUpgrade = false;
             Time.timeScale = 1f;
-            GameManager.Instance?.ContinueAfterUpgrade();
+            // Прямо вызываем ContinueAfterUpgrade
+            if (GameManager.Instance != null)
+                GameManager.Instance.ContinueAfterUpgrade();
             return;
         }
 
@@ -91,28 +93,20 @@ public class UpgradeManager : MonoBehaviour
             case "damage":
                 PlayerShooting shooting = player.GetComponent<PlayerShooting>();
                 if (shooting != null)
-                {
                     shooting.damageMultiplier *= damageMultiplier;
-                    Debug.Log($"?? Урон увеличен! Теперь: x{shooting.damageMultiplier}");
-                }
                 break;
-
             case "speed":
                 PlayerMovement movement = player.GetComponent<PlayerMovement>();
                 if (movement != null)
-                {
                     movement.moveSpeed *= speedMultiplier;
-                    Debug.Log($"? Скорость увеличена! Теперь: {movement.moveSpeed}");
-                }
                 break;
-
             case "health":
                 Health health = player.GetComponent<Health>();
                 if (health != null)
                 {
                     health.currentHealth += healthBonus;
                     health.maxHealth += healthBonus;
-                    Debug.Log($"?? Здоровье увеличено! Теперь: {health.currentHealth}/{health.maxHealth}");
+                    health.UpdateUI();
                 }
                 break;
         }
@@ -122,14 +116,10 @@ public class UpgradeManager : MonoBehaviour
 
         waitingForUpgrade = false;
 
+        // ВАЖНО: вызываем ContinueAfterUpgrade
         if (GameManager.Instance != null)
-        {
             GameManager.Instance.ContinueAfterUpgrade();
-        }
         else
-        {
             Time.timeScale = 1f;
-            Debug.LogError("GameManager.Instance is null!");
-        }
     }
 }
