@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class HealthEnemy : MonoBehaviour
 {
@@ -30,7 +31,8 @@ public class HealthEnemy : MonoBehaviour
 
     void Start()
     {
-        EnemyManager.Instance.RegisterEnemy(gameObject);
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.RegisterEnemy(gameObject);
 
         current_health = max_health;
         sprite_renderer = GetComponent<SpriteRenderer>();
@@ -55,7 +57,15 @@ public class HealthEnemy : MonoBehaviour
 
     public void take_damage_to_enemy(float damage)
     {
-        AudioManager.instance.PlaySound(AudioManager.instance.hitSound);
+        // ========== ИСПРАВЛЕННЫЙ ЗВУК ==========
+        if (AudioManager.instance != null && AudioManager.instance.hitSound != null)
+        {
+            AudioManager.instance.PlaySound(AudioManager.instance.hitSound);
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager or hitSound is missing!");
+        }
 
         if (immortality) return;
 
@@ -108,6 +118,8 @@ public class HealthEnemy : MonoBehaviour
     System.Collections.IEnumerator StunEffect(float duration)
     {
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        if (sprite == null) yield break;
+
         Color original = sprite.color;
         sprite.color = Color.yellow;
 
@@ -121,7 +133,8 @@ public class HealthEnemy : MonoBehaviour
     {
         Debug.Log($"{gameObject.name} died!");
 
-        EnemyManager.Instance.EnemyDied(gameObject);
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.EnemyDied(gameObject);
 
         EnemyDeath?.Invoke();
 
@@ -147,9 +160,12 @@ public class HealthEnemy : MonoBehaviour
 
     System.Collections.IEnumerator Flash()
     {
+        if (sprite_renderer == null) yield break;
+
         sprite_renderer.color = damage_color;
         yield return new WaitForSeconds(flash_duration);
-        sprite_renderer.color = original_color;
+        if (sprite_renderer != null)
+            sprite_renderer.color = original_color;
     }
 
     void OnTriggerEnter2D(Collider2D other)

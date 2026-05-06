@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,8 +23,10 @@ public class PlayerMovement : MonoBehaviour
     private float originalSpeed;
 
     public AudioClip[] footstepSounds;
+    public float stepDelay = 0.6f;  // Базовый интервал между шагами
+    public float stepDelayVariation = 0.3f; // Вариация интервала (от 0.6-0.3 до 0.6+0.3)
     private float stepTimer;
-    public float stepDelay = 0.4f;
+
 
     // Для отслеживания последней нажатой клавиши
     private string lastPressedKey = "";
@@ -99,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0) return;
+
         if (GameManager.Instance != null && GameManager.Instance.isPaused) return;
 
         // Получаем ввод для движения
@@ -166,16 +171,16 @@ public class PlayerMovement : MonoBehaviour
 
             if (stepTimer <= 0f)
             {
-                if (footstepSounds.Length > 0)
+                if (footstepSounds.Length > 0 && AudioManager.instance != null)
                 {
                     int i = Random.Range(0, footstepSounds.Length);
-                    if (AudioManager.instance != null && AudioManager.instance.gameObject != null)
-                    {
-                        AudioManager.instance.PlaySound(footstepSounds[i]);
-                    }
+                    AudioManager.instance.PlaySound(footstepSounds[i]);
                 }
 
-                stepTimer = Random.Range(0.5f, 0.7f); //задержка между шагами
+                // Теперь используем stepDelay с вариацией
+                float minInterval = stepDelay - stepDelayVariation;
+                float maxInterval = stepDelay + stepDelayVariation;
+                stepTimer = Random.Range(minInterval, maxInterval);
             }
         }
         else

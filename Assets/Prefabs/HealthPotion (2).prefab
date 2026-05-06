@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6083764727383221767}
   - component: {fileID: 8476731574456158751}
   - component: {fileID: 3847516332705504589}
+  - component: {fileID: -6018055572710895036}
   m_Layer: 0
   m_Name: HealthPotion (2)
   m_TagString: Untagged
@@ -153,3 +154,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConsumablePickup
   healAmount: 30
   pickupEffect: {fileID: 0}
+--- !u!114 &-6018055572710895036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7557174064277780515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 3df5d0d7a4049964093ca43cfaa95d40, type: 3}

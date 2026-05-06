@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -24,9 +25,11 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
+        // ЕСЛИ ГЛАВНОЕ МЕНЮ - НЕ СТРЕЛЯЕМ
+        if (SceneManager.GetActiveScene().buildIndex == 0) return;
+
         if (GameManager.Instance != null && GameManager.Instance.isPaused) return;
 
-        // Исправлено: проверка Camera.main
         Camera mainCamera = Camera.main;
         if (weaponPivot != null && mainCamera != null)
         {

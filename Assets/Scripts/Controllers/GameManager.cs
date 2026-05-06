@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public GameObject gameOverPanel; // ПЕРЕТАЩИ сюда панель GameOver ВРУЧНУЮ!
+    public GameObject gameOverPanel;
     public GameObject pauseMenuPanel;
     public GameObject levelCompletePanel;
 
@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public KeyCode pauseKey = KeyCode.Escape;
 
     private List<int> availableLevels = new List<int> { 1, 2, 3 };
-    private int currentLevelIndex = -1;
     private int score = 0;
 
     void Awake()
@@ -34,7 +33,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Подписываемся на загрузку сцен
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -47,7 +45,6 @@ public class GameManager : MonoBehaviour
     {
         score = 0;
         isGameOver = false;
-        currentLevelIndex = -1;
         LoadRandomLevel();
     }
 
@@ -55,15 +52,8 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver) return;
 
-        int newIndex;
-        do
-        {
-            newIndex = Random.Range(0, availableLevels.Count);
-        }
-        while (newIndex == currentLevelIndex && availableLevels.Count > 1);
-
-        currentLevelIndex = newIndex;
-        int sceneToLoad = availableLevels[currentLevelIndex];
+        int randomIndex = Random.Range(0, availableLevels.Count);
+        int sceneToLoad = availableLevels[randomIndex];
 
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneToLoad);
@@ -72,19 +62,8 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel()
     {
         if (isGameOver) return;
-
         score++;
-        Debug.Log($"Level complete! Score: {score} - Loading next level...");
-
-        // Прямая загрузка следующего уровня
-        Time.timeScale = 1f;
         LoadRandomLevel();
-    }
-
-    public void ContinueAfterUpgrade()
-    {
-        Time.timeScale = 1f;
-        LoadRandomLevel(); // Загружаем следующий случайный уровень
     }
 
     public void GameOver()
@@ -97,34 +76,12 @@ public class GameManager : MonoBehaviour
         if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(true);
-
-            // Находим все тексты на панели и обновляем
             Text[] texts = gameOverPanel.GetComponentsInChildren<Text>();
             foreach (Text t in texts)
             {
                 if (t.name == "ScoreText" || t.name == "WavesText")
-                {
                     t.text = $"Waves Completed: {score}";
-                }
-                else if (t.name == "TitleText")
-                {
-                    t.text = "GAME OVER";
-                }
             }
-
-            // Находим кнопки и вешаем события
-            Button[] buttons = gameOverPanel.GetComponentsInChildren<Button>();
-            foreach (Button btn in buttons)
-            {
-                if (btn.name == "RestartButton")
-                    btn.onClick.AddListener(RestartRun);
-                else if (btn.name == "MenuButton")
-                    btn.onClick.AddListener(ReturnToMainMenu);
-            }
-        }
-        else
-        {
-            Debug.LogError("GameOverPanel is NULL!");
         }
     }
 
@@ -132,33 +89,11 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = false;
         score = 0;
-        currentLevelIndex = -1;
         Time.timeScale = 1f;
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
 
-        // Не удаляем игрока, а просто сбрасываем
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            Health health = player.GetComponent<Health>();
-            if (health != null)
-            {
-                health.currentHealth = health.maxHealth;
-                health.currentShield = 0f;
-                health.UpdateUI();
-            }
-
-            // Перемещаем на спавн
-            GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
-            if (spawnPoint != null)
-            {
-                player.transform.position = spawnPoint.transform.position;
-            }
-        }
-
-        // Просто перезагружаем текущую сцену или новую
         LoadRandomLevel();
     }
 
@@ -174,7 +109,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
 
-        // ПОИСК ПАНЕЛЕЙ
+        // Поиск панелей (ваш существующий код)
         Canvas[] canvases = FindObjectsByType<Canvas>(FindObjectsSortMode.None);
         foreach (Canvas canvas in canvases)
         {
@@ -199,68 +134,53 @@ public class GameManager : MonoBehaviour
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
         if (levelCompletePanel != null) levelCompletePanel.SetActive(false);
 
-        // ========== СОЗДАЁМ ИГРОКА ЕСЛИ ЕГО НЕТ ==========
+        // ========== ВОТ ЭТО ДОБАВИТЬ ==========
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        if (player == null)
+        if (scene.buildIndex == 0) // Главное меню
         {
-            GameData data = FindFirstObjectByType<GameData>();
-            if (data != null && data.playerPrefab != null)
+            if (player != null)
             {
-                // Создаём нового игрока
-                player = Instantiate(data.playerPrefab, Vector3.zero, Quaternion.identity);
-                player.tag = "Player";
-                Debug.Log("New player created!");
-            }
-            else
-            {
-                Debug.LogError("GameData or playerPrefab is null!");
+                // Отключаем скрипты стрельбы и движения
+                PlayerShooting shooting = player.GetComponent<PlayerShooting>();
+                if (shooting != null) shooting.enabled = false;
+
+                PlayerMovement movement = player.GetComponent<PlayerMovement>();
+                if (movement != null) movement.enabled = false;
             }
         }
-
-        // ========== ТЕЛЕПОРТАЦИЯ К СПАВНУ ==========
-        GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
-
-        if (player != null && spawnPoint != null)
+        else // Игровые сцены
         {
-            player.transform.position = spawnPoint.transform.position;
-            Debug.Log($"Player teleported to spawn: {spawnPoint.transform.position}");
-        }
-        else if (player != null)
-        {
-            player.transform.position = Vector3.zero;
-            Debug.Log("No spawn point found, teleported to (0,0)");
-        }
+            if (player != null)
+            {
+                // Включаем скрипты обратно
+                PlayerShooting shooting = player.GetComponent<PlayerShooting>();
+                if (shooting != null) shooting.enabled = true;
 
-        // ========== СБРОС ЗДОРОВЬЯ ==========
-        Health health = player?.GetComponent<Health>();
-        if (health != null)
-        {
-            health.currentHealth = health.maxHealth;
-            health.currentShield = 0f;
-            health.UpdateUI();
-            Debug.Log($"Health reset to {health.currentHealth}/{health.maxHealth}");
+                PlayerMovement movement = player.GetComponent<PlayerMovement>();
+                if (movement != null) movement.enabled = true;
+            }
         }
+    }
+
+    public void ContinueAfterUpgrade()
+    {
+        Time.timeScale = 1f;
+        LoadRandomLevel();
     }
 
     void Update()
     {
         if (!isGameOver && Input.GetKeyDown(pauseKey))
-        {
             TogglePause();
-        }
 
-        // Быстрый рестарт при GameOver по клавише R
         if (isGameOver && Input.GetKeyDown(KeyCode.R))
-        {
             RestartRun();
-        }
     }
 
     public void TogglePause()
     {
         if (isGameOver) return;
-
         if (isPaused) ResumeGame();
         else PauseGame();
     }

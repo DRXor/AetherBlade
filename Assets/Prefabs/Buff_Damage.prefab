@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4685708248289539105}
   - component: {fileID: 748344143005667124}
   - component: {fileID: 810210560112772108}
+  - component: {fileID: -6513995490841381792}
   m_Layer: 0
   m_Name: Buff_Damage
   m_TagString: Untagged
@@ -157,3 +158,18 @@ MonoBehaviour:
   speedMultiplier: 2
   pickupEffect: {fileID: 0}
   buffIcon: {fileID: -601808571921159187, guid: c08fe619bf7168841bf82347054998dd, type: 3}
+--- !u!114 &-6513995490841381792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4721930307995528981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItem
+  pickupSound: {fileID: 8300000, guid: 3df5d0d7a4049964093ca43cfaa95d40, type: 3}
+  coinValue: 1
+  healAmount: 0

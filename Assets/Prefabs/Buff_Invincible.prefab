@@ -170,4 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1c71b430545314496d54b5d031bcb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
-  pickupSound: {fileID: 8300000, guid: b346bbcf94b53dd47b8e777e576375e0, type: 3}
+  pickupSound: {fileID: 8300000, guid: 3df5d0d7a4049964093ca43cfaa95d40, type: 3}
+  coinValue: 1
+  healAmount: 0
