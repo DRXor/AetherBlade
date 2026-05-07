@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
@@ -22,14 +21,10 @@ public class Health : MonoBehaviour
     public UnityEvent OnDamage;
     public UnityEvent OnDeath;
     public UnityEvent OnHeal;
+    public UnityEvent OnShieldChange;
 
     [Header("Buff Settings")]
     public float damageMultiplier = 1f;
-
-    // UI элементы - автоматически найдутся
-    private Slider healthSlider;
-    private Slider shieldSlider;
-    private Image healthFillImage;
 
     void Start()
     {
@@ -37,92 +32,21 @@ public class Health : MonoBehaviour
         currentShield = 0f;
         damageMultiplier = 1f;
 
-        FindUIElements();
-        UpdateUI();
-
         Debug.Log($"HEALTH RESET IN START: {currentHealth}/{maxHealth}");
-    }
-
-    void FindUIElements()
-    {
-        // Ищем сл��йдер здоровья
-        GameObject healthCanvas = GameObject.Find("PlayerHealthCanvas");
-        if (healthCanvas != null)
-        {
-            Transform bar = healthCanvas.transform.Find("HealthBar");
-            if (bar != null)
-            {
-                healthSlider = bar.GetComponent<Slider>();
-                if (healthSlider != null && healthSlider.fillRect != null)
-                    healthFillImage = healthSlider.fillRect.GetComponent<Image>();
-            }
-        }
-
-        if (healthSlider == null)
-        {
-            healthSlider = GameObject.Find("HealthBar")?.GetComponent<Slider>();
-        }
-
-        // Ищем слайдер щита
-        GameObject shieldCanvas = GameObject.Find("ShieldCanvas");
-        if (shieldCanvas != null)
-        {
-            Transform bar = shieldCanvas.transform.Find("ShieldBar");
-            if (bar != null)
-                shieldSlider = bar.GetComponent<Slider>();
-        }
-
-        if (shieldSlider == null)
-        {
-            shieldSlider = GameObject.Find("ShieldBar")?.GetComponent<Slider>();
-        }
-
-        Debug.Log($"HealthSlider found: {healthSlider != null}");
-        Debug.Log($"ShieldSlider found: {shieldSlider != null}");
-    }
-
-    public void UpdateUI()
-    {
-        // Обновляем здоровье
-        if (healthSlider != null)
-        {
-            healthSlider.value = currentHealth;
-            healthSlider.maxValue = maxHealth;
-
-            // Меняем цвет
-            if (healthFillImage != null)
-            {
-                float percent = currentHealth / maxHealth;
-                healthFillImage.color = Color.Lerp(Color.red, Color.green, percent);
-            }
-        }
-
-        // Обновляем щит
-        if (shieldSlider != null)
-        {
-            shieldSlider.value = currentShield;
-            shieldSlider.maxValue = maxShield;
-        }
-
-        if (healthSlider != null)
-        {
-            healthSlider.value = currentHealth;
-            healthSlider.maxValue = maxHealth;
-            Debug.Log($"FORCE UPDATE: healthSlider.value = {currentHealth}/{maxHealth}"); // ПРОВЕРКА
-        }
     }
 
     public void TakeDamage(float damage)
     {
         if (isInvulnerable) return;
 
-        float remainingDamage = damage;
+        float remainingDamage = damage * damageMultiplier;
 
         if (currentShield > 0)
         {
             float shieldDamage = Mathf.Min(currentShield, remainingDamage);
             currentShield -= shieldDamage;
             remainingDamage -= shieldDamage;
+            OnShieldChange?.Invoke();
         }
 
         if (remainingDamage > 0)
@@ -130,8 +54,7 @@ public class Health : MonoBehaviour
             currentHealth -= remainingDamage;
         }
 
-        UpdateUI();
-        OnDamage?.Invoke();  // ЭТО ВАЖНО - вызывает обновление HealthBarUI
+        OnDamage?.Invoke();
 
         if (currentHealth <= 0)
         {
@@ -144,14 +67,15 @@ public class Health : MonoBehaviour
         }
     }
 
-
     public void ResetHealth()
     {
         currentHealth = maxHealth;
         currentShield = 0f;
         damageMultiplier = 1f;
         isInvulnerable = false;
-        UpdateUI();
+
+        OnHeal?.Invoke(); 
+        OnShieldChange?.Invoke();
         Debug.Log($"Health reset to {currentHealth}/{maxHealth}");
     }
 
@@ -178,7 +102,7 @@ public class Health : MonoBehaviour
     {
         currentHealth += amount;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
-        UpdateUI();
+
         OnHeal?.Invoke();
         Debug.Log($"Вылечен! Здоровье: {currentHealth}");
     }
@@ -187,7 +111,8 @@ public class Health : MonoBehaviour
     {
         currentShield += amount;
         if (currentShield > maxShield) currentShield = maxShield;
-        UpdateUI();
+
+        OnShieldChange?.Invoke();
         Debug.Log($"Щит увеличен: {currentShield}/{maxShield}");
     }
 
@@ -229,5 +154,13 @@ public class Health : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+
+        Destroy(gameObject);
+    }
+
+    public void UpdateUI()
+    {
+        OnHeal?.Invoke();
+        OnShieldChange?.Invoke();
     }
 }
