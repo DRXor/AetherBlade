@@ -12,7 +12,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip hitSound;
     public AudioClip pickupSound;
     public AudioClip enemySound;
-    public AudioClip music; 
+    public AudioClip music;
+    public AudioClip gameOverSound;
 
     public string mainMenuSceneName = "MainMenu";
 
@@ -116,5 +117,10 @@ public class AudioManager : MonoBehaviour
     public void PlayEnemySound()
     {
         PlaySound(enemySound);
+    }
+
+    public void PlayGameOverSound()
+    {
+        PlaySound(gameOverSound);
     }
 }

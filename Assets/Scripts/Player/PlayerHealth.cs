@@ -146,6 +146,11 @@ public class Health : MonoBehaviour
         Debug.Log("ИГРОК УМЕР!");
         OnDeath?.Invoke();
 
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayGameOverSound();
+        }
+
         if (GameManager.Instance != null)
         {
             GameManager.Instance.GameOver();
