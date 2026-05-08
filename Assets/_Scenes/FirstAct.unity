@@ -5052,8 +5052,9 @@ MonoBehaviour:
   movingToB: 1
   distanceToTarget: 0
   attackSounds:
-  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
-  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  - {fileID: 8300000, guid: 98825c4e5c865fd44924d214d5734e86, type: 3}
+  - {fileID: 8300000, guid: 9b1e94a23bb2118459a6aef210cea17f, type: 3}
+  - {fileID: 8300000, guid: 4344c7e5bc8de324e9598aa869470d85, type: 3}
 --- !u!114 &359423845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9077,8 +9078,8 @@ MonoBehaviour:
   movingToB: 1
   distanceToTarget: 0
   attackSounds:
-  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
-  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  - {fileID: 8300000, guid: 98825c4e5c865fd44924d214d5734e86, type: 3}
+  - {fileID: 8300000, guid: 9b1e94a23bb2118459a6aef210cea17f, type: 3}
 --- !u!114 &651730643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10727,8 +10728,9 @@ MonoBehaviour:
   movingToB: 1
   distanceToTarget: 0
   attackSounds:
-  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
-  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  - {fileID: 8300000, guid: 98825c4e5c865fd44924d214d5734e86, type: 3}
+  - {fileID: 8300000, guid: 9b1e94a23bb2118459a6aef210cea17f, type: 3}
+  - {fileID: 8300000, guid: 4344c7e5bc8de324e9598aa869470d85, type: 3}
 --- !u!114 &721331197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11294,8 +11296,8 @@ MonoBehaviour:
   movingToB: 1
   distanceToTarget: 0
   attackSounds:
-  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
-  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  - {fileID: 8300000, guid: 98825c4e5c865fd44924d214d5734e86, type: 3}
+  - {fileID: 8300000, guid: 9b1e94a23bb2118459a6aef210cea17f, type: 3}
 --- !u!114 &763401770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12984,8 +12986,9 @@ MonoBehaviour:
   movingToB: 1
   distanceToTarget: 0
   attackSounds:
-  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
-  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  - {fileID: 8300000, guid: 98825c4e5c865fd44924d214d5734e86, type: 3}
+  - {fileID: 8300000, guid: 9b1e94a23bb2118459a6aef210cea17f, type: 3}
+  - {fileID: 8300000, guid: 6ec43ba964159fa409e7dc62e7323317, type: 3}
 --- !u!114 &931858510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23141,6 +23144,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8513189703881636216, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
+      propertyPath: moveSound
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8751366780161611209, guid: a4845f064a89cb847b5931a5d14cf459, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -25102,8 +25109,9 @@ MonoBehaviour:
   movingToB: 1
   distanceToTarget: 0
   attackSounds:
-  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
-  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  - {fileID: 8300000, guid: 98825c4e5c865fd44924d214d5734e86, type: 3}
+  - {fileID: 8300000, guid: 9b1e94a23bb2118459a6aef210cea17f, type: 3}
+  - {fileID: 8300000, guid: 4344c7e5bc8de324e9598aa869470d85, type: 3}
 --- !u!114 &1885837168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26298,8 +26306,9 @@ MonoBehaviour:
   movingToB: 1
   distanceToTarget: 0
   attackSounds:
-  - {fileID: 8300000, guid: 95e8ccf5d10d4494e8317b41f4c449a8, type: 3}
-  - {fileID: 8300000, guid: 32f1470f41eb67b498bae8c41a61c463, type: 3}
+  - {fileID: 8300000, guid: 98825c4e5c865fd44924d214d5734e86, type: 3}
+  - {fileID: 8300000, guid: 9b1e94a23bb2118459a6aef210cea17f, type: 3}
+  - {fileID: 8300000, guid: 4344c7e5bc8de324e9598aa869470d85, type: 3}
 --- !u!114 &1971981315
 MonoBehaviour:
   m_ObjectHideFlags: 0
