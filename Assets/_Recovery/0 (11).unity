@@ -1083,7 +1083,7 @@ PrefabInstance:
     - target: {fileID: 7364216779223336401, guid: 2416d609225d85049b3f8ffef97eb9c1, type: 3}
       propertyPath: music
       value: 
-      objectReference: {fileID: 8300000, guid: 163216e8e66b60e42876f466e5e674f2, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7364216779223336401, guid: 2416d609225d85049b3f8ffef97eb9c1, type: 3}
       propertyPath: hitSound
       value: 
@@ -1100,10 +1100,6 @@ PrefabInstance:
       propertyPath: pickupSound
       value: 
       objectReference: {fileID: 8300000, guid: 833e84ea4850463458e69aa7f24fd595, type: 3}
-    - target: {fileID: 7364216779223336401, guid: 2416d609225d85049b3f8ffef97eb9c1, type: 3}
-      propertyPath: gameOverSound
-      value: 
-      objectReference: {fileID: 8300000, guid: d42810e0a653170418780b1c7a125563, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
