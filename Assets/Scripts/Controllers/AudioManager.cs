@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class AudioManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip pickupSound;
     public AudioClip enemySound;
     public AudioClip music;
+    public AudioClip gameOverSound;
+
+    public string mainMenuSceneName = "MainMenu";
 
     void Awake()
     {
@@ -23,12 +27,34 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return; 
+        }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == mainMenuSceneName)
+        {
+            PlayMusic(); 
+        }
+        else
+        {
+            StopMusic(); 
         }
     }
 
     void Start()
     {
-        // Автоматически находим или создаём AudioSource-ы
         if (sfxSource == null)
             sfxSource = GetComponent<AudioSource>();
 
@@ -37,7 +63,6 @@ public class AudioManager : MonoBehaviour
 
         if (musicSource == null)
         {
-            // Ищем отдельный источник для музыки
             AudioSource[] sources = GetComponents<AudioSource>();
             if (sources.Length > 1)
                 musicSource = sources[1];
@@ -45,7 +70,10 @@ public class AudioManager : MonoBehaviour
                 musicSource = gameObject.AddComponent<AudioSource>();
         }
 
-        PlayMusic();
+        if (SceneManager.GetActiveScene().name == mainMenuSceneName)
+        {
+            PlayMusic();
+        }
     }
 
     public void PlaySound(AudioClip clip)
@@ -66,12 +94,21 @@ public class AudioManager : MonoBehaviour
     {
         if (musicSource == null || music == null) return;
 
+        if (musicSource.isPlaying && musicSource.clip == music) return;
+
         musicSource.clip = music;
         musicSource.loop = true;
         musicSource.Play();
     }
 
-    // Добавьте этот метод для проверки
+    public void StopMusic()
+    {
+        if (musicSource != null && musicSource.isPlaying)
+        {
+            musicSource.Stop();
+        }
+    }
+
     public void PlayHitSound()
     {
         PlaySound(hitSound);
@@ -80,5 +117,10 @@ public class AudioManager : MonoBehaviour
     public void PlayEnemySound()
     {
         PlaySound(enemySound);
+    }
+
+    public void PlayGameOverSound()
+    {
+        PlaySound(gameOverSound);
     }
 }
