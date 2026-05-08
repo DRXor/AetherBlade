@@ -8047,6 +8047,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: b346bbcf94b53dd47b8e777e576375e0, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1001 &398752604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8130,6 +8132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: b346bbcf94b53dd47b8e777e576375e0, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &400308038
 GameObject:
   m_ObjectHideFlags: 0
@@ -8297,6 +8301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &415624505
 GameObject:
   m_ObjectHideFlags: 0
@@ -8794,6 +8800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: b346bbcf94b53dd47b8e777e576375e0, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!4 &563117341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1814243411871787956, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
@@ -8997,6 +9005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!4 &620771305 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1814243411871787956, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
@@ -9169,6 +9179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &623812448
 GameObject:
   m_ObjectHideFlags: 0
@@ -9598,6 +9610,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1001 &697800580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9768,6 +9782,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &699444661
 GameObject:
   m_ObjectHideFlags: 0
@@ -10465,6 +10481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &952489923
 GameObject:
   m_ObjectHideFlags: 0
@@ -11489,6 +11507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1001 &1150337240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11659,6 +11679,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!4 &1150373350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1814243411871787956, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
@@ -11865,6 +11887,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &1266241780
 GameObject:
   m_ObjectHideFlags: 0
@@ -12557,6 +12581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &1384110698
 GameObject:
   m_ObjectHideFlags: 0
@@ -12665,6 +12691,10 @@ PrefabInstance:
     - target: {fileID: 2210179156198990449, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1808124683}
+    - target: {fileID: 2210179156198990449, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2603489385211851052, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12677,6 +12707,10 @@ PrefabInstance:
     - target: {fileID: 4049044112080662801, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1808124683}
+    - target: {fileID: 4049044112080662801, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartRun
       objectReference: {fileID: 0}
     - target: {fileID: 4765211470891456017, guid: 07892db1232341b49a5f5cacd3bebbc0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -12889,6 +12923,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &1421775643
 GameObject:
   m_ObjectHideFlags: 0
@@ -13056,6 +13092,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1001 &1425826168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13461,6 +13499,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &1513502266
 GameObject:
   m_ObjectHideFlags: 0
@@ -43470,6 +43510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1001 &1713394234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43640,6 +43682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &1717241162
 GameObject:
   m_ObjectHideFlags: 0
@@ -44083,6 +44127,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789677559}
   m_CullTransparentMesh: 1
+--- !u!1 &1808124682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1808124684}
+  - component: {fileID: 1808124683}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1808124683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808124682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d85cb92c6f1d2a4faf702fc34422fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  gameOverPanel: {fileID: 0}
+  pauseMenuPanel: {fileID: 0}
+  levelCompletePanel: {fileID: 0}
+  isGameOver: 0
+  isPaused: 0
+  pauseKey: 27
+--- !u!4 &1808124684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808124682}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1280, y: 726.6667, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1809353839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44253,6 +44347,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 0}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &1819108533
 GameObject:
   m_ObjectHideFlags: 0
@@ -44859,6 +44955,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 6873a79cfeaee5b40b52b30aff27dd5e, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!1 &1930689004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7458204294799031986, guid: c3b0c7a6a867e34428a6a566d8433603, type: 3}
@@ -45928,6 +46026,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   pickupSound: {fileID: 8300000, guid: 31e23b032fede824ab56176d45a1f790, type: 3}
+  coinValue: 1
+  healAmount: 0
 --- !u!4 &2118406499 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1814243411871787956, guid: 8b69b7cb6e1597447ab67fc17c861bef, type: 3}
@@ -46029,3 +46129,4 @@ SceneRoots:
   - {fileID: 1921471445}
   - {fileID: 1392447178}
   - {fileID: 1384110699}
+  - {fileID: 1808124684}

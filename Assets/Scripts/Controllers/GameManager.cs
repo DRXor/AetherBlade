@@ -76,12 +76,11 @@ public class GameManager : MonoBehaviour
         if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(true);
-            Text[] texts = gameOverPanel.GetComponentsInChildren<Text>();
-            foreach (Text t in texts)
-            {
-                if (t.name == "ScoreText" || t.name == "WavesText")
-                    t.text = $"Waves Completed: {score}";
-            }
+            gameOverPanel.transform.SetAsLastSibling();
+
+            Canvas canvas = gameOverPanel.GetComponentInParent<Canvas>();
+            if (canvas != null)
+                canvas.enabled = true;
         }
     }
 
@@ -130,9 +129,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (gameOverPanel != null) gameOverPanel.SetActive(false);
-        if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
-        if (levelCompletePanel != null) levelCompletePanel.SetActive(false);
+        if (gameOverPanel != null && scene.buildIndex != 0)
+            gameOverPanel.SetActive(false);
+
+        if (pauseMenuPanel != null)
+            pauseMenuPanel.SetActive(false);
+
+        if (levelCompletePanel != null)
+            levelCompletePanel.SetActive(false);
 
         // ========== ВОТ ЭТО ДОБАВИТЬ ==========
         GameObject player = GameObject.FindGameObjectWithTag("Player");
