@@ -18,7 +18,7 @@ public class PlayerShooting : MonoBehaviour
 
     [Header("Recoil Settings")]
     public Rigidbody2D playerRb;
-    public float recoilForce = 4f;
+    public float recoilForce = 2f;
     public bool recoilPerShoot = false;
 
     private float nextFireTime = 0f;
@@ -93,14 +93,13 @@ public class PlayerShooting : MonoBehaviour
 
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 shootDir = (mousePos - transform.position).normalized;
-        Vector2 recoilDir = -shootDir;
 
-        float strength = recoilForce * 22f;
+        // МЯГКИЙ recoil (ВАЖНО)
+        Vector2 recoilDir = -shootDir * 0.6f;
 
-        if (Mathf.Abs(recoilDir.x) > 0.65f)
-            strength *= 1.65f;
+        float strength = recoilForce * 0.8f;
 
-        movement.TriggerRecoil(recoilDir, strength, 0.26f);
+        movement.TriggerRecoil(recoilDir, strength, 0.12f);
     }
 
     void PerformMeleeAttack()
